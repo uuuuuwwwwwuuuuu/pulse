@@ -18,10 +18,10 @@ export const members = pgTable('members', {
         .$defaultFn(() => uuidv7()),
     organizationId: uuid('organization_id')
         .notNull()
-        .references(() => organizations.id),
+        .references(() => organizations.id, { onDelete: 'cascade'}),
     userId: uuid('user_id')
         .notNull()
-        .references(() => users.id),
+        .references(() => users.id, { onDelete: 'cascade'}),
     role: text('role', { enum: ['owner', 'admin', 'member'] }).notNull(),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
 });

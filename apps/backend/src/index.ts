@@ -6,6 +6,8 @@ import routes from './routes/index.js';
 import { logger } from 'hono/logger';
 import { cors } from 'hono/cors';
 
+import { TRUSTED_ORIGINS, PORT } from '@utils/constants.js';
+
 const app = new Hono();
 
 app.use('*', logger());
@@ -13,7 +15,7 @@ app.use('*', logger());
 app.use(
     '/api/auth/*',
     cors({
-        origin: process.env.TRUSTED_ORIGINS ?? 'http://localhost:3000',
+        origin: TRUSTED_ORIGINS,
         allowHeaders: ['Content-Type', 'Authorization'],
         allowMethods: ['POST', 'GET', 'OPTIONS'],
         credentials: true,
@@ -31,7 +33,7 @@ app.route('/api', routes);
 serve(
     {
         fetch: app.fetch,
-        port: +process.env.PORT!,
+        port: +PORT!,
     },
     (info) => {
         console.log(`Server is running on http://localhost:${info.port}`);

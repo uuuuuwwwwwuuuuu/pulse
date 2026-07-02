@@ -12,7 +12,8 @@
         "@/*": ["./src/*"],
         "@handlers/*": ["./src/handlers/*"],
         "@routes/*": ["./src/routes/*"],
-        "@middlewares/*": ["./src/middlewares/*"]
+        "@middlewares/*": ["./src/middlewares/*"],
+        "@utils/*": ["./src/utils/*"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
