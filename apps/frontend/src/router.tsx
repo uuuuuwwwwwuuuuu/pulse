@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { lazyRoute } from '@lib/lazy-route';
 import { MainLayout } from '@layouts/MainLayout/MainLayout';
 import { PageLoader } from '@components/PageLoader/PageLoader';
@@ -32,6 +32,10 @@ export const router = createBrowserRouter([
                             'OrganizationLayout',
                         ),
                         children: [
+                            {
+                                index: true,
+                                element: <Navigate to="list" replace />,
+                            },
                             {
                                 path: 'list',
                                 lazy: lazyRoute(

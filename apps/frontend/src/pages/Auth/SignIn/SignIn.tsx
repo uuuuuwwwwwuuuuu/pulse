@@ -1,7 +1,7 @@
 import { Input, Button } from '@bookio/ui';
 import { type FC, useReducer, useCallback, type ChangeEvent, type SubmitEvent } from 'react';
 import styles from './SignIn.module.scss';
-import { useSignIn } from '@hooks/auth';
+import { useSignIn } from '@api/auth';
 import { z } from 'zod';
 import { toast } from 'react-hot-toast';
 
@@ -13,9 +13,13 @@ const signInSchema = z.object({
         .regex(/[A-Z]/, { message: 'Password must contain at least one uppercase letter' })
         .regex(/[a-z]/, { message: 'Password must contain at least one lowercase letter' })
         .regex(/[0-9]/, { message: 'Password must contain at least one number' })
-        .regex(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/, { message: 'Password must contain at least one special character' })
+        .regex(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/, {
+            message: 'Password must contain at least one special character',
+        })
         .regex(/[0-9]/, { message: 'Password must contain at least one number' })
-        .regex(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/, { message: 'Password must contain at least one special character'}),
+        .regex(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/, {
+            message: 'Password must contain at least one special character',
+        }),
 });
 
 type SignInData = z.infer<typeof signInSchema>;
@@ -96,7 +100,7 @@ export const SignIn: FC = () => {
             >
                 {isPending ? 'Signing in…' : 'Sign in'}
             </Button>
-            <Button type='link' to='/auth/sign-up' variant="outlined">
+            <Button type="link" to="/auth/sign-up" variant="outlined">
                 Sign Up
             </Button>
         </form>

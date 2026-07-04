@@ -13,11 +13,11 @@ const app = new Hono();
 app.use('*', logger());
 
 app.use(
-    '/api/auth/*',
+    '/api/*',
     cors({
         origin: TRUSTED_ORIGINS,
         allowHeaders: ['Content-Type', 'Authorization'],
-        allowMethods: ['POST', 'GET', 'OPTIONS'],
+        allowMethods: ['POST', 'GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         credentials: true,
     }),
 );

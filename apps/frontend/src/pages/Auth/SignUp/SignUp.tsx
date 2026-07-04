@@ -1,7 +1,7 @@
 import { type FC, type ChangeEvent, type SubmitEvent, useReducer, useCallback } from 'react';
 import { Button, Input } from '@bookio/ui';
 import styles from './SignUp.module.scss';
-import { useSignUp } from '@hooks/auth';
+import { useSignUp } from '@api/auth';
 import { z } from 'zod';
 import { toast } from 'react-hot-toast';
 
@@ -11,7 +11,9 @@ const passwordSchema = z
     .regex(/[A-Z]/, { message: 'Password must contain at least one uppercase letter' })
     .regex(/[a-z]/, { message: 'Password must contain at least one lowercase letter' })
     .regex(/[0-9]/, { message: 'Password must contain at least one number' })
-    .regex(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/, { message: 'Password must contain at least one special character' });
+    .regex(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/, {
+        message: 'Password must contain at least one special character',
+    });
 
 const signUpSchema = z
     .object({
@@ -41,13 +43,16 @@ export const SignUp: FC = () => {
         },
     );
 
-    const { mutate, isPending} = useSignUp();
+    const { mutate, isPending } = useSignUp();
 
-    const handleChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        setData({
-            [e.target.name]: e.target.value,
-        });
-    }, [setData]);
+    const handleChangeInput = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+            setData({
+                [e.target.name]: e.target.value,
+            });
+        },
+        [setData],
+    );
 
     const handleSubmit = (e: SubmitEvent) => {
         e.preventDefault();
@@ -109,7 +114,7 @@ export const SignUp: FC = () => {
             >
                 {isPending ? 'Signing up…' : 'Sign Up'}
             </Button>
-            <Button type='link' to='/auth/sign-in' variant='outlined'>
+            <Button type="link" to="/auth/sign-in" variant="outlined">
                 Sign in
             </Button>
         </form>

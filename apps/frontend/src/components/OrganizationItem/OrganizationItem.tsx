@@ -4,12 +4,14 @@ import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import PlaceholderImage from '@assets/images/OrganizationPlaceholder.webp';
 
+import type { OrganizationsResponse } from '@api/organizations/getOrganizationsByUserId';
+
 interface OrganizationItemProps {
-    organizationName: string;
-    organizationId: string;
+    organizationName: OrganizationsResponse[number]['name'];
+    organizationId: OrganizationsResponse[number]['id'];
     imageUrl?: string;
-    createdAt: string;
-    // add roles here
+    createdAt: OrganizationsResponse[number]['createdAt'];
+    role: OrganizationsResponse[number]['role'];
 }
 
 export const OrganizationItem: FC<OrganizationItemProps> = ({
@@ -17,13 +19,17 @@ export const OrganizationItem: FC<OrganizationItemProps> = ({
     createdAt,
     organizationId,
     imageUrl,
+    role,
 }) => {
     return (
         <div className={styles.organizationItem}>
             <img src={imageUrl || PlaceholderImage} alt={organizationName} />
             <div className={styles.organizationInfo}>
                 <h3>{organizationName}</h3>
-                <span>{format(new Date(createdAt), 'dd/MM/yyyy', { locale: ru })}</span>
+                <div className={styles.organizationAdditionalInfo}>
+                    <span>{role}</span>
+                    <span>{format(new Date(createdAt), 'dd/MM/yyyy', { locale: ru })}</span>
+                </div>
             </div>
         </div>
     );
