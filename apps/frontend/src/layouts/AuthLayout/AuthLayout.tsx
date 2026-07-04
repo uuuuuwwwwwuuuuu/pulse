@@ -1,6 +1,7 @@
-import { type FC, useEffect } from 'react';
+import { type FC, useEffect, Suspense } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useSession } from '@hooks/auth';
+import { PageLoader } from '@components/PageLoader/PageLoader';
 import styles from './AuthLayout.module.scss';
 
 export const AuthLayout: FC = () => {
@@ -25,7 +26,9 @@ export const AuthLayout: FC = () => {
 
     return (
         <div className={styles.authLayout}>
-            <Outlet />
+            <Suspense fallback={<PageLoader />}>
+                <Outlet />
+            </Suspense>
         </div>
     );
 };

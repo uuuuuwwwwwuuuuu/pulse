@@ -4,7 +4,6 @@ import styles from './SignUp.module.scss';
 import { useSignUp } from '@hooks/auth';
 import { z } from 'zod';
 import { toast } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
 
 const passwordSchema = z
     .string()
@@ -28,7 +27,6 @@ const signUpSchema = z
 type SignUpData = z.infer<typeof signUpSchema>;
 
 export const SignUp: FC = () => {
-    const navigate = useNavigate();
     const [data, setData] = useReducer(
         (prev: SignUpData, next: Partial<SignUpData>) => {
             return {
@@ -73,10 +71,6 @@ export const SignUp: FC = () => {
         }
     };
 
-    const handleSignIn = useCallback(() => {
-        navigate('/auth/sign-in');
-    }, [navigate]);
-
     return (
         <form className={styles.signUpForm} onSubmit={handleSubmit}>
             <h1>Sign up</h1>
@@ -115,7 +109,7 @@ export const SignUp: FC = () => {
             >
                 {isPending ? 'Signing up…' : 'Sign Up'}
             </Button>
-            <Button variant='outlined' onClick={handleSignIn}>
+            <Button type='link' to='/auth/sign-in' variant='outlined'>
                 Sign in
             </Button>
         </form>

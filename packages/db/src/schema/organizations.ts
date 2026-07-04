@@ -11,6 +11,10 @@ export const organizations = pgTable('organizations', {
     password: text('password').notNull(),
     secretKey: uuid('secret_key').defaultRandom().notNull(),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true })
+        .defaultNow()
+        .notNull()
+        .$onUpdateFn(() => new Date()),
 });
 
 export const members = pgTable('members', {
