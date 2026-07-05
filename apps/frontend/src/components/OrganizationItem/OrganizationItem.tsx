@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import styles from './OrganizationItem.module.scss';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
+import { clsx } from 'clsx';
 import PlaceholderImage from '@assets/images/OrganizationPlaceholder.webp';
 
 import type { OrganizationsResponse } from '@api/organizations/getOrganizationsByUserId';
@@ -27,7 +28,7 @@ export const OrganizationItem: FC<OrganizationItemProps> = ({
             <div className={styles.organizationInfo}>
                 <h3>{organizationName}</h3>
                 <div className={styles.organizationAdditionalInfo}>
-                    <span>{role}</span>
+                    <div className={clsx(styles.role, { [styles.owner]: role === 'owner' })}>{role}</div>
                     <span>{format(new Date(createdAt), 'dd/MM/yyyy', { locale: ru })}</span>
                 </div>
             </div>

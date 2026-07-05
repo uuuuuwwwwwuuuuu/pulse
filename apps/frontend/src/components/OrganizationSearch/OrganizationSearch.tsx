@@ -1,0 +1,171 @@
+import type { FC } from 'react';
+import styles from './OrganizationSearch.module.scss';
+import { Input } from '@bookio/ui';
+import { useOrganizationListStore } from '@store/useOrganizationListStore';
+import { useShallow } from 'zustand/shallow';
+import { useOnPress } from '@hooks/useOnPress';
+import { useCallback, useRef, useState } from 'react';
+import { clsx } from 'clsx';
+import { useOutsideClick } from '@hooks/useOutsideClick';
+import {
+    useGetOrganizationsByUserId,
+    type OrganizationsResponse,
+} from '@api/organizations/getOrganizationsByUserId';
+
+import PlaceholderImage from '@assets/images/OrganizationPlaceholder.webp';
+import { format } from 'date-fns';
+import { ru } from 'date-fns/locale';
+import { useNavigate } from 'react-router-dom';
+
+const createTrigrams = (value: string) => {
+    return value
+        .split('')
+        .map((char, index, array) => {
+            return char + array[index + 1] + array[index + 2];
+        })
+        .filter((trigram) => trigram.length === 3);
+};
+
+const filterOrganizations = (organizations: OrganizationsResponse, value: string) => {
+    if (!value.trim()) return [];
+
+    const searchLower = value.toLowerCase();
+
+    if (value.length < 3)
+        return organizations.filter((org) => org.name.toLowerCase().includes(searchLower));
+
+    const searchTrigrams = createTrigrams(searchLower);
+
+    const preparedOrgs = organizations.map((org) => {
+        const orgNameLower = org.name.toLowerCase();
+        const orgTrigrams = createTrigrams(orgNameLower);
+        const matchedSearchTrigrams = searchTrigrams.filter((trigram) =>
+            orgTrigrams.includes(trigram),
+        );
+        const score =
+            orgNameLower === searchLower
+                ? 100
+                : (matchedSearchTrigrams.length / searchTrigrams.length) * 100;
+
+        return {
+            ...org,
+            score,
+        };
+    });
+
+    return preparedOrgs.filter((org) => org.score > 60).sort((a, b) => b.score - a.score);
+};
+
+export const OrganizationSearch: FC = () => {
+    const { setIsOpen, isOpen } = useOrganizationListStore(
+        useShallow(({ setIsOpen, isOpen }) => ({ isOpen, setIsOpen })),
+    );
+    const searchInputRef = useRef<HTMLInputElement>(null);
+    const searchWrapperRef = useRef<HTMLDivElement>(null);
+    const [isClosing, setIsClosing] = useState(false);
+
+    const closeSearch = useCallback(() => {
+        if (!isOpen || isClosing) return;
+        setIsClosing(true);
+    }, [isOpen, isClosing]);
+
+    const handleAnimationEnd = useCallback(
+        (e: React.AnimationEvent<HTMLDivElement>) => {
+            if (e.target !== e.currentTarget || !isClosing) return;
+            if (e.animationName !== styles.fadeOut) return;
+
+            setIsClosing(false);
+            setIsOpen(false);
+        },
+        [isClosing, setIsOpen],
+    );
+
+    const { data: organizations } = useGetOrganizationsByUserId();
+    const [filteredOrganizations, setFilteredOrganizations] = useState<OrganizationsResponse>([]);
+
+    useOnPress('Escape', closeSearch);
+    useOutsideClick([searchInputRef, searchWrapperRef], closeSearch);
+
+    const handleSearchChange = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const value = e.target.value;
+            setFilteredOrganizations(filterOrganizations(organizations || [], value));
+        },
+        [organizations, setFilteredOrganizations],
+    );
+
+    if (!isOpen) return null;
+
+    return (
+        <div
+            className={clsx(styles.organizationSearch, { [styles.closing]: isClosing })}
+            onAnimationEnd={handleAnimationEnd}
+        >
+            <Input
+                type="search"
+                placeholder="Search"
+                ref={searchInputRef}
+                className={styles.searchInput}
+                onChange={handleSearchChange}
+                autoFocus
+            />
+            <OrganizationSearchWrapper data={filteredOrganizations} ref={searchWrapperRef} />
+        </div>
+    );
+};
+
+interface OrganizationSearchWrapperProps {
+    data: OrganizationsResponse;
+    ref: React.RefObject<HTMLDivElement | null>;
+}
+
+const OrganizationSearchWrapper = ({ data, ref }: OrganizationSearchWrapperProps) => {
+    return (
+        <div
+            className={styles.organizationSearchWrapper}
+            style={{ opacity: data.length > 0 ? 1 : 0 }}
+            ref={ref}
+        >
+            {data.map((organization) => (
+                <OrganizationSearchItem key={organization.id} {...organization} />
+            ))}
+        </div>
+    );
+};
+
+interface OrganizationSearchItemProps {
+    name: string;
+    role: string;
+    id: string;
+    createdAt: string;
+    imageUrl?: string;
+}
+
+const OrganizationSearchItem: FC<OrganizationSearchItemProps> = ({
+    name,
+    role,
+    id,
+    createdAt,
+    imageUrl,
+}) => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/${id}`);
+    };
+
+    return (
+        <div className={styles.organizationSearchItem} onClick={handleClick}>
+            <img src={imageUrl || PlaceholderImage} alt={name} />
+            <div className={styles.organizationInfo}>
+                <h3>{name}</h3>
+                <div className={styles.organizationAdditionalInfo}>
+                    <div className={clsx(styles.role, { [styles.owner]: role === 'owner' })}>
+                        {role}
+                    </div>
+                    <span>{format(new Date(createdAt), 'dd MMMM yyyy', { locale: ru })}</span>
+                </div>
+            </div>
+        </div>
+    );
+};

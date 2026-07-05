@@ -2,7 +2,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100dvh;
+    min-height: 100svh;
+    width: 100%;
+    background-color: var(--color-bg-main);
 }
 
 .spinner {

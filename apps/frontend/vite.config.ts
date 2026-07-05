@@ -19,6 +19,7 @@ export default defineConfig({
             '@components': path.resolve(__dirname, 'src/components'),
             '@utils': path.resolve(__dirname, 'src/utils'),
             '@api': path.resolve(__dirname, 'src/api'),
+            '@store': path.resolve(__dirname, 'src/store'),
             '@bookio/backend': path.resolve(__dirname, '../backend/src/routes/index.ts'),
         },
     },

@@ -1,4 +1,4 @@
-import { memo, type ComponentProps } from 'react';
+import { memo, type ComponentProps, type FocusEvent, type MouseEvent } from 'react';
 import styles from './Input.module.scss';
 
 type TextareaProps = {
@@ -13,18 +13,62 @@ type NativeInputProps = {
 
 export type InputProps = TextareaProps | NativeInputProps;
 
+function getReadOnlyHandlers<T extends HTMLInputElement | HTMLTextAreaElement>(
+    readOnly: boolean | undefined,
+    onFocus?: (event: FocusEvent<T>) => void,
+    onMouseDown?: (event: MouseEvent<T>) => void,
+) {
+    if (!readOnly) {
+        return { onFocus, onMouseDown };
+    }
+
+    return {
+        tabIndex: -1,
+        onFocus: (event: FocusEvent<T>) => {
+            event.currentTarget.blur();
+        },
+        onMouseDown: (event: MouseEvent<T>) => {
+            event.preventDefault();
+            onMouseDown?.(event);
+        },
+    };
+}
+
 function Input(props: TextareaProps): React.JSX.Element;
 function Input(props: NativeInputProps): React.JSX.Element;
 function Input(props: InputProps): React.JSX.Element {
-    const classes = [styles.input, props.className].filter(Boolean).join(' ');
-
     if (props.type === 'textarea') {
-        const { type, className, ...rest } = props as TextareaProps;
-        return <textarea className={classes} {...rest} />;
+        const { type, className, readOnly, onFocus, onMouseDown, ...rest } = props as TextareaProps;
+        const classes = [styles.input, readOnly && styles.readOnly, className]
+            .filter(Boolean)
+            .join(' ');
+        const readOnlyHandlers = getReadOnlyHandlers(readOnly, onFocus, onMouseDown);
+
+        return <textarea className={classes} readOnly={readOnly} {...rest} {...readOnlyHandlers} />;
     }
 
-    const { type = 'text', className, ...rest } = props as NativeInputProps;
-    return <input type={type} className={classes} {...rest} />;
+    const {
+        type = 'text',
+        className,
+        readOnly,
+        onFocus,
+        onMouseDown,
+        ...rest
+    } = props as NativeInputProps;
+    const classes = [styles.input, readOnly && styles.readOnly, className]
+        .filter(Boolean)
+        .join(' ');
+    const readOnlyHandlers = getReadOnlyHandlers(readOnly, onFocus, onMouseDown);
+
+    return (
+        <input
+            type={type}
+            className={classes}
+            readOnly={readOnly}
+            {...rest}
+            {...readOnlyHandlers}
+        />
+    );
 }
 
 export default memo(Input);

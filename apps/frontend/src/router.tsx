@@ -12,6 +12,10 @@ export const router = createBrowserRouter([
                 lazy: lazyRoute(() => import('@layouts/AuthLayout/AuthLayout'), 'AuthLayout'),
                 children: [
                     {
+                        index: true,
+                        element: <Navigate to="sign-up" replace />,
+                    },
+                    {
                         path: 'sign-up',
                         lazy: lazyRoute(() => import('@pages/Auth/SignUp/SignUp'), 'SignUp'),
                     },
@@ -39,14 +43,16 @@ export const router = createBrowserRouter([
                             {
                                 path: 'list',
                                 lazy: lazyRoute(
-                                    () => import('@pages/Organization/OrganizationList/OrganizationList'),
+                                    () =>
+                                        import('@pages/Organization/OrganizationList/OrganizationList'),
                                     'OrganizationList',
                                 ),
                             },
                             {
                                 path: 'create',
                                 lazy: lazyRoute(
-                                    () => import('@pages/Organization/CreateOrganization/CreateOrganization'),
+                                    () =>
+                                        import('@pages/Organization/CreateOrganization/CreateOrganization'),
                                     'CreateOrganization',
                                 ),
                             },

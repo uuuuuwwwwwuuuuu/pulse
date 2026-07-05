@@ -13,9 +13,17 @@
         color: var(--color-text-secondary);
     }
 
-    &:focus,
-    &:focus-visible {
+    &:focus:not(.readOnly),
+    &:focus-visible:not(.readOnly) {
         border-color: var(--color-primary);
+    }
+
+    &.readOnly {
+        cursor: default;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     &:disabled {
