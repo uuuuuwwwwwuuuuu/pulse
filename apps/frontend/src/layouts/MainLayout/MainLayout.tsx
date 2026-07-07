@@ -1,8 +1,27 @@
-import type { FC } from "react";
+import { useEffect, type FC } from "react";
 import styles from './MainLayout.module.scss';
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useSession } from "@api/auth";
+import { toast } from 'react-hot-toast';
 
 export const MainLayout: FC = () => {
+    const { data: session, isPending } = useSession();
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        if (isPending) {
+            return;
+        }
+
+        if (!session) {
+            navigate('/auth/sign-in');
+            toast('You are not authorized to access this page', {
+                icon: '❌',
+                duration: 3000,
+            });
+        }
+    }, [session, isPending, navigate]);
+
     return (
         <div className={styles.mainLayout}>
             <Outlet />
