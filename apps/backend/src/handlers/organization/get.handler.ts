@@ -36,9 +36,9 @@ export const getOrganizationHandler = factory(
                 };
             });
 
-            return c.json(prepareSuccess(organizationsData));
+            return c.json(prepareSuccess(organizationsData), 200);
         } catch (error) {
-            return c.json(prepareError(error));
+            return c.json(prepareError(error), 500);
         }
     },
 );
