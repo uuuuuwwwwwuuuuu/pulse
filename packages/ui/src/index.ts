@@ -13,3 +13,11 @@ export type { InputProps } from './Input/Input.js';
 
 export { default as HiddenField } from './HiddenField/HiddenField.js';
 export type { HiddenFieldProps } from './HiddenField/HiddenField.js';
+
+export { default as Dialog } from './Dialog/Dialog.js';
+export type {
+    DialogActionsProps,
+    DialogDescriptionProps,
+    DialogProps,
+    DialogTitleProps,
+} from './Dialog/Dialog.js';
