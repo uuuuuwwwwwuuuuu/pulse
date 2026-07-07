@@ -3,6 +3,7 @@ import { createFactory } from 'hono/factory';
 import { zValidator } from '@hono/zod-validator';
 import { db } from '@/db.js';
 import { members, organizations } from '@bookio/db';
+import { prepareError, prepareSuccess } from '@/utils/prepareResponse.js';
 
 const organizationSchema = z.object({
     name: z.string().min(3).max(255),
@@ -30,13 +31,17 @@ export const createOrganizationHandler = factory(zValidator('json', organization
         role: 'owner'
     }).returning();
 
-    return c.json({
+    if (!member) {
+        return c.json(prepareError('Failed to create member'), 500);
+    }
+
+    return c.json(prepareSuccess({
         organization: {
             name: organization.name,
             id: organization.id,
             createdAt: organization.createdAt,
-            secretKey: organization.secretKey
+            secretKey: organization.secretKey,
         },
         role: member.role,
-    })
+    }));
 });

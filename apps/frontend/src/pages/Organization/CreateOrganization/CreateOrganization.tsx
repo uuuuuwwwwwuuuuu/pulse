@@ -51,8 +51,8 @@ export const CreateOrganization: FC = () => {
         [setFormData],
     );
 
-    if (isSuccess && organization) {
-        return <SuccessfulOrganizationCreation data={organization} />;
+    if (isSuccess && organization.success) {
+        return <SuccessfulOrganizationCreation data={organization.data} />;
     }
 
     return (
@@ -87,7 +87,9 @@ export const CreateOrganization: FC = () => {
     );
 };
 
-const SuccessfulOrganizationCreation: FC<{ data: CreateOrganizationResponse }> = ({ data }) => {
+const SuccessfulOrganizationCreation: FC<{ data: CreateOrganizationResponse['data'] }> = ({
+    data,
+}) => {
     const handleCopy = useCallback(() => {
         toast.success('Secret key copied to clipboard');
     }, []);
@@ -95,15 +97,14 @@ const SuccessfulOrganizationCreation: FC<{ data: CreateOrganizationResponse }> =
     return (
         <div className={styles.createOrganization}>
             <div className={styles.content}>
-                <h2 className={styles.title}>Organization {data.organization.name} created successfully</h2>
+                <h2 className={styles.title}>
+                    Organization {data.organization.name} created successfully
+                </h2>
                 <p className={styles.description}>
                     Your organization has been created successfully. Bellow, in the hidden field,
                     you can find the organization secret key. Copy and keep it in a safe place.
                 </p>
-                <HiddenField
-                    value={data.organization.secretKey}
-                    onCopy={handleCopy}
-                />
+                <HiddenField value={data.organization.secretKey} onCopy={handleCopy} />
                 <Button
                     type="link"
                     to="/organization/list"

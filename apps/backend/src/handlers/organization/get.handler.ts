@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { zValidator } from '@hono/zod-validator';
 import { members, organizations } from '@bookio/db';
 import { eq } from 'drizzle-orm';
+import { prepareError, prepareSuccess } from '@/utils/prepareResponse.js';
 
 const factory = createFactory().createHandlers;
 
@@ -14,26 +15,30 @@ const organizationSchema = z.object({
 export const getOrganizationHandler = factory(
     zValidator('query', organizationSchema),
     async (c) => {
-        const { userId } = c.req.valid('query');
+        try {
+            const { userId } = c.req.valid('query');
 
-        const selectedData = await db
-            .select()
-            .from(members)
-            .innerJoin(organizations, eq(members.organizationId, organizations.id))
-            .where(eq(members.userId, userId));
+            const selectedData = await db
+                .select()
+                .from(members)
+                .innerJoin(organizations, eq(members.organizationId, organizations.id))
+                .where(eq(members.userId, userId));
 
-        const organizationsData = selectedData.map((item) => {
-            const {
-                organizations: { secretKey, ...organization },
-                members,
-            } = item;
+            const organizationsData = selectedData.map((item) => {
+                const {
+                    organizations: { secretKey, ...organization },
+                    members,
+                } = item;
 
-            return {
-                ...organization,
-                role: members.role,
-            };
-        });
+                return {
+                    ...organization,
+                    role: members.role,
+                };
+            });
 
-        return c.json(organizationsData);
+            return c.json(prepareSuccess(organizationsData));
+        } catch (error) {
+            return c.json(prepareError(error));
+        }
     },
 );

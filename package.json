@@ -4,9 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "booking": "pnpm --filter @bookio/booking",
-        "frontend": "pnpm --filter @bookio/frontend",
-        "backend": "pnpm --filter @bookio/backend",
+        "book": "pnpm --filter @bookio/booking",
+        "front": "pnpm --filter @bookio/frontend",
+        "back": "pnpm --filter @bookio/backend",
         "db": "pnpm --filter @bookio/db"
     },
     "keywords": [],

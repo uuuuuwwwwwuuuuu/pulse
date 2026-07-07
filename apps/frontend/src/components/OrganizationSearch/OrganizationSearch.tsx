@@ -26,7 +26,7 @@ const createTrigrams = (value: string) => {
         .filter((trigram) => trigram.length === 3);
 };
 
-const filterOrganizations = (organizations: OrganizationsResponse, value: string) => {
+const filterOrganizations = (organizations: OrganizationsResponse['data'], value: string) => {
     if (!value.trim()) return [];
 
     const searchLower = value.toLowerCase();
@@ -81,7 +81,9 @@ export const OrganizationSearch: FC = () => {
     );
 
     const { data: organizations } = useGetOrganizationsByUserId();
-    const [filteredOrganizations, setFilteredOrganizations] = useState<OrganizationsResponse>([]);
+    const [filteredOrganizations, setFilteredOrganizations] = useState<
+        OrganizationsResponse['data']
+    >([]);
 
     useOnPress('Escape', closeSearch);
     useOutsideClick([searchInputRef, searchWrapperRef], closeSearch);
@@ -89,7 +91,8 @@ export const OrganizationSearch: FC = () => {
     const handleSearchChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             const value = e.target.value;
-            setFilteredOrganizations(filterOrganizations(organizations || [], value));
+            if (!organizations?.success) return;
+            setFilteredOrganizations(filterOrganizations(organizations.data || [], value));
         },
         [organizations, setFilteredOrganizations],
     );
@@ -115,7 +118,7 @@ export const OrganizationSearch: FC = () => {
 };
 
 interface OrganizationSearchWrapperProps {
-    data: OrganizationsResponse;
+    data: OrganizationsResponse['data'];
     ref: React.RefObject<HTMLDivElement | null>;
 }
 
