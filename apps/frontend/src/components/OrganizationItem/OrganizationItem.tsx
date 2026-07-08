@@ -8,9 +8,30 @@ import { Dialog } from '@bookio/ui';
 
 import type { OrganizationsResponse } from '@api/organizations/getOrganizationsByUserId';
 import { Button } from '@bookio/ui';
+import { toast } from 'react-hot-toast';
 
 import TrashIcon from '@assets/icons/trash.svg?react';
 import { useLogoutOrganization } from '@api/organizations/logoutOgranization';
+
+const getDialogContent = (
+    organizationName: string,
+    role: OrganizationsResponse['data'][number]['role'],
+) => {
+    switch (role) {
+        case 'owner':
+            return {
+                title: `Are you sure you want to <span class='${styles.red}'>remove</span> ${organizationName}?`,
+                description:
+                    "This action will remove the organization and all its members will be removed from it.<br /><br />If you're sure, enter organization password to confirm.",
+            };
+        default:
+            return {
+                title: `Are you sure you want to logout from ${organizationName}?`,
+                description:
+                    'This action will logout you from the organization and you will lose your role status.',
+            };
+    }
+};
 
 interface OrganizationItemProps {
     organizationName: OrganizationsResponse['data'][number]['name'];
@@ -27,21 +48,44 @@ export const OrganizationItem: FC<OrganizationItemProps> = ({
     imageUrl,
     role,
 }) => {
-    const { mutate: logoutOrganization } = useLogoutOrganization();
+    const { mutateAsync: logoutOrganization } = useLogoutOrganization();
     const [isOpenLogoutDialog, setIsOpenLogoutDialog] = useState(false);
+    const [organizationPassword, setOrganizationPassword] = useState('');
 
     const handleClickOnTrash = () => {
         setIsOpenLogoutDialog(true);
     };
 
-    const handleLogoutOrganization = useCallback(() => {
-        logoutOrganization({ organizationId });
-        setIsOpenLogoutDialog(false);
-    }, [logoutOrganization, organizationId]);
-
     const handleCloseLogoutDialog = () => {
         setIsOpenLogoutDialog(false);
     };
+
+    const handleLogoutOrganization = useCallback(async () => {
+        if (role === 'owner' && organizationPassword.trim() === '') {
+            toast.error('Please enter the organization password');
+            return;
+        }
+
+        const payload =
+            role === 'owner' ? { organizationId, organizationPassword } : { organizationId };
+
+        await toast.promise(logoutOrganization(payload), {
+            loading: 'Logging out...',
+            success: 'Logged out successfully',
+            error: 'Failed to logout',
+        });
+
+        handleCloseLogoutDialog();
+    }, [logoutOrganization, organizationId, organizationPassword, role]);
+
+    const handleChangeOrganizationPassword = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            setOrganizationPassword(e.target.value);
+        },
+        [],
+    );
+
+    const { title, description } = getDialogContent(organizationName, role);
 
     return (
         <div className={styles.organizationItem}>
@@ -62,11 +106,26 @@ export const OrganizationItem: FC<OrganizationItemProps> = ({
                 </Button>
             </div>
 
-            <Dialog open={isOpenLogoutDialog} onOpenChange={setIsOpenLogoutDialog} closeOnEscape>
-                <Dialog.Title>Are you sure you want to logout from {organizationName}?</Dialog.Title>
+            <Dialog
+                open={isOpenLogoutDialog}
+                onOpenChange={setIsOpenLogoutDialog}
+                closeOnEscape
+                contentClassName={styles.logoutDialog}
+            >
+                <Dialog.Title>
+                    <span dangerouslySetInnerHTML={{ __html: title }} />
+                </Dialog.Title>
                 <Dialog.Description>
-                    This action will logout you from the organization. Organization won't be removed at all.
+                    <span dangerouslySetInnerHTML={{ __html: description }} />
                 </Dialog.Description>
+                {role === 'owner' && (
+                    <Dialog.Input
+                        type="password"
+                        placeholder="Enter organization password"
+                        value={organizationPassword}
+                        onChange={handleChangeOrganizationPassword}
+                    />
+                )}
                 <Dialog.Actions>
                     <Dialog.Button variant="simple-clean" onClick={handleCloseLogoutDialog}>
                         Cancel

@@ -13,6 +13,7 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 import Button, { type ButtonProps } from '../Button/Button.js';
+import Input, { type InputProps } from '../Input/Input.js';
 import { useOutsideClick } from '../hooks/useOutsideClick.js';
 import styles from './Dialog.module.scss';
 
@@ -64,15 +65,22 @@ function DialogRoot({
     const titleId = useId();
     const descriptionId = useId();
 
+    const prevOpenRef = useRef(open);
+
     const requestClose = useCallback(() => {
         if (!isRendered || isClosing) return;
-        setIsClosing(true);
-    }, [isRendered, isClosing]);
+        onOpenChange(false);
+    }, [isRendered, isClosing, onOpenChange]);
 
     useEffect(() => {
+        const wasOpen = prevOpenRef.current;
+        prevOpenRef.current = open;
+
         if (open) {
             setIsRendered(true);
-            setIsClosing(false);
+            if (!wasOpen) {
+                setIsClosing(false);
+            }
             return;
         }
 
@@ -212,11 +220,35 @@ function DialogButton({ className, ...props }: ButtonProps) {
     return <Button className={classes || undefined} {...props} />;
 }
 
+type DialogTextareaInputProps = Extract<InputProps, { type: 'textarea' }>;
+type DialogNativeInputProps = Exclude<InputProps, { type: 'textarea' }>;
+
+const DialogTextareaInputComponent = Input as React.FC<DialogTextareaInputProps>;
+const DialogNativeInputComponent = Input as React.FC<DialogNativeInputProps>;
+
+function DialogInput(props: DialogTextareaInputProps): React.JSX.Element;
+function DialogInput(props: DialogNativeInputProps): React.JSX.Element;
+function DialogInput(props: InputProps): React.JSX.Element {
+    const classes = [props.className].filter(Boolean).join(' ') || undefined;
+
+    if (props.type === 'textarea') {
+        return (
+            <DialogTextareaInputComponent
+                {...(props as DialogTextareaInputProps)}
+                className={classes}
+            />
+        );
+    }
+
+    return <DialogNativeInputComponent {...(props as DialogNativeInputProps)} className={classes} />;
+}
+
 type DialogComponent = typeof DialogRoot & {
     Title: typeof DialogTitle;
     Description: typeof DialogDescription;
     Actions: typeof DialogActions;
     Button: typeof DialogButton;
+    Input: typeof DialogInput;
 };
 
 const Dialog = memo(DialogRoot) as unknown as DialogComponent;
@@ -224,5 +256,6 @@ Dialog.Title = DialogTitle;
 Dialog.Description = DialogDescription;
 Dialog.Actions = DialogActions;
 Dialog.Button = DialogButton;
+Dialog.Input = DialogInput;
 
 export default Dialog;
