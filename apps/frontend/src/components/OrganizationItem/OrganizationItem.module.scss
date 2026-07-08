@@ -22,6 +22,16 @@
         .actionButtons {
             opacity: 1;
         }
+
+        .organizationInfo .title {
+            .titleName {
+                opacity: 0;
+            }
+
+            .titleSlug {
+                opacity: 1;
+            }
+        }
     }
 
     .actionButtons {
@@ -60,14 +70,34 @@
         gap: 0.6rem;
         flex: 1;
         min-width: 0;
+        padding-right: 5rem;
 
-        h3 {
+        .title {
+            position: relative;
+            overflow: hidden;
+            min-width: 0;
+            width: 100%;
             font-size: 1.8rem;
             font-weight: 600;
             line-height: 1.2;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+
+            .titleName,
+            .titleSlug {
+                display: block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                transition: opacity 0.3s ease;
+            }
+
+            .titleSlug {
+                position: absolute;
+                inset: 0;
+                font-size: 1.6rem;
+                color: var(--color-text-secondary);
+                opacity: 0;
+                pointer-events: none;
+            }
         }
     }
 
@@ -97,6 +127,12 @@
     .owner {
         background-color: var(--color-primary);
         color: var(--color-text-white);
+    }
+}
+
+.withoutActions {
+    .organizationInfo {
+        padding-right: 0;
     }
 }
 

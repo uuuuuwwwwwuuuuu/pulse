@@ -98,8 +98,10 @@ type KnownKeyboardKey =
 
 export type KeyboardKey = KnownKeyboardKey | (string & {});
 
-export const useOnPress = (key: KeyboardKey, callback: () => void) => {
+export const useOnPress = (key: KeyboardKey, callback: () => void, enabled = true) => {
     useEffect(() => {
+        if (!enabled) return;
+
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === key) {
                 callback();
@@ -111,5 +113,5 @@ export const useOnPress = (key: KeyboardKey, callback: () => void) => {
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
         };
-    }, [key, callback]);
+    }, [key, callback, enabled]);
 };

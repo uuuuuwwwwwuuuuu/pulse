@@ -52,6 +52,7 @@ export const OrganizationList: FC = () => {
                     organizationId={item.id}
                     createdAt={item.createdAt}
                     role={item.role}
+                    slug={item.slug}
                 />
             ))}
         </div>

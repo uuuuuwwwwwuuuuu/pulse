@@ -50,67 +50,10 @@
     gap: 1rem;
     display: flex;
     flex-direction: column;
-}
 
-.organizationSearchItem {
-    display: flex;
-    gap: 1rem;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    border: 1px solid var(--color-border);
-    background-color: var(--color-bg-main);
-    transition: all 0.4s ease;
-    height: 10rem;
-    align-items: center;
-    transition: all 0.4s ease;
-
-    &:hover {
-        border-color: var(--color-primary);
-        background-color: var(--color-bg-ui);
-    }
-
-    img {
-        height: 100%;
-        aspect-ratio: 1/1;
-        object-fit: cover;
-        border-radius: 0.5rem;
-    }
-
-    .organizationInfo {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-
-        h3 {
-            font-size: 1.6rem;
-            font-weight: 600;
-        }
-
-        .organizationAdditionalInfo {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-
-            .role {
-                font-size: 1.4rem;
-                font-weight: 600;
-                color: var(--color-text-secondary);
-                border: 1px solid var(--color-border);
-                padding: 0.5rem 1rem;
-                border-radius: 10rem;
-            }
-
-            .owner {
-                background-color: var(--color-primary);
-                color: var(--color-text-white);
-            }
-
-            span {
-                font-size: 1.4rem;
-                font-weight: 400;
-                color: var(--color-text-secondary);
-            }
-        }
+    > * {
+        height: 10rem !important;
+        flex-shrink: 0;
     }
 }
 

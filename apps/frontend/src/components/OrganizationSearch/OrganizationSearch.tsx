@@ -11,10 +11,7 @@ import {
     useGetOrganizationsByUserId,
     type OrganizationsType,
 } from '@api/organizations/getOrganizationsByUserId';
-
-import PlaceholderImage from '@assets/images/OrganizationPlaceholder.webp';
-import { format } from 'date-fns';
-import { ru } from 'date-fns/locale';
+import { OrganizationItem } from '@components/OrganizationItem/OrganizationItem';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
@@ -127,6 +124,8 @@ interface OrganizationSearchWrapperProps {
 }
 
 const OrganizationSearchWrapper = ({ data, ref }: OrganizationSearchWrapperProps) => {
+    const navigate = useNavigate();
+
     return (
         <div
             className={styles.organizationSearchWrapper}
@@ -134,45 +133,17 @@ const OrganizationSearchWrapper = ({ data, ref }: OrganizationSearchWrapperProps
             ref={ref}
         >
             {data.map((organization) => (
-                <OrganizationSearchItem key={organization.id} {...organization} />
+                <OrganizationItem
+                    key={organization.id}
+                    organizationName={organization.name}
+                    organizationId={organization.id}
+                    createdAt={organization.createdAt}
+                    role={organization.role}
+                    slug={organization.slug}
+                    showActions={false}
+                    onClick={() => navigate(`/${organization.id}`)}
+                />
             ))}
-        </div>
-    );
-};
-
-interface OrganizationSearchItemProps {
-    name: string;
-    role: string;
-    id: string;
-    createdAt: string;
-    imageUrl?: string;
-}
-
-const OrganizationSearchItem: FC<OrganizationSearchItemProps> = ({
-    name,
-    role,
-    id,
-    createdAt,
-    imageUrl,
-}) => {
-    const navigate = useNavigate();
-
-    const handleClick = () => {
-        navigate(`/${id}`);
-    };
-
-    return (
-        <div className={styles.organizationSearchItem} onClick={handleClick}>
-            <img src={imageUrl || PlaceholderImage} alt={name} />
-            <div className={styles.organizationInfo}>
-                <h3>{name}</h3>
-                <div className={styles.organizationAdditionalInfo}>
-                    <div className={clsx(styles.role, { [styles.owner]: role === 'owner' })}>
-                        {role}
-                    </div>
-                    <span>{format(new Date(createdAt), 'dd MMMM yyyy', { locale: ru })}</span>
-                </div>
-            </div>
         </div>
     );
 };
