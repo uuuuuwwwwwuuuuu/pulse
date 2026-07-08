@@ -22,7 +22,7 @@ export const ConnectOrganization: FC = () => {
         (prev: FormData, next: Partial<FormData>) => ({ ...prev, ...next }),
         { slug: '', password: '' },
     );
-    const { mutate, isPending, isSuccess } = useConnectToOrganization();
+    const { mutateAsync, data, isPending } = useConnectToOrganization();
 
     const onSubmitForm = (e: SubmitEvent) => {
         e.preventDefault();
@@ -30,7 +30,11 @@ export const ConnectOrganization: FC = () => {
         try {
             const result = formSchema.parse(formData);
 
-            mutate(result);
+            toast.promise(mutateAsync(result), {
+                loading: 'Connecting to organization...',
+                success: 'Connected to organization successfully',
+                error: (error: Error) => error.message,
+            });
         } catch (error) {
             if (error instanceof z.ZodError) {
                 toast.error('Invalid form data');
@@ -43,7 +47,7 @@ export const ConnectOrganization: FC = () => {
         setFormData({ [name]: value });
     }, []);
 
-    if (isSuccess) {
+    if (data?.success) {
         navigate('/organization/list', { replace: true });
         toast.success('Connected to organization successfully');
     }

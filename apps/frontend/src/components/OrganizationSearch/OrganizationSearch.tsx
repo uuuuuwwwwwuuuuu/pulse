@@ -9,13 +9,14 @@ import { clsx } from 'clsx';
 import { useOutsideClick } from '@hooks/useOutsideClick';
 import {
     useGetOrganizationsByUserId,
-    type OrganizationsResponse,
+    type OrganizationsType,
 } from '@api/organizations/getOrganizationsByUserId';
 
 import PlaceholderImage from '@assets/images/OrganizationPlaceholder.webp';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const createTrigrams = (value: string) => {
     return value
@@ -26,7 +27,7 @@ const createTrigrams = (value: string) => {
         .filter((trigram) => trigram.length === 3);
 };
 
-const filterOrganizations = (organizations: OrganizationsResponse['data'], value: string) => {
+const filterOrganizations = (organizations: OrganizationsType, value: string) => {
     if (!value.trim()) return [];
 
     const searchLower = value.toLowerCase();
@@ -82,7 +83,7 @@ export const OrganizationSearch: FC = () => {
 
     const { data: organizations } = useGetOrganizationsByUserId();
     const [filteredOrganizations, setFilteredOrganizations] = useState<
-        OrganizationsResponse['data']
+        OrganizationsType
     >([]);
 
     useOnPress('Escape', closeSearch);
@@ -91,7 +92,10 @@ export const OrganizationSearch: FC = () => {
     const handleSearchChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             const value = e.target.value;
-            if (!organizations?.success) return;
+            if (!organizations?.success) {
+                toast.error('Failed to load organizations');
+                return;
+            };
             setFilteredOrganizations(filterOrganizations(organizations.data || [], value));
         },
         [organizations, setFilteredOrganizations],
@@ -118,7 +122,7 @@ export const OrganizationSearch: FC = () => {
 };
 
 interface OrganizationSearchWrapperProps {
-    data: OrganizationsResponse['data'];
+    data: OrganizationsType;
     ref: React.RefObject<HTMLDivElement | null>;
 }
 

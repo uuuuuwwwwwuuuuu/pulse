@@ -1,4 +1,4 @@
-export const prepareError = <T>(error: T): { success: false, error: T } => {
+export const prepareError = (error: string): { success: false, error: string } => {
     return {
         success: false,
         error,

@@ -3,6 +3,7 @@ import type { InferRequestType, InferResponseType } from 'hono/client';
 import { useMutation } from '@tanstack/react-query';
 import { useSession } from '@api/auth';
 import { queryClient } from '@lib/query-client';
+import { parseError } from '@utils/parseError';
 
 export type ConnectToOrganizationRequest = InferRequestType<
     typeof hono.organizations.connect.$put
@@ -16,11 +17,16 @@ const connectToOrganizationRequest = async (requestData: ConnectToOrganizationRe
         json: requestData,
     });
 
+    const body = await response.json();
+
     if (!response.ok) {
+        if (!body.success) {
+            throw new Error(parseError(body));
+        }
         throw new Error('Failed to connect to organization');
     }
 
-    return await response.json();
+    return body;
 };
 
 export const useConnectToOrganization = () => {
@@ -31,6 +37,6 @@ export const useConnectToOrganization = () => {
             connectToOrganizationRequest({ ...data, userId: session!.user.id }),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['organizations'] });
-        }
+        },
     });
 };

@@ -6,7 +6,7 @@ import { clsx } from 'clsx';
 import PlaceholderImage from '@assets/images/OrganizationPlaceholder.webp';
 import { Dialog } from '@bookio/ui';
 
-import type { OrganizationsResponse } from '@api/organizations/getOrganizationsByUserId';
+import type { OrganizationType } from '@api/organizations/getOrganizationsByUserId';
 import { Button } from '@bookio/ui';
 import { toast } from 'react-hot-toast';
 
@@ -15,7 +15,7 @@ import { useLogoutOrganization } from '@api/organizations/logoutOgranization';
 
 const getDialogContent = (
     organizationName: string,
-    role: OrganizationsResponse['data'][number]['role'],
+    role: OrganizationType['role'],
 ) => {
     switch (role) {
         case 'owner':
@@ -34,11 +34,11 @@ const getDialogContent = (
 };
 
 interface OrganizationItemProps {
-    organizationName: OrganizationsResponse['data'][number]['name'];
-    organizationId: OrganizationsResponse['data'][number]['id'];
+    organizationName: OrganizationType['name'];
+    organizationId: OrganizationType['id'];
     imageUrl?: string;
-    createdAt: OrganizationsResponse['data'][number]['createdAt'];
-    role: OrganizationsResponse['data'][number]['role'];
+    createdAt: OrganizationType['createdAt'];
+    role: OrganizationType['role'];
 }
 
 export const OrganizationItem: FC<OrganizationItemProps> = ({
@@ -72,7 +72,7 @@ export const OrganizationItem: FC<OrganizationItemProps> = ({
         await toast.promise(logoutOrganization(payload), {
             loading: 'Logging out...',
             success: 'Logged out successfully',
-            error: 'Failed to logout',
+            error: (error: Error) => error.message,
         });
 
         handleCloseLogoutDialog();

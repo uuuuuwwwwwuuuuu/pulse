@@ -29,7 +29,7 @@ type FormData = z.infer<typeof formSchema>;
 
 export const CreateOrganization: FC = () => {
     const { data: session } = useSession();
-    const { data: organization, mutate, isPending, isSuccess } = useCreateOrganization();
+    const { data: organization, mutateAsync, isPending, isSuccess } = useCreateOrganization();
     const [formData, setFormData] = useReducer(
         (prev: FormData, next: Partial<FormData>) => ({ ...prev, ...next }),
         { name: '', slug: '', password: '' },
@@ -48,7 +48,11 @@ export const CreateOrganization: FC = () => {
                 return;
             }
 
-            mutate({ ...result, userId: session!.user.id });
+            toast.promise(mutateAsync({ ...result, userId: session!.user.id }), {
+                loading: 'Creating organization...',
+                success: 'Organization created successfully',
+                error: (error: Error) => error.message,
+            });
         } catch (error) {
             if (error instanceof z.ZodError) {
                 toast.error('Invalid form data');

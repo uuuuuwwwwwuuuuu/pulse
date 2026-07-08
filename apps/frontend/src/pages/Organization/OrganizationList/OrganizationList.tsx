@@ -1,4 +1,4 @@
-import { useEffect, type FC } from 'react';
+import { useCallback, type FC } from 'react';
 import styles from './OrganizationList.module.scss';
 
 import { OrganizationItem } from '@components/OrganizationItem/OrganizationItem';
@@ -6,42 +6,36 @@ import { useGetOrganizationsByUserId } from '@api/organizations/getOrganizations
 import { Spinner } from '@components/Spinner/Spinner';
 
 import { toast } from 'react-hot-toast';
+import { Button } from '@bookio/ui';
 
 export const OrganizationList: FC = () => {
-    const { data, isLoading, isError } = useGetOrganizationsByUserId();
+    const { data, isPending, isError, refetch } = useGetOrganizationsByUserId();
 
-    useEffect(() => {
-        if (isError) {
-            toast.error('Failed to load organizations');
-        }
-    });
+    const handleRetry = useCallback(() => {
+        refetch();
+    }, [refetch]);
 
-    if (isLoading)
-        return (
-            <div className={styles.container}>
-                <Spinner size={6} />
-            </div>
-        );
-    
-    if (!data) {
-        return (
-            <div className={styles.container}>
-                <h2 className={styles.message}>There are no organizations</h2>
-            </div>
-        );
-    }
-
-    if (data && data.success === false) {
+    if (isError) {
         toast.error('Failed to load organizations');
 
         return (
             <div className={styles.container}>
                 <h2 className={styles.message}>❌ Failed to load organizations</h2>
+                <Button variant="primary-filled" onClick={handleRetry}>
+                    Retry
+                </Button>
             </div>
-        );
+        )
     }
 
-    if (data.data.length === 0) {
+    if (isPending)
+        return (
+            <div className={styles.container}>
+                <Spinner size={6} />
+            </div>
+        );
+
+    if (data?.data.length === 0) {
         return (
             <div className={styles.container}>
                 <h2 className={styles.message}>You haven't any Organizations yet</h2>
