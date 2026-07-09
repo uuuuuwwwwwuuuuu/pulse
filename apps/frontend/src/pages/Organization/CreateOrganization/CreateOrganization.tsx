@@ -135,7 +135,7 @@ const SuccessfulOrganizationCreation: FC<{ data: CreateOrganizationResponse['dat
                 <HiddenField value={data.organization.secretKey} onCopy={handleCopy} />
                 <Button
                     type="link"
-                    to="/organization/list"
+                    to="/organizations/list"
                     className={styles.button}
                     variant="primary-filled"
                 >

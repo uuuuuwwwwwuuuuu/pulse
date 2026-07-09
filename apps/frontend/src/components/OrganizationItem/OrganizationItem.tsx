@@ -41,7 +41,7 @@ interface OrganizationItemProps {
     createdAt: OrganizationType['createdAt'];
     role: OrganizationType['role'];
     slug: OrganizationType['slug'];
-    onClick?: () => void;
+    onClick?: (id: string) => void;
     showActions?: boolean;
 }
 
@@ -96,10 +96,14 @@ export const OrganizationItem: FC<OrganizationItemProps> = ({
 
     const { title, description } = getDialogContent(organizationName, role);
 
+    const handleClickOnOrganization = useCallback(() => {
+        onClick?.(organizationId);
+    }, [onClick, organizationId]);
+
     return (
         <div
             className={clsx(styles.organizationItem, { [styles.withoutActions]: !showActions })}
-            onClick={onClick}
+            onClick={handleClickOnOrganization}
         >
             <img src={imageUrl || PlaceholderImage} alt={organizationName} />
             <div className={styles.organizationInfo}>

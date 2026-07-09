@@ -1,23 +1,20 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "NodeNext",
-    "strict": true,
-    "verbatimModuleSyntax": true,
-    "skipLibCheck": true,
-    "types": [
-      "node"
-    ],
-    "paths": {
-        "@/*": ["./src/*"],
-        "@handlers/*": ["./src/handlers/*"],
-        "@routes/*": ["./src/routes/*"],
-        "@middlewares/*": ["./src/middlewares/*"],
-        "@utils/*": ["./src/utils/*"]
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "baseUrl": ".",
+        "strict": true,
+        "verbatimModuleSyntax": true,
+        "skipLibCheck": true,
+        "types": ["node"],
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "jsx": "react-jsx",
+        "jsxImportSource": "hono/jsx",
+        "outDir": "./dist"
     },
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
-    "outDir": "./dist"
-  },
-  "exclude": ["node_modules"]
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
 }

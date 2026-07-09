@@ -70,6 +70,12 @@
     padding: 0;
 }
 
+svg {
+    path {
+        fill: currentColor;
+    }
+}
+
 html {
     font-size: 10px;
     -webkit-text-size-adjust: 100%;
@@ -169,5 +175,5 @@ p {
 
     --color-border: #544d4d;
     --color-system-red: #cc2b0e;
-	--color-system-green: #1ecc0e;
+    --color-system-green: #1ecc0e;
 }

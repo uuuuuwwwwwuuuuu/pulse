@@ -10,7 +10,7 @@ export const AuthLayout: FC = () => {
 
     useEffect(() => {
         if (!isPending && session) {
-            navigate('/organization', { replace: true });
+            navigate('/organizations', { replace: true });
         }
     }, [session, isPending, navigate]);
 

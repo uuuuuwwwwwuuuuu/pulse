@@ -12,18 +12,18 @@ import { useOrganizationListStore } from '@store/useOrganizationListStore';
 export const OrganizationHeader: FC = memo(() => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
-    
-    const setIsOpen  = useOrganizationListStore(state => state.setIsOpen);
+
+    const setIsOpen = useOrganizationListStore((state) => state.setIsOpen);
 
     const onClickHeader = () => {
-        navigate('/organization/list');
+        navigate('/organizations/list');
     };
 
     const onClickSearch = useCallback(() => {
         setIsOpen(true);
     }, [setIsOpen]);
 
-    if (pathname === '/organization/list') {
+    if (pathname === '/organizations/list') {
         return (
             <header className={styles.header}>
                 <button className={styles.logoButton} onClick={onClickHeader}>
@@ -41,7 +41,7 @@ export const OrganizationHeader: FC = memo(() => {
                 <div className={styles.buttonsWrapper}>
                     <Button
                         type="link"
-                        to="/organization/connect"
+                        to="/organizations/connect"
                         variant="simple-clean"
                         className={styles.button}
                     >
@@ -50,7 +50,7 @@ export const OrganizationHeader: FC = memo(() => {
                     </Button>
                     <Button
                         type="link"
-                        to="/organization/create"
+                        to="/organizations/create"
                         variant="primary-filled"
                         className={clsx(styles.button, styles.addButton)}
                     >
@@ -78,7 +78,7 @@ const DefaultOrganizationHeader: FC<DefaultOrganizationHeaderProps> = ({ onClick
             <div className={styles.buttonsWrapper}>
                 <Button
                     type="link"
-                    to="/organization/connect"
+                    to="/organizations/connect"
                     variant="simple-clean"
                     className={styles.button}
                 >
@@ -87,7 +87,7 @@ const DefaultOrganizationHeader: FC<DefaultOrganizationHeaderProps> = ({ onClick
                 </Button>
                 <Button
                     type="link"
-                    to="/organization/create"
+                    to="/organizations/create"
                     variant="primary-filled"
                     className={clsx(styles.button, styles.addButton)}
                 >

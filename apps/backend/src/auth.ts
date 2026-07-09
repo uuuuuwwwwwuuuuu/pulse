@@ -2,7 +2,7 @@ import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from '@better-auth/drizzle-adapter';
 import * as schema from '@bookio/db';
 import { db } from './db.js';
-import { BETTER_AUTH_SECRET, BETTER_AUTH_URL, ENVIRONMENT, TRUSTED_ORIGINS } from '@utils/constants.js';
+import { BETTER_AUTH_SECRET, BETTER_AUTH_URL, ENVIRONMENT, TRUSTED_ORIGINS } from '@/utils/constants.js';
 
 
 export const auth = betterAuth({

@@ -48,7 +48,7 @@ export const ConnectOrganization: FC = () => {
     }, []);
 
     if (data?.success) {
-        navigate('/organization/list', { replace: true });
+        navigate('/organizations/list', { replace: true });
     }
 
     return (

@@ -71,4 +71,6 @@ function Input(props: InputProps): React.JSX.Element {
     );
 }
 
+export { Input };
+
 export default memo(Input);

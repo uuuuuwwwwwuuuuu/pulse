@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
                 element: <MainLayout />,
                 children: [
                     {
-                        path: 'organization',
+                        path: 'organizations',
                         lazy: lazyRoute(
                             () => import('@layouts/OrganizationLayout/OrganizationLayout'),
                             'OrganizationLayout',
@@ -65,6 +65,10 @@ export const router = createBrowserRouter([
                                 ),
                             },
                         ],
+                    },
+                    {
+                        path: ':id',
+                        lazy: lazyRoute(() => import('@layouts/AppLayout/AppLayout'), 'AppLayout'),
                     },
                 ],
             },

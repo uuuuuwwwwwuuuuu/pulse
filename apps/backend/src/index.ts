@@ -6,7 +6,7 @@ import routes from './routes/index.js';
 import { logger } from 'hono/logger';
 import { cors } from 'hono/cors';
 
-import { TRUSTED_ORIGINS, PORT } from '@utils/constants.js';
+import { TRUSTED_ORIGINS, PORT } from '@/utils/constants.js';
 
 const app = new Hono();
 

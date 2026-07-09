@@ -1,0 +1,77 @@
+.appHeader {
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .logoButton {
+        height: 100%;
+    }
+
+    .logo {
+        max-height: 2rem;
+        height: 100%;
+        width: fit-content;
+        padding: 0 2rem;
+    }
+
+    .dropdown {
+        width: fit-content;
+        max-width: 20rem;
+    }
+    
+    .menuItemImage {
+        height: 3rem;
+        border-radius: 0.6rem;
+        flex: 0 0 3rem;
+    }
+
+    .menuItemText {
+        flex: 1 1 auto;
+        min-width: 0;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .menuTrigger {
+        padding: 0.6rem;
+        font-size: 2rem;
+        color: var(--color-text-main);
+        border-radius: 0.6rem;
+        transition: background-color 0.15s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        max-width: 100%;
+        min-width: 0;
+        &:hover {
+            background-color: color-mix(in srgb, var(--color-text-main) 8%, transparent);
+        }
+    }
+    
+    .arrowIcon {
+        flex: 0 0 2rem;
+        height: 2rem;
+        color: var(--color-text-main);
+    }
+}
+
+.dropdownContent {
+    width: 100%;
+    max-width: 20rem;
+}
+
+.menuItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.4rem;
+
+    .menuItemIcon {
+        width: 1.6rem !important;
+        height: 1.6rem !important;
+    }
+}

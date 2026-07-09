@@ -125,6 +125,9 @@ interface OrganizationSearchWrapperProps {
 
 const OrganizationSearchWrapper = ({ data, ref }: OrganizationSearchWrapperProps) => {
     const navigate = useNavigate();
+    const handleClickOnOrganization = useCallback((id: string) => {
+        navigate(`/${id}`);
+    }, [navigate]);
 
     return (
         <div
@@ -141,7 +144,7 @@ const OrganizationSearchWrapper = ({ data, ref }: OrganizationSearchWrapperProps
                     role={organization.role}
                     slug={organization.slug}
                     showActions={false}
-                    onClick={() => navigate(`/${organization.id}`)}
+                    onClick={handleClickOnOrganization}
                 />
             ))}
         </div>

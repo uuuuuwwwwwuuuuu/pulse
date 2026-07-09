@@ -1,26 +1,29 @@
-import { useEffect, useState, type FC } from 'react';
-import { Input, type InputProps } from '@bookio/ui';
+import { useEffect, useState, type JSX } from 'react';
+import { BaseInput, type InputProps } from '@bookio/ui';
 import styles from './ValidatableInput.module.scss';
 
-export type ValidatableInputProps = InputProps & {
+type ValidatableInputBaseProps = {
     isValid?: boolean | null;
 };
 
-export const ValidatableInput: FC<ValidatableInputProps> = ({
-    isValid,
-    className,
-    ...inputProps
-}) => {
+type TextareaValidatableInputProps = ValidatableInputBaseProps &
+    Extract<InputProps, { type: 'textarea' }>;
+type NativeValidatableInputProps = ValidatableInputBaseProps &
+    Exclude<InputProps, { type: 'textarea' }>;
+
+export type ValidatableInputProps = TextareaValidatableInputProps | NativeValidatableInputProps;
+
+function useShake(isValid: boolean | null | undefined) {
     const [isShaking, setIsShaking] = useState(false);
 
     useEffect(() => {
-        if (isValid === false) {
-            setIsShaking(false);
-            requestAnimationFrame(() => setIsShaking(true));
-            return;
-        }
+        if (isValid !== false) return;
 
-        setIsShaking(false);
+        const frame = requestAnimationFrame(() => setIsShaking(true));
+        return () => {
+            cancelAnimationFrame(frame);
+            setIsShaking(false);
+        };
     }, [isValid]);
 
     useEffect(() => {
@@ -30,10 +33,50 @@ export const ValidatableInput: FC<ValidatableInputProps> = ({
         return () => clearTimeout(timer);
     }, [isShaking]);
 
+    return isShaking;
+}
+
+function getValidationClasses(
+    isValid: boolean | null | undefined,
+    isShaking: boolean,
+    className?: string,
+) {
     const validationClass =
         isValid === true ? styles.valid : isValid === false ? styles.invalid : undefined;
 
-    const classes = [validationClass, isShaking && styles.shake, className].filter(Boolean).join(' ');
+    return [validationClass, isShaking && styles.shake, className].filter(Boolean).join(' ');
+}
 
-    return <Input {...inputProps} className={classes || undefined} />;
-};
+function ValidatableTextareaInput(props: TextareaValidatableInputProps) {
+    const { isValid, className, ...inputProps } = props;
+    const isShaking = useShake(isValid);
+    const classes = getValidationClasses(isValid, isShaking, className);
+
+    return <BaseInput {...inputProps} className={classes || undefined} />;
+}
+
+function ValidatableNativeInput(props: NativeValidatableInputProps) {
+    const { isValid, className, ...inputProps } = props;
+    const isShaking = useShake(isValid);
+    const classes = getValidationClasses(isValid, isShaking, className);
+
+    return <BaseInput {...inputProps} className={classes || undefined} />;
+}
+
+function isTextareaValidatableInput(
+    props: ValidatableInputProps,
+): props is TextareaValidatableInputProps {
+    return props.type === 'textarea';
+}
+
+function ValidatableInput(props: TextareaValidatableInputProps): JSX.Element;
+function ValidatableInput(props: NativeValidatableInputProps): JSX.Element;
+function ValidatableInput(props: ValidatableInputProps): JSX.Element {
+    if (isTextareaValidatableInput(props)) {
+        return <ValidatableTextareaInput {...props} />;
+    }
+
+    return <ValidatableNativeInput {...props} />;
+}
+
+export { ValidatableInput };

@@ -7,13 +7,21 @@ import { Spinner } from '@components/Spinner/Spinner';
 
 import { toast } from 'react-hot-toast';
 import { Button } from '@bookio/ui';
+import { useNavigate } from 'react-router-dom';
 
 export const OrganizationList: FC = () => {
     const { data, isPending, isError, refetch } = useGetOrganizationsByUserId();
-
+    const navigate = useNavigate();
     const handleRetry = useCallback(() => {
         refetch();
     }, [refetch]);
+
+    const handleClickOnOrganization = useCallback(
+        (id: string) => {
+            navigate(`/${id}`);
+        },
+        [navigate],
+    );
 
     if (isError) {
         toast.error('Failed to load organizations');
@@ -25,7 +33,7 @@ export const OrganizationList: FC = () => {
                     Retry
                 </Button>
             </div>
-        )
+        );
     }
 
     if (isPending)
@@ -53,6 +61,7 @@ export const OrganizationList: FC = () => {
                     createdAt={item.createdAt}
                     role={item.role}
                     slug={item.slug}
+                    onClick={handleClickOnOrganization}
                 />
             ))}
         </div>

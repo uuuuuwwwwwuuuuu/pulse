@@ -8,7 +8,7 @@ export type {
     ButtonVariant,
 } from './Button/Button.js';
 
-export { default as Input } from './Input/Input.js';
+export { default as Input, Input as BaseInput } from './Input/Input.js';
 export type { InputProps } from './Input/Input.js';
 
 export { default as HiddenField } from './HiddenField/HiddenField.js';
@@ -21,3 +21,11 @@ export type {
     DialogProps,
     DialogTitleProps,
 } from './Dialog/Dialog.js';
+
+export { default as Dropdown } from './Dropdown/Dropdown.js';
+export type {
+    DropdownContentProps,
+    DropdownItemProps,
+    DropdownProps,
+    DropdownTriggerProps,
+} from './Dropdown/Dropdown.js';
