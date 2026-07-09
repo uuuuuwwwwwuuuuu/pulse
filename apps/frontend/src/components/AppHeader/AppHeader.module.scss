@@ -59,9 +59,46 @@
     }
 }
 
+.companyInfo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+
+    .menuItemImage {
+        height: 6rem;
+        aspect-ratio: 1/1;
+        border-radius: 0.6rem;
+    }
+
+    .menuItemText {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        min-width: 0;
+        width: 100%;
+    }
+
+    .menuItemName {
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .menuItemSlug {
+        font-size: 1.4rem;
+        color: var(--color-text-secondary);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+}
+
 .dropdownContent {
     width: 100%;
-    max-width: 20rem;
+    max-width: 35rem;
 }
 
 .menuItem {

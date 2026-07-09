@@ -4,11 +4,11 @@ import Logo from '@assets/logo.svg?react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Dropdown } from '@bookio/ui';
 
-import ConnectIcon from '@assets/icons/connect.svg?react';
-import TrashIcon from '@assets/icons/trash.svg?react';
 import { useGetOrganizationData } from '@api/organizations/getOrganizationData';
 
 import ArrowIcon from '@assets/icons/short-arrow.svg?react';
+import FormIcon from '@assets/icons/form.svg?react';
+import OrganizationIcon from '@assets/icons/organization.svg?react';
 
 import PlaceholderImage from '@assets/images/OrganizationPlaceholder.webp';
 
@@ -26,23 +26,38 @@ export const AppHeader: FC = () => {
             <div className={styles.dropdown}>
                 <Dropdown open={isMenuOpen} onOpenChange={setIsMenuOpen} placement="bottom">
                     <Dropdown.Trigger className={styles.menuTrigger}>
-                        <img src={PlaceholderImage} alt="Organization image" className={styles.menuItemImage} />
+                        <img
+                            src={PlaceholderImage}
+                            alt="Organization image"
+                            className={styles.menuItemImage}
+                        />
                         <div className={styles.menuItemText}>{organizationData?.data?.name}</div>
                         <ArrowIcon className={styles.arrowIcon} />
                     </Dropdown.Trigger>
                     <Dropdown.Content className={styles.dropdownContent}>
+                        <Dropdown.Item className={styles.companyInfo} hoverable={false}>
+                            <img
+                                src={PlaceholderImage}
+                                alt="Organization image"
+                                className={styles.menuItemImage}
+                            />
+                            <div className={styles.menuItemText}>
+                                <span className={styles.menuItemName}>{organizationData?.data?.name}</span>
+                                <span className={styles.menuItemSlug}>@{organizationData?.data?.slug}</span>
+                            </div>
+                        </Dropdown.Item>
                         <Dropdown.Item
                             className={styles.menuItem}
                             onClick={() => navigate(`/${id}`)}
                         >
-                            <ConnectIcon className={styles.menuItemIcon} />
-                            Home
+                            <FormIcon className={styles.menuItemIcon} />
+                            Booking forms
                         </Dropdown.Item>
                         <Dropdown.Item
                             className={styles.menuItem}
                             onClick={() => navigate('/organizations')}
                         >
-                            <TrashIcon className={styles.menuItemIcon} />
+                            <OrganizationIcon className={styles.menuItemIcon} />
                             Organizations
                         </Dropdown.Item>
                     </Dropdown.Content>

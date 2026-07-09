@@ -152,27 +152,34 @@ function DropdownContent({ children, className }: DropdownContentProps) {
     );
 }
 
-export type DropdownItemProps = ButtonAsButtonProps;
+export type DropdownItemProps = ButtonAsButtonProps & {
+    hoverable?: boolean;
+};
 
 function DropdownItem({
     children,
     className,
     variant = 'simple-clean',
     disabled = false,
+    hoverable = true,
     onClick,
     ...props
 }: DropdownItemProps) {
     const { onOpenChange, getItemProps } = useDropdownContext();
 
-    const classes = [styles.item, className].filter(Boolean).join(' ') || undefined;
+    const classes = [styles.item, !hoverable && styles.itemNotHoverable, className]
+        .filter(Boolean)
+        .join(' ') || undefined;
 
     const handleClick = useCallback(
         (event: MouseEvent<HTMLButtonElement>) => {
             if (disabled) return;
             onClick?.(event);
-            onOpenChange(false);
+            if (hoverable) {
+                onOpenChange(false);
+            }
         },
-        [disabled, onClick, onOpenChange],
+        [disabled, hoverable, onClick, onOpenChange],
     );
 
     return (

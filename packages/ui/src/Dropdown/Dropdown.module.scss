@@ -40,3 +40,12 @@
     width: 100%;
     justify-content: flex-start;
 }
+
+.item.itemNotHoverable {
+    cursor: default;
+
+    &:hover:not(:disabled) {
+        background-color: transparent;
+        filter: none;
+    }
+}
