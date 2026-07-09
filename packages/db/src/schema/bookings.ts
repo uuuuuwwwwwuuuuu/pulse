@@ -123,3 +123,16 @@ export const bookingsRelations = relations(bookings, ({one}) => ({
         references: [bookingForms.id]
     })
 }))
+
+export type BookingFormSelect = typeof bookingForms.$inferSelect;
+export type BookingFormFieldSelect = typeof bookingFormFields.$inferSelect;
+export type BookingSelect = typeof bookings.$inferSelect;
+
+export type BookingFormInsert = typeof bookingForms.$inferInsert;
+export type BookingFormFieldInsert = typeof bookingFormFields.$inferInsert;
+export type BookingInsert = typeof bookings.$inferInsert;
+
+export type BookingFormFieldCreate = Omit<BookingFormFieldInsert, 'id' | 'order'>;
+export type BookingFormFieldUpdate = Partial<
+    Omit<BookingFormFieldInsert, 'id'>
+>;
