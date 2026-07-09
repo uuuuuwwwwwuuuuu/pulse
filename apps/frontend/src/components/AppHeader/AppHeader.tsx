@@ -48,7 +48,7 @@ export const AppHeader: FC = () => {
                         </Dropdown.Item>
                         <Dropdown.Item
                             className={styles.menuItem}
-                            onClick={() => navigate(`/${id}`)}
+                            onClick={() => navigate(`/${id}/booking-forms`)}
                         >
                             <FormIcon className={styles.menuItemIcon} />
                             Booking forms

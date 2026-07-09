@@ -69,6 +69,15 @@ export const router = createBrowserRouter([
                     {
                         path: ':id',
                         lazy: lazyRoute(() => import('@layouts/AppLayout/AppLayout'), 'AppLayout'),
+                        children: [
+                            {
+                                path: 'booking-forms',
+                                lazy: lazyRoute(
+                                    () => import('@pages/App/BookingForms/BookingForms'),
+                                    'BookingForms',
+                                ),
+                            },
+                        ],
                     },
                 ],
             },
