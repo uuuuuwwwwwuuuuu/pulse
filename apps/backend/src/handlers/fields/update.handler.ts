@@ -18,9 +18,17 @@ const updateBookingFormFieldSchema = z
         parentId: z.uuid().optional().nullable(),
         order: z.number().int().min(0).optional(),
     })
-    .refine((data) => Object.values(data).some((value) => value !== undefined), {
-        message: 'At least one field must be provided',
-    }) satisfies z.ZodType<BookingFormFieldUpdate>;
+    .refine(
+        (data) =>
+            Object.entries(data).some(([key, value]) => {
+                if (key === 'bookingFormId') return false;
+
+                return value !== undefined;
+            }),
+        {
+            message: 'At least one field must be provided',
+        },
+    ) satisfies z.ZodType<BookingFormFieldUpdate>;
 
 export const updateBookingFormFieldHandler = factory(
     zValidator('json', updateBookingFormFieldSchema),
@@ -54,3 +62,4 @@ export const updateBookingFormFieldHandler = factory(
         }
     },
 );
+

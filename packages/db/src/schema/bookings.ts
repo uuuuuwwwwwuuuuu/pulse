@@ -49,7 +49,7 @@ export const bookingForms = pgTable('booking_forms', {
         .$default(() => uuidv7()),
     organizationId: uuid('organization_id').references(() => organizations.id, {
         onDelete: 'cascade',
-    }),
+    }).notNull(),
     isActive: boolean('is_active').notNull().default(true),
     name: text('name').notNull(),
     totalBookings: integer('total_bookings').notNull().default(0),
