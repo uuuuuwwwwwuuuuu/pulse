@@ -28,5 +28,7 @@ export const BookingForms: FC = () => {
         );
     }
 
+    if (bookingForms)
+
     return <div className={styles.bookingForms}></div>;
 };

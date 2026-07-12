@@ -30,7 +30,7 @@ const connectToOrganizationRequest = async (requestData: ConnectToOrganizationRe
         throw new Error(parseError(body));
     }
 
-    return body;
+    return body.data;
 };
 
 export const useConnectToOrganization = () => {

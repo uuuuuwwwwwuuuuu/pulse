@@ -39,7 +39,7 @@ const logoutOrganization = async ({
         throw new Error(parseError(body));
     }
 
-    return body;
+    return body.data;
 };
 
 export const useLogoutOrganization = () => {

@@ -22,7 +22,7 @@ export const ConnectOrganization: FC = () => {
         (prev: FormData, next: Partial<FormData>) => ({ ...prev, ...next }),
         { slug: '', password: '' },
     );
-    const { mutateAsync, data, isPending } = useConnectToOrganization();
+    const { mutateAsync, isSuccess, isPending } = useConnectToOrganization();
 
     const onSubmitForm = (e: SubmitEvent) => {
         e.preventDefault();
@@ -47,7 +47,7 @@ export const ConnectOrganization: FC = () => {
         setFormData({ [name]: value });
     }, []);
 
-    if (data?.success) {
+    if (isSuccess) {
         navigate('/organizations/list', { replace: true });
     }
 

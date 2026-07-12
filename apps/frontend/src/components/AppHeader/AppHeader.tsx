@@ -36,7 +36,7 @@ export const AppHeader: FC = () => {
                             alt="Organization image"
                             className={styles.menuItemImage}
                         />
-                        <div className={styles.menuItemText}>{organizationData?.data?.name}</div>
+                        <div className={styles.menuItemText}>{organizationData?.name}</div>
                         <ArrowIcon className={styles.arrowIcon} />
                     </Dropdown.Trigger>
                     <Dropdown.Content className={styles.dropdownContent}>
@@ -48,10 +48,10 @@ export const AppHeader: FC = () => {
                             />
                             <div className={styles.menuItemText}>
                                 <span className={styles.menuItemName}>
-                                    {organizationData?.data?.name}
+                                    {organizationData?.name}
                                 </span>
                                 <span className={styles.menuItemSlug}>
-                                    @{organizationData?.data?.slug}
+                                    @{organizationData?.slug}
                                 </span>
                             </div>
                         </Dropdown.Item>

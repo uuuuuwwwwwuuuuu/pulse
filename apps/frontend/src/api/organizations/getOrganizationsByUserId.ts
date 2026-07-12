@@ -26,10 +26,10 @@ const fetchOrganizationsByUserId = async (userId: string) => {
         throw new Error(parseError(body));
     }
 
-    return body;
+    return body.data;
 };
 
-export const useGetOrganizationsByUserId = (): UseQueryResult<OrganizationsResponse200> => {
+export const useGetOrganizationsByUserId = (): UseQueryResult<OrganizationsType> => {
     const { data: session } = useSession();
 
     return useQuery({

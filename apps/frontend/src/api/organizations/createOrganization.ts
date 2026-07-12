@@ -30,7 +30,7 @@ const createOrganizationRequest = async (requestData: CreateOrganizationRequest)
         throw new Error(parseError(body));
     }
 
-    return body;
+    return body.data;
 };
 
 export const useCreateOrganization = () => {

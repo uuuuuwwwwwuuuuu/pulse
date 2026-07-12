@@ -71,8 +71,8 @@ export const CreateOrganization: FC = () => {
         setFormData({ [name]: value });
     }, []);
 
-    if (isSuccess && organization.success) {
-        return <SuccessfulOrganizationCreation data={organization.data} />;
+    if (isSuccess && organization) {
+        return <SuccessfulOrganizationCreation data={organization} />;
     }
 
     return (

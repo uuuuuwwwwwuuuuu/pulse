@@ -8,7 +8,7 @@ const getBookingFormClient = hono['booking-forms']['get-one'];
 export type GetBookingFormResponse = InferResponseType<typeof getBookingFormClient.$get, 200>;
 export type BookingFormType = GetBookingFormResponse['data'];
 
-export const fetchBookingForm = async (bookingFormId: string): Promise<GetBookingFormResponse> => {
+export const fetchBookingForm = async (bookingFormId: string): Promise<BookingFormType> => {
     const response = await getBookingFormClient.$get({
         query: {
             bookingFormId,
@@ -28,13 +28,13 @@ export const fetchBookingForm = async (bookingFormId: string): Promise<GetBookin
         throw new Error(parseError(body));
     }
 
-    return body;
+    return body.data;
 };
 
 export const useGetBookingForm = (
     bookingFormId: string | undefined,
-): UseQueryResult<GetBookingFormResponse> => {
-    return useQuery<GetBookingFormResponse>({
+): UseQueryResult<BookingFormType> => {
+    return useQuery<BookingFormType>({
         queryKey: ['booking-form', bookingFormId],
         queryFn: () => fetchBookingForm(bookingFormId!),
         enabled: !!bookingFormId,

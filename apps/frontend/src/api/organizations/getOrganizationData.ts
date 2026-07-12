@@ -14,7 +14,7 @@ export type GetOrganizationDataRequest = InferRequestType<typeof hono.organizati
 const getOrganizationData = async (
     organizationId: string,
     userId: string,
-): Promise<GetOrganizationDataResponse> => {
+): Promise<OrganizationData> => {
     const response = await hono.organizations.data.$get({
         query: {
             organizationId,
@@ -35,14 +35,14 @@ const getOrganizationData = async (
         throw new Error(parseError(body));
     }
 
-    return body;
+    return body.data;
 };
 
 export const useGetOrganization = (
     organizationId: string | undefined,
-): UseQueryResult<GetOrganizationDataResponse> => {
+): UseQueryResult<OrganizationData> => {
     const { data: session } = useSession();
-    return useQuery<GetOrganizationDataResponse>({
+    return useQuery<OrganizationData>({
         queryKey: ['organization', organizationId],
         queryFn: () => getOrganizationData(organizationId!, session!.user.id),
         enabled: !!session && !!organizationId,

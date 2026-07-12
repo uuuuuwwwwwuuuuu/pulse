@@ -43,7 +43,7 @@ export const OrganizationList: FC = () => {
             </div>
         );
 
-    if (data?.data.length === 0) {
+    if (data.length === 0) {
         return (
             <div className={styles.container}>
                 <h2 className={styles.message}>You haven't any Organizations yet</h2>
@@ -53,7 +53,7 @@ export const OrganizationList: FC = () => {
 
     return (
         <div className={styles.organizationList}>
-            {data.data.map((item) => (
+            {data.map((item) => (
                 <OrganizationItem
                     key={item.id}
                     organizationName={item.name}

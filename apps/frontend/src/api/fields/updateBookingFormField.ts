@@ -29,7 +29,7 @@ const updateBookingFormFieldRequest = async (requestData: UpdateBookingFormField
         throw new Error(parseError(body));
     }
 
-    return body;
+    return body.data;
 };
 
 export const useUpdateBookingFormField = () => {

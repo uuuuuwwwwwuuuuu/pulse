@@ -96,7 +96,7 @@ export const OrganizationSearch: FC = () => {
             
             if (!organizations) return;
 
-            setFilteredOrganizations(filterOrganizations(organizations.data || [], value));
+            setFilteredOrganizations(filterOrganizations(organizations || [], value));
         },
         [organizations, setFilteredOrganizations],
     );

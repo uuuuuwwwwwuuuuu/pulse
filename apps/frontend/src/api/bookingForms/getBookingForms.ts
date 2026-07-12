@@ -9,7 +9,7 @@ export type GetBookingFormsResponse = InferResponseType<typeof getBookingFormsCl
 export type BookingFormsType = GetBookingFormsResponse['data'];
 export type BookingFormType = BookingFormsType[number];
 
-const fetchBookingForms = async (organizationId: string): Promise<GetBookingFormsResponse> => {
+const fetchBookingForms = async (organizationId: string): Promise<BookingFormsType> => {
     const response = await getBookingFormsClient.$get({
         query: { organizationId },
     });
@@ -27,13 +27,13 @@ const fetchBookingForms = async (organizationId: string): Promise<GetBookingForm
         throw new Error(parseError(body));
     }
 
-    return body;
+    return body.data;
 };
 
 export const useGetBookingForms = (
     organizationId: string | undefined,
-): UseQueryResult<GetBookingFormsResponse> => {
-    return useQuery<GetBookingFormsResponse>({
+): UseQueryResult<BookingFormsType> => {
+    return useQuery<BookingFormsType>({
         queryKey: ['booking-forms', organizationId],
         queryFn: () => fetchBookingForms(organizationId!),
         enabled: !!organizationId,

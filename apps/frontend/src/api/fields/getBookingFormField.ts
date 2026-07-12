@@ -13,7 +13,7 @@ export type BookingFormFieldType = GetBookingFormFieldResponse['data'];
 
 export const fetchBookingFormField = async (
     bookingFormFieldId: string,
-): Promise<GetBookingFormFieldResponse> => {
+): Promise<BookingFormFieldType> => {
     const response = await getBookingFormFieldClient.$get({
         query: {
             bookingFormFieldId,
@@ -33,13 +33,13 @@ export const fetchBookingFormField = async (
         throw new Error(parseError(body));
     }
 
-    return body;
+    return body.data;
 };
 
 export const useGetBookingFormField = (
     bookingFormFieldId: string | undefined,
-): UseQueryResult<GetBookingFormFieldResponse> => {
-    return useQuery<GetBookingFormFieldResponse>({
+): UseQueryResult<BookingFormFieldType> => {
+    return useQuery<BookingFormFieldType>({
         queryKey: ['booking-form-field', bookingFormFieldId],
         queryFn: () => fetchBookingFormField(bookingFormFieldId!),
         enabled: !!bookingFormFieldId,
