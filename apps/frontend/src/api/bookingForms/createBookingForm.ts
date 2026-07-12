@@ -28,6 +28,10 @@ const createBookingFormRequest = async (requestData: CreateBookingFormRequest) =
         throw new Error('Failed to create booking form');
     }
 
+    if (!body.success) {
+        throw new Error(parseError(body));
+    }
+
     return body;
 };
 
