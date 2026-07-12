@@ -22,6 +22,10 @@ const fetchOrganizationsByUserId = async (userId: string) => {
         throw new Error('Failed to fetch organizations');
     }
 
+    if (!body.success) {
+        throw new Error(parseError(body));
+    }
+
     return body;
 };
 

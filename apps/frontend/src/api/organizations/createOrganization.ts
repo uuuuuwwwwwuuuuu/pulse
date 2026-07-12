@@ -26,6 +26,10 @@ const createOrganizationRequest = async (requestData: CreateOrganizationRequest)
         throw new Error('Failed to create organization');
     }
 
+    if (!body.success) {
+        throw new Error(parseError(body));
+    }
+
     return body;
 };
 

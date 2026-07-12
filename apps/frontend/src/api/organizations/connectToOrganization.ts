@@ -26,6 +26,10 @@ const connectToOrganizationRequest = async (requestData: ConnectToOrganizationRe
         throw new Error('Failed to connect to organization');
     }
 
+    if (!body.success) {
+        throw new Error(parseError(body));
+    }
+
     return body;
 };
 

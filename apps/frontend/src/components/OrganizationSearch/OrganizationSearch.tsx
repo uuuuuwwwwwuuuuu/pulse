@@ -78,7 +78,7 @@ export const OrganizationSearch: FC = () => {
         [isClosing, setIsOpen],
     );
 
-    const { data: organizations } = useGetOrganizationsByUserId();
+    const { data: organizations, error } = useGetOrganizationsByUserId();
     const [filteredOrganizations, setFilteredOrganizations] = useState<
         OrganizationsType
     >([]);
@@ -86,13 +86,16 @@ export const OrganizationSearch: FC = () => {
     useOnPress('Escape', closeSearch);
     useOutsideClick([searchInputRef, searchWrapperRef], closeSearch);
 
+    if (error) {
+        toast.error(error.message)
+    }
+
     const handleSearchChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             const value = e.target.value;
-            if (!organizations?.success) {
-                toast.error('Failed to load organizations');
-                return;
-            };
+            
+            if (!organizations) return;
+
             setFilteredOrganizations(filterOrganizations(organizations.data || [], value));
         },
         [organizations, setFilteredOrganizations],

@@ -10,7 +10,7 @@ import { Button } from '@bookio/ui';
 import { useNavigate } from 'react-router-dom';
 
 export const OrganizationList: FC = () => {
-    const { data, isPending, isError, refetch } = useGetOrganizationsByUserId();
+    const { data, isPending, refetch, error } = useGetOrganizationsByUserId();
     const navigate = useNavigate();
     const handleRetry = useCallback(() => {
         refetch();
@@ -23,8 +23,8 @@ export const OrganizationList: FC = () => {
         [navigate],
     );
 
-    if (isError) {
-        toast.error('Failed to load organizations');
+    if (error) {
+        toast.error(error.message)
 
         return (
             <div className={styles.container}>

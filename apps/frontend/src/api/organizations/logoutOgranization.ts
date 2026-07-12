@@ -35,6 +35,10 @@ const logoutOrganization = async ({
         throw new Error('Failed to logout organization');
     }
 
+    if (!body.success) {
+        throw new Error(parseError(body));
+    }
+
     return body;
 };
 

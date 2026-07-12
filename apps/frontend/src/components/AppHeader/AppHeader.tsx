@@ -4,19 +4,24 @@ import Logo from '@assets/logo.svg?react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Dropdown } from '@bookio/ui';
 
-import { useGetOrganizationData } from '@api/organizations/getOrganizationData';
+import { useGetOrganization } from '@api/organizations/getOrganizationData';
 
 import ArrowIcon from '@assets/icons/short-arrow.svg?react';
 import FormIcon from '@assets/icons/form.svg?react';
 import OrganizationIcon from '@assets/icons/organization.svg?react';
 
 import PlaceholderImage from '@assets/images/OrganizationPlaceholder.webp';
+import toast from 'react-hot-toast';
 
 export const AppHeader: FC = () => {
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
-    const { data: organizationData } = useGetOrganizationData(id);
+    const { data: organizationData, error } = useGetOrganization(id);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    if (error) {
+        toast.error(error.message)
+    }
 
     return (
         <div className={styles.appHeader}>
@@ -42,8 +47,12 @@ export const AppHeader: FC = () => {
                                 className={styles.menuItemImage}
                             />
                             <div className={styles.menuItemText}>
-                                <span className={styles.menuItemName}>{organizationData?.data?.name}</span>
-                                <span className={styles.menuItemSlug}>@{organizationData?.data?.slug}</span>
+                                <span className={styles.menuItemName}>
+                                    {organizationData?.data?.name}
+                                </span>
+                                <span className={styles.menuItemSlug}>
+                                    @{organizationData?.data?.slug}
+                                </span>
                             </div>
                         </Dropdown.Item>
                         <Dropdown.Item
