@@ -25,6 +25,10 @@ const updateBookingFormFieldRequest = async (requestData: UpdateBookingFormField
         throw new Error('Failed to update booking form field');
     }
 
+    if (!body.success) {
+        throw new Error(parseError(body));
+    }
+
     return body;
 };
 

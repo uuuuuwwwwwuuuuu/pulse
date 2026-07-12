@@ -56,7 +56,7 @@ export const updateBookingFormFieldHandler = factory(
                 return c.json(prepareError('Failed to update booking form field'), 500);
             }
 
-            return c.json(prepareSuccess('Booking form field updated'));
+            return c.json(prepareSuccess(updatedField));
         } catch (error) {
             return c.json(prepareError('Failed to update booking form field'), 500);
         }

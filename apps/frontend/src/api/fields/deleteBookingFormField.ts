@@ -26,6 +26,10 @@ const deleteBookingFormFieldRequest = async (requestData: DeleteBookingFormField
         throw new Error('Failed to delete booking form field');
     }
 
+    if (!body.success) {
+        throw new Error(parseError(body));
+    }
+
     return body;
 };
 

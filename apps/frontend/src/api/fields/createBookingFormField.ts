@@ -26,6 +26,10 @@ const createBookingFormFieldRequest = async (requestData: CreateBookingFormField
         throw new Error('Failed to create booking form field');
     }
 
+    if (!body.success) {
+        throw new Error(parseError(body));
+    }
+
     return body;
 };
 

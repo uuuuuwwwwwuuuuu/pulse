@@ -18,17 +18,13 @@ export const deleteBookingFormFieldHandler = factory(
         try {
             const { id } = c.req.valid('json');
 
-            const existingField = await db.query.bookingFormFields.findFirst({
-                where: (field, { eq }) => eq(field.id, id),
-            });
-            
-            if (!existingField) {
-                return c.json(prepareError('Field already deleted'), 404);
+            const [deletedField] = await db.delete(bookingFormFields).where(eq(bookingFormFields.id, id)).returning();
+
+            if (!deletedField) {
+                return c.json(prepareError('Field not found'), 404);
             }
 
-            await db.delete(bookingFormFields).where(eq(bookingFormFields.id, id));
-
-            return c.json(prepareSuccess('Booking form field deleted'));
+            return c.json(prepareSuccess(deletedField));
         } catch (error) {
             return c.json(prepareError('Failed to delete booking form field'), 500);
         }
