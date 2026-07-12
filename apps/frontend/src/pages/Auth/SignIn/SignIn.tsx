@@ -1,9 +1,12 @@
 import { Input, Button } from '@bookio/ui';
-import { type FC, useReducer, useCallback, type ChangeEvent, type SubmitEvent } from 'react';
+import { type FC } from 'react';
 import styles from './SignIn.module.scss';
 import { useSignIn } from '@api/auth';
 import { z } from 'zod';
 import { toast } from 'react-hot-toast';
+import { useForm, type FieldErrors } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { getFirstFieldError } from '@utils/formErrors';
 
 const signInSchema = z.object({
     email: z.email(),
@@ -15,85 +18,59 @@ const signInSchema = z.object({
         .regex(/[0-9]/, { message: 'Password must contain at least one number' })
         .regex(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/, {
             message: 'Password must contain at least one special character',
-        })
-        .regex(/[0-9]/, { message: 'Password must contain at least one number' })
-        .regex(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/, {
-            message: 'Password must contain at least one special character',
         }),
 });
 
 type SignInData = z.infer<typeof signInSchema>;
 
 export const SignIn: FC = () => {
-    const [data, setData] = useReducer(
-        (prev: SignInData, next: Partial<SignInData>) => {
-            return {
-                ...prev,
-                ...next,
-            };
-        },
-        {
-            email: '',
-            password: '',
-        },
-    );
-
     const { mutateAsync, isPending } = useSignIn();
 
-    const handleChangeInput = useCallback(
-        (e: ChangeEvent<HTMLInputElement>) => {
-            setData({
-                [e.target.name]: e.target.value,
-            });
-        },
-        [setData],
-    );
+    const {
+        register,
+        handleSubmit,
+        formState: { isSubmitting },
+    } = useForm<SignInData>({
+        resolver: zodResolver(signInSchema),
+        defaultValues: { email: '', password: '' },
+    });
 
-    const handleSubmit = (e: SubmitEvent) => {
-        e.preventDefault();
-
-        try {
-            const zodRes = signInSchema.parse(data);
-
-            toast.promise(mutateAsync(zodRes), {
-                loading: 'Signing in...',
-                success: 'Signed in successfully',
-                error: (error: Error) => error.message
-            });
-        } catch (error) {
-            if (error instanceof z.ZodError) {
-                const errorsArr = JSON.parse(error.message);
-                toast.error(errorsArr[0].message);
-            }
-        }
+    const onSubmit = async (data: SignInData) => {
+        await toast.promise(mutateAsync(data), {
+            loading: 'Signing in...',
+            success: 'Signed in successfully',
+            error: (error: Error) => error.message,
+        });
     };
 
+    const onInvalid = (errors: FieldErrors<SignInData>) => {
+        toast.error(getFirstFieldError(errors) ?? 'Invalid form data');
+    };
+
+    const isDisabled = isPending || isSubmitting;
+
     return (
-        <form className={styles.signInForm} onSubmit={handleSubmit}>
+        <form className={styles.signInForm} onSubmit={handleSubmit(onSubmit, onInvalid)}>
             <h1>Sign in</h1>
             <Input
                 type="email"
-                name="email"
                 placeholder="Email"
                 autoComplete="email"
-                value={data.email}
-                onChange={handleChangeInput}
-                disabled={isPending}
+                disabled={isDisabled}
+                {...register('email')}
             />
             <Input
                 type="password"
-                name="password"
                 placeholder="Password"
                 autoComplete="new-password"
-                value={data.password}
-                onChange={handleChangeInput}
-                disabled={isPending}
+                disabled={isDisabled}
+                {...register('password')}
             />
             <Button
                 type="submit"
                 variant="primary-filled"
                 className={styles.submitButton}
-                disabled={isPending}
+                disabled={isDisabled}
             >
                 {isPending ? 'Signing in…' : 'Sign in'}
             </Button>

@@ -1,9 +1,12 @@
-import { type FC, type ChangeEvent, type SubmitEvent, useReducer, useCallback } from 'react';
+import { type FC } from 'react';
 import { Button, Input } from '@bookio/ui';
 import styles from './SignUp.module.scss';
 import { useSignUp } from '@api/auth';
 import { z } from 'zod';
 import { toast } from 'react-hot-toast';
+import { useForm, type FieldErrors } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { getFirstFieldError } from '@utils/formErrors';
 
 const passwordSchema = z
     .string()
@@ -29,85 +32,60 @@ const signUpSchema = z
 type SignUpData = z.infer<typeof signUpSchema>;
 
 export const SignUp: FC = () => {
-    const [data, setData] = useReducer(
-        (prev: SignUpData, next: Partial<SignUpData>) => {
-            return {
-                ...prev,
-                ...next,
-            };
-        },
-        {
-            email: '',
-            password: '',
-            confirmPassword: '',
-        },
-    );
-
     const { mutateAsync, isPending } = useSignUp();
 
-    const handleChangeInput = useCallback(
-        (e: ChangeEvent<HTMLInputElement>) => {
-            setData({
-                [e.target.name]: e.target.value,
-            });
-        },
-        [setData],
-    );
+    const {
+        register,
+        handleSubmit,
+        formState: { isSubmitting },
+    } = useForm<SignUpData>({
+        resolver: zodResolver(signUpSchema),
+        defaultValues: { email: '', password: '', confirmPassword: '' },
+    });
 
-    const handleSubmit = (e: SubmitEvent) => {
-        e.preventDefault();
-
-        try {
-            const zodRes = signUpSchema.parse(data);
-
-            toast.promise(mutateAsync(zodRes), {
-                loading: 'Signing up...',
-                success: 'Signed up successfully',
-                error: (error: Error) => error.message
-            });
-        } catch (error) {
-            if (error instanceof z.ZodError) {
-                const errorsArr = JSON.parse(error.message);
-                toast.error(errorsArr[0].message);
-            }
-        }
+    const onSubmit = async (data: SignUpData) => {
+        await toast.promise(mutateAsync(data), {
+            loading: 'Signing up...',
+            success: 'Signed up successfully',
+            error: (error: Error) => error.message,
+        });
     };
 
+    const onInvalid = (errors: FieldErrors<SignUpData>) => {
+        toast.error(getFirstFieldError(errors) ?? 'Invalid form data');
+    };
+
+    const isDisabled = isPending || isSubmitting;
+
     return (
-        <form className={styles.signUpForm} onSubmit={handleSubmit}>
+        <form className={styles.signUpForm} onSubmit={handleSubmit(onSubmit, onInvalid)}>
             <h1>Sign up</h1>
             <Input
                 type="email"
-                name="email"
                 placeholder="Email"
                 autoComplete="email"
-                value={data.email}
-                onChange={handleChangeInput}
-                disabled={isPending}
+                disabled={isDisabled}
+                {...register('email')}
             />
             <Input
                 type="password"
-                name="password"
                 placeholder="Password"
                 autoComplete="new-password"
-                value={data.password}
-                onChange={handleChangeInput}
-                disabled={isPending}
+                disabled={isDisabled}
+                {...register('password')}
             />
             <Input
                 type="password"
-                name="confirmPassword"
                 placeholder="Confirm Password"
                 autoComplete="new-password"
-                value={data.confirmPassword}
-                onChange={handleChangeInput}
-                disabled={isPending}
+                disabled={isDisabled}
+                {...register('confirmPassword')}
             />
             <Button
                 type="submit"
                 variant="primary-filled"
                 className={styles.submitButton}
-                disabled={isPending}
+                disabled={isDisabled}
             >
                 {isPending ? 'Signing up…' : 'Sign Up'}
             </Button>

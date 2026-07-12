@@ -1,4 +1,4 @@
-import { useReducer, type FC, type SubmitEvent, type ChangeEvent, useCallback } from 'react';
+import { type FC, useCallback } from 'react';
 import styles from './CreateOrganization.module.scss';
 import { Button, Input, HiddenField } from '@bookio/ui';
 import { ValidatableInput } from '@components/ValidatableInput/ValidatableInput';
@@ -11,6 +11,9 @@ import { z } from 'zod';
 import { toast } from 'react-hot-toast';
 import { type CreateOrganizationRequest } from '@api/organizations/createOrganization';
 import { useIsOrganizationExists } from '@api/organizations/isOrganizationExists';
+import { Controller, useForm, useWatch, type FieldErrors } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { getFirstFieldError } from '@utils/formErrors';
 
 const formSchema = z.object({
     name: z.string().min(3).max(255),
@@ -36,77 +39,79 @@ type FormData = z.infer<typeof formSchema>;
 export const CreateOrganization: FC = () => {
     const { data: session } = useSession();
     const { data: organization, mutateAsync, isPending, isSuccess } = useCreateOrganization();
-    const [formData, setFormData] = useReducer(
-        (prev: FormData, next: Partial<FormData>) => ({ ...prev, ...next }),
-        { name: '', slug: '', password: '' },
-    );
-    const { exists: slugExists } = useIsOrganizationExists(formData.slug);
+
+    const {
+        register,
+        control,
+        handleSubmit,
+        formState: { isSubmitting },
+    } = useForm<FormData>({
+        resolver: zodResolver(formSchema),
+        defaultValues: { name: '', slug: '', password: '' },
+    });
+
+    const slug = useWatch({ control, name: 'slug', defaultValue: '' });
+    const { exists: slugExists } = useIsOrganizationExists(slug);
     const slugIsValid = slugExists === undefined ? undefined : !slugExists;
 
-    const onSubmitForm = (e: SubmitEvent) => {
-        e.preventDefault();
-
-        try {
-            const result = formSchema.parse(formData);
-
-            if (slugExists === true) {
-                toast.error('Organization slug is already taken');
-                return;
-            }
-
-            toast.promise(mutateAsync({ ...result, userId: session!.user.id }), {
-                loading: 'Creating organization...',
-                success: 'Organization created successfully',
-                error: (error: Error) => error.message,
-            });
-        } catch (error) {
-            if (error instanceof z.ZodError) {
-                toast.error('Invalid form data');
-            }
+    const onSubmit = async (data: FormData) => {
+        if (slugExists === true) {
+            toast.error('Organization slug is already taken');
+            return;
         }
+
+        await toast.promise(mutateAsync({ ...data, userId: session!.user.id }), {
+            loading: 'Creating organization...',
+            success: 'Organization created successfully',
+            error: (error: Error) => error.message,
+        });
     };
 
-    const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData({ [name]: value });
-    }, []);
+    const onInvalid = (errors: FieldErrors<FormData>) => {
+        toast.error(getFirstFieldError(errors) ?? 'Invalid form data');
+    };
 
     if (isSuccess && organization) {
         return <SuccessfulOrganizationCreation data={organization} />;
     }
 
+    const isDisabled = isPending || isSubmitting;
+
     return (
         <div className={styles.createOrganization}>
-            <form className={styles.form} onSubmit={onSubmitForm}>
+            <form className={styles.form} onSubmit={handleSubmit(onSubmit, onInvalid)}>
                 <h2 className={styles.title}>Lets create your organization</h2>
                 <div className={styles.formGroup}>
                     <Input
-                        name="name"
                         placeholder="Organization name"
-                        onChange={handleInputChange}
-                        value={formData.name}
+                        disabled={isDisabled}
+                        {...register('name')}
                     />
-                    <ValidatableInput
+                    <Controller
                         name="slug"
-                        placeholder="Unique organization slug"
-                        onChange={handleInputChange}
-                        value={formData.slug}
-                        isValid={slugIsValid}
+                        control={control}
+                        render={({ field }) => (
+                            <ValidatableInput
+                                {...field}
+                                placeholder="Unique organization slug"
+                                isValid={slugIsValid}
+                                disabled={isDisabled}
+                            />
+                        )}
                     />
                     <Input
-                        name="password"
                         type="password"
                         placeholder="Organization password"
                         autoComplete="new-password"
-                        onChange={handleInputChange}
-                        value={formData.password}
+                        disabled={isDisabled}
+                        {...register('password')}
                     />
                 </div>
                 <Button
                     className={styles.button}
                     variant="primary-filled"
                     type="submit"
-                    disabled={isPending}
+                    disabled={isDisabled}
                 >
                     Create Organization
                 </Button>

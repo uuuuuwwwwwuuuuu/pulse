@@ -1,4 +1,4 @@
-import { type FC, type ChangeEvent, type SubmitEvent, useReducer, useCallback } from 'react';
+import { type FC } from 'react';
 import styles from './ConnectOrganization.module.scss';
 import { Button, Input } from '@bookio/ui';
 import {
@@ -8,6 +8,9 @@ import {
 import { z } from 'zod';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { useForm, type FieldErrors } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { getFirstFieldError } from '@utils/formErrors';
 
 const formSchema = z.object({
     slug: z.string().min(1).max(255),
@@ -18,63 +21,57 @@ type FormData = z.infer<typeof formSchema>;
 
 export const ConnectOrganization: FC = () => {
     const navigate = useNavigate();
-    const [formData, setFormData] = useReducer(
-        (prev: FormData, next: Partial<FormData>) => ({ ...prev, ...next }),
-        { slug: '', password: '' },
-    );
     const { mutateAsync, isSuccess, isPending } = useConnectToOrganization();
 
-    const onSubmitForm = (e: SubmitEvent) => {
-        e.preventDefault();
+    const {
+        register,
+        handleSubmit,
+        formState: { isSubmitting },
+    } = useForm<FormData>({
+        resolver: zodResolver(formSchema),
+        defaultValues: { slug: '', password: '' },
+    });
 
-        try {
-            const result = formSchema.parse(formData);
-
-            toast.promise(mutateAsync(result), {
-                loading: 'Connecting to organization...',
-                success: 'Connected to organization successfully',
-                error: (error: Error) => error.message,
-            });
-        } catch (error) {
-            if (error instanceof z.ZodError) {
-                toast.error('Invalid form data');
-            }
-        }
+    const onSubmit = async (data: FormData) => {
+        await toast.promise(mutateAsync(data), {
+            loading: 'Connecting to organization...',
+            success: 'Connected to organization successfully',
+            error: (error: Error) => error.message,
+        });
     };
 
-    const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData({ [name]: value });
-    }, []);
+    const onInvalid = (errors: FieldErrors<FormData>) => {
+        toast.error(getFirstFieldError(errors) ?? 'Invalid form data');
+    };
 
     if (isSuccess) {
         navigate('/organizations/list', { replace: true });
     }
 
+    const isDisabled = isPending || isSubmitting;
+
     return (
         <div className={styles.connectOrganization}>
-            <form className={styles.form} onSubmit={onSubmitForm}>
+            <form className={styles.form} onSubmit={handleSubmit(onSubmit, onInvalid)}>
                 <h2 className={styles.title}>Lets connect to organization</h2>
                 <div className={styles.formGroup}>
                     <Input
-                        name="slug"
                         placeholder="Organization slug"
-                        onChange={handleInputChange}
-                        value={formData.slug}
+                        disabled={isDisabled}
+                        {...register('slug')}
                     />
                     <Input
-                        name="password"
                         type="password"
                         placeholder="Organization password"
-                        onChange={handleInputChange}
-                        value={formData.password}
+                        disabled={isDisabled}
+                        {...register('password')}
                     />
                 </div>
                 <Button
                     className={styles.button}
                     variant="primary-filled"
                     type="submit"
-                    disabled={isPending}
+                    disabled={isDisabled}
                 >
                     Connect to Organization
                 </Button>
