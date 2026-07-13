@@ -11,12 +11,12 @@ export const BookingFormCard: FC<{ bookingForm: BookingFormType }> = ({ bookingF
                 <p>{bookingForm.description}</p>
             </div>
             <div className={styles.bookingFormCardGroup}>
-                <Checkbox label="Is active booking form" checked={bookingForm.isActive} />
-            </div>
-            <div className={styles.bookingFormCardGroup}>
                 <span className={styles.bookingFormCardTotalBookings}>
                     Total bookings in this month: {bookingForm.totalBookings}
                 </span>
+            </div>
+            <div className={styles.bookingFormCardGroup}>
+                <Checkbox label="Is active booking form" checked={bookingForm.isActive} />
             </div>
             <div className={styles.bookingFormCardGroup}>
                 <Button variant="blue-clean" type="link" to="create">
