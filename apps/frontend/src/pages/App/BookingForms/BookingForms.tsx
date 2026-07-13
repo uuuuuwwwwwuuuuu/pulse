@@ -4,6 +4,7 @@ import { useGetBookingForms } from '@api/bookingForms/getBookingForms';
 import { useParams } from 'react-router-dom';
 import { Button } from '@bookio/ui';
 import { Spinner } from '@components/Spinner/Spinner';
+import { BookingFormCard } from '@components/BookingFormCard/BookingFormCard';
 
 export const BookingForms: FC = () => {
     const { id } = useParams();
@@ -51,5 +52,14 @@ export const BookingForms: FC = () => {
         );
     }
 
-    return <div className={styles.bookingForms}></div>;
+    return (
+        <>
+        <div className={styles.booking}></div>
+        <div className={styles.bookingForms}>
+            {bookingForms.map((bookingForm) => (
+                <BookingFormCard key={bookingForm.id} bookingForm={bookingForm} />
+            ))}
+        </div>
+            </>
+    );
 };

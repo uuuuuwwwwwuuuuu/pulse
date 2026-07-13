@@ -29,3 +29,6 @@ export type {
     DropdownProps,
     DropdownTriggerProps,
 } from './Dropdown/Dropdown.js';
+
+export { default as Checkbox } from './Checkbox/Checkbox.js';
+export type { CheckboxProps } from './Checkbox/Checkbox.js';
