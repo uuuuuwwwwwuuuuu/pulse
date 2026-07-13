@@ -34,12 +34,9 @@ export const CreateBookingForm: FC = () => {
         formState: { isSubmitting },
     } = useForm<FormData>({
         resolver: zodResolver(createBookingFormSchema),
-
         defaultValues: {
             name: '',
-
             description: '',
-
             organizationId: id ?? '',
         },
     });
