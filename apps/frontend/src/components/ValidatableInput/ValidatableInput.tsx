@@ -57,8 +57,12 @@ function ValidatableTextareaInput(props: TextareaValidatableInputProps) {
 
 function ValidatableNativeInput(props: NativeValidatableInputProps) {
     const { isValid, className, ...inputProps } = props;
+
     const isShaking = useShake(isValid);
     const classes = getValidationClasses(isValid, isShaking, className);
+
+    if (isValid === undefined)
+        return <BaseInput {...inputProps} className={className || undefined} />;
 
     return <BaseInput {...inputProps} className={classes || undefined} />;
 }
