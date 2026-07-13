@@ -123,6 +123,18 @@
     @include outlined-variant(var(--color-system-green));
 }
 
+.blueClean {
+    @include clean-variant(var(--color-system-blue));
+}
+
+.blueFilled {
+    @include filled-variant(var(--color-system-blue));
+}
+
+.blueOutlined {
+    @include outlined-variant(var(--color-system-blue));
+}
+
 .primaryClean {
     @include clean-variant(var(--color-primary));
 }

@@ -6,6 +6,9 @@ import { Button } from '@bookio/ui';
 import { Spinner } from '@components/Spinner/Spinner';
 import { BookingFormCard } from '@components/BookingFormCard/BookingFormCard';
 
+import PlusIcon from '@assets/icons/plus.svg?react';
+import { clsx } from 'clsx';
+
 export const BookingForms: FC = () => {
     const { id } = useParams();
     const { data: bookingForms, isPending, error, refetch } = useGetBookingForms(id);
@@ -54,12 +57,25 @@ export const BookingForms: FC = () => {
 
     return (
         <>
-        <div className={styles.booking}></div>
-        <div className={styles.bookingForms}>
-            {bookingForms.map((bookingForm) => (
-                <BookingFormCard key={bookingForm.id} bookingForm={bookingForm} />
-            ))}
-        </div>
-            </>
+            <div className={styles.bookingHeader}>
+                <h2>Booking Forms</h2>
+                <div className={styles.bookingHeaderActions}>
+                    <Button
+                        variant="primary-filled"
+                        type="link"
+                        to="create"
+                        className={clsx(styles.button, styles.createButton)}
+                    >
+                        <PlusIcon />
+                        Create Booking Form
+                    </Button>
+                </div>
+            </div>
+            <div className={styles.bookingForms}>
+                {bookingForms.map((bookingForm) => (
+                    <BookingFormCard key={bookingForm.id} bookingForm={bookingForm} />
+                ))}
+            </div>
+        </>
     );
 };

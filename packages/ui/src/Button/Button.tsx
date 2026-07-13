@@ -2,7 +2,7 @@ import { memo, type ComponentProps } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Button.module.scss';
 
-export type ButtonColor = 'simple' | 'red' | 'green' | 'primary';
+export type ButtonColor = 'simple' | 'red' | 'green' | 'blue' | 'primary';
 export type ButtonType = 'clean' | 'filled' | 'outlined';
 export type ButtonVariant = 'plain' | `${ButtonColor}-${ButtonType}`;
 
@@ -31,6 +31,9 @@ const VARIANT_CLASS: Record<Exclude<ButtonVariant, 'plain'>, string> = {
     'green-clean': styles.greenClean,
     'green-filled': styles.greenFilled,
     'green-outlined': styles.greenOutlined,
+    'blue-clean': styles.blueClean,
+    'blue-filled': styles.blueFilled,
+    'blue-outlined': styles.blueOutlined,
     'primary-clean': styles.primaryClean,
     'primary-filled': styles.primaryFilled,
     'primary-outlined': styles.primaryOutlined,
