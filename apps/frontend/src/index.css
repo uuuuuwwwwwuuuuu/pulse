@@ -79,6 +79,7 @@ svg {
 html {
     font-size: 10px;
     -webkit-text-size-adjust: 100%;
+    background-color: var(--color-bg-main);
 }
 
 body {
@@ -86,6 +87,7 @@ body {
     line-height: inherit;
     font-family: var(--font-family);
     color: var(--color-text-main);
+    background-color: var(--color-bg-main);
 }
 
 img,
@@ -184,10 +186,6 @@ p {
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
     transition: scrollbar-color 0.1s ease;
-}
-
-html {
-    scrollbar-gutter: stable;
 }
 
 *:hover {

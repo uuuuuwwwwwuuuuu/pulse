@@ -91,6 +91,16 @@ export const router = createBrowserRouter([
                                             'CreateBookingForm',
                                         ),
                                     },
+                                    {
+                                        path: ':bookingFormId/configurator',
+                                        lazy: lazyRoute(
+                                            () =>
+                                                import(
+                                                    '@pages/App/BookingForms/BookingFormConfigurator/BookingFormConfigurator'
+                                                ),
+                                            'BookingFormConfigurator',
+                                        ),
+                                    },
                                 ],
                             },
                         ],

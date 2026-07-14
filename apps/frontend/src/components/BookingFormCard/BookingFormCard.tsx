@@ -8,6 +8,9 @@ import clsx from 'clsx';
 import { EditBookingFormDialog } from './EditBookingFormDialog';
 import { DeleteBookingFormDialog } from './DeleteBookingFormDialog';
 
+import TrashIcon from '@assets/icons/trash.svg?react';
+import EditIcon from '@assets/icons/pen.svg?react';
+
 export const BookingFormCard: FC<{ bookingForm: BookingFormType }> = ({ bookingForm }) => {
     const { mutateAsync: updateBookingForm } = useUpdateBookingForm(bookingForm.id);
     const [isEditing, setIsEditing] = useState(false);
@@ -72,12 +75,28 @@ export const BookingFormCard: FC<{ bookingForm: BookingFormType }> = ({ bookingF
                         />
                     </div>
                 </div>
-                <div className={styles.bookingFormCardGroup}>
-                    <Button variant="blue-clean" onClick={handleOpenEditDialog}>
-                        Edit
+                <div className={styles.bookingFormButtonsGroup}>
+                    <Button
+                        variant="red-clean"
+                        onClick={handleOpenDeleteDialog}
+                        className={styles.bookingFormCardButton}
+                    >
+                        <TrashIcon />
                     </Button>
-                    <Button variant="red-clean" onClick={handleOpenDeleteDialog}>
-                        Delete
+                    <Button
+                        variant="blue-clean"
+                        onClick={handleOpenEditDialog}
+                        className={styles.bookingFormCardButton}
+                    >
+                        <EditIcon />
+                    </Button>
+                    <Button
+                        variant="primary-filled"
+                        type="link"
+                        to={`${bookingForm.id}/configurator`}
+                        className={styles.bookingFormCardConfiguratorButton}
+                    >
+                        Open configurator
                     </Button>
                 </div>
             </div>
