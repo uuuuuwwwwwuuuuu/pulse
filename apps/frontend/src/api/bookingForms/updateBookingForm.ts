@@ -9,10 +9,7 @@ const updateBookingFormClient = hono['booking-forms']['update'];
 export type UpdateBookingFormRequest = InferRequestType<
     typeof updateBookingFormClient.$put
 >['json'];
-export type UpdateBookingFormResponse = InferResponseType<
-    typeof updateBookingFormClient.$put,
-    200
->;
+export type UpdateBookingFormResponse = InferResponseType<typeof updateBookingFormClient.$put, 200>;
 
 const updateBookingFormRequest = async (requestData: UpdateBookingFormRequest) => {
     const response = await updateBookingFormClient.$put({
@@ -35,13 +32,12 @@ const updateBookingFormRequest = async (requestData: UpdateBookingFormRequest) =
     return body.data;
 };
 
-export const useUpdateBookingForm = () => {
+export const useUpdateBookingForm = (bookingFormId: string | undefined) => {
     return useMutation({
         mutationFn: updateBookingFormRequest,
         onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['booking-form', bookingFormId] });
             queryClient.invalidateQueries({ queryKey: ['booking-forms'] });
-            queryClient.invalidateQueries({ queryKey: ['booking-form'] });
-            queryClient.invalidateQueries({ queryKey: ['booking-form-with-fields'] });
         },
     });
 };

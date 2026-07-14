@@ -7,7 +7,7 @@ import {
     type UpdateBookingFormRequest,
 } from '@api/bookingForms/updateBookingForm';
 import toast from 'react-hot-toast';
-import { useForm, type FieldErrors, useWatch, Controller } from 'react-hook-form';
+import { useForm, type FieldErrors, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import clsx from 'clsx';
@@ -17,13 +17,13 @@ import { useIsBookingFormExists } from '@api/bookingForms/isBookingFormExists';
 
 const updateBookingFormSchema = z.object({
     name: z.string().min(1).max(255),
-    description: z.string().max(255).optional().nullable(),
+    description: z.string().optional().nullable(),
 }) satisfies z.ZodType<Omit<UpdateBookingFormRequest, 'bookingFormId' | 'isActive'>>;
 
 type UpdateBookingFormFormData = z.infer<typeof updateBookingFormSchema>;
 
 export const BookingFormCard: FC<{ bookingForm: BookingFormType }> = ({ bookingForm }) => {
-    const { mutateAsync: updateBookingForm } = useUpdateBookingForm();
+    const { mutateAsync: updateBookingForm } = useUpdateBookingForm(bookingForm.id);
     const [isEditing, setIsEditing] = useState(false);
 
     const handleUpdateIsActive = useCallback(
@@ -63,6 +63,8 @@ export const BookingFormCard: FC<{ bookingForm: BookingFormType }> = ({ bookingF
         setIsEditing(false);
     }, []);
 
+    const handleDelete = useCallback(() => {}, []);
+
     useEffect(() => {
         console.log(bookingForm.isActive);
     }, [bookingForm.isActive]);
@@ -89,7 +91,13 @@ export const BookingFormCard: FC<{ bookingForm: BookingFormType }> = ({ bookingF
 
             handleCloseDialog();
         },
-        [updateBookingForm, bookingForm.id, bookingForm.name, handleCloseDialog],
+        [
+            updateBookingForm,
+            bookingForm.id,
+            bookingForm.name,
+            bookingForm.description,
+            handleCloseDialog,
+        ],
     );
 
     const onInvalid = useCallback((errors: FieldErrors<UpdateBookingFormFormData>) => {
@@ -134,7 +142,9 @@ export const BookingFormCard: FC<{ bookingForm: BookingFormType }> = ({ bookingF
                     <Button variant="blue-clean" onClick={handleEdit}>
                         Edit
                     </Button>
-                    <Button variant="red-clean">Delete</Button>
+                    <Button variant="red-clean" onClick={handleDelete}>
+                        Delete
+                    </Button>
                 </div>
             </div>
 

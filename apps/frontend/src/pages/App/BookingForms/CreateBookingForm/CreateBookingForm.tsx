@@ -24,14 +24,13 @@ type FormData = z.infer<typeof createBookingFormSchema>;
 
 export const CreateBookingForm: FC = () => {
     const { id } = useParams();
-    const { mutateAsync, isPending, isSuccess } = useCreateBookingForm();
+    const { mutateAsync, isSuccess } = useCreateBookingForm(id ?? '');
     const navigate = useNavigate();
 
     const {
         register,
         control,
         handleSubmit,
-        formState: { isSubmitting },
     } = useForm<FormData>({
         resolver: zodResolver(createBookingFormSchema),
         defaultValues: {

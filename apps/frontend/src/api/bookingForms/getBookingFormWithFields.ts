@@ -2,6 +2,7 @@ import hono from '@lib/hono-client';
 import { parseError } from '@utils/parseError';
 import type { InferResponseType } from 'hono/client';
 import { useQuery, type UseQueryResult } from '@tanstack/react-query';
+import { useSession } from '@api/auth';
 
 const getBookingFormWithFieldsClient = hono['booking-forms']['get-one-with-fields'];
 
@@ -39,9 +40,10 @@ const fetchBookingFormWithFields = async (
 export const useGetBookingFormWithFields = (
     bookingFormId: string | undefined,
 ): UseQueryResult<BookingFormWithFieldsType> => {
+    const { data: session } = useSession();
     return useQuery<BookingFormWithFieldsType>({
-        queryKey: ['booking-form-with-fields', bookingFormId],
+        queryKey: ['booking-form', bookingFormId],
         queryFn: () => fetchBookingFormWithFields(bookingFormId!),
-        enabled: !!bookingFormId,
+        enabled: !!session?.user.id,
     });
 };

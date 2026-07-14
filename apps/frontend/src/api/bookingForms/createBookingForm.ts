@@ -35,11 +35,11 @@ const createBookingFormRequest = async (requestData: CreateBookingFormRequest) =
     return body.data;
 };
 
-export const useCreateBookingForm = () => {
+export const useCreateBookingForm = (organizationId: string | undefined) => {
     return useMutation({
         mutationFn: createBookingFormRequest,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['booking-forms'] });
+            queryClient.invalidateQueries({ queryKey: ['booking-forms', organizationId] });
         },
     });
 };

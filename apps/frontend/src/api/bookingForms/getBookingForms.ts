@@ -2,6 +2,7 @@ import hono from '@lib/hono-client';
 import { parseError } from '@utils/parseError';
 import type { InferResponseType } from 'hono/client';
 import { useQuery, type UseQueryResult } from '@tanstack/react-query';
+import { useSession } from '@api/auth';
 
 const getBookingFormsClient = hono['booking-forms']['get-all'];
 
@@ -33,9 +34,10 @@ const fetchBookingForms = async (organizationId: string): Promise<BookingFormsTy
 export const useGetBookingForms = (
     organizationId: string | undefined,
 ): UseQueryResult<BookingFormsType> => {
+    const { data: session } = useSession();
     return useQuery<BookingFormsType>({
         queryKey: ['booking-forms', organizationId],
         queryFn: () => fetchBookingForms(organizationId!),
-        enabled: !!organizationId,
+        enabled: !!session?.user.id,
     });
 };
