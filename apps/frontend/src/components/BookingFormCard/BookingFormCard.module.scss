@@ -66,6 +66,19 @@
 
 }
 
+.bookingFormLink {
+    font-size: 1.6rem;
+    color: var(--color-text-secondary);
+    font-weight: 400;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    text-align: start;
+    &:hover {
+        color: var(--color-text-primary);
+    }
+}
+
 .editBookingFormForm {
     display: flex;
     flex-direction: column;

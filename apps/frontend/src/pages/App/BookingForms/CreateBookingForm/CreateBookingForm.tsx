@@ -81,7 +81,7 @@ export const CreateBookingForm: FC = () => {
     if (isSuccess) {
         navigate(`/${id}/booking-forms`);
     }
-
+    // TODO: add check does the same org slug and booking form slug already exists
     return (
         <div className={styles.createBookingForm}>
             <div className={styles.createBookingFormContent}>

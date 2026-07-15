@@ -7,12 +7,17 @@ import toast from 'react-hot-toast';
 import clsx from 'clsx';
 import { EditBookingFormDialog } from './EditBookingFormDialog';
 import { DeleteBookingFormDialog } from './DeleteBookingFormDialog';
+import { BOOKING_FORM_URL } from '@utils/constants';
 
 import TrashIcon from '@assets/icons/trash.svg?react';
 import EditIcon from '@assets/icons/pen.svg?react';
+import { useParams } from 'react-router-dom';
+import { useGetOrganization } from '@api/organizations/getOrganizationData';
 
 export const BookingFormCard: FC<{ bookingForm: BookingFormType }> = ({ bookingForm }) => {
     const { mutateAsync: updateBookingForm } = useUpdateBookingForm(bookingForm.id);
+    const { id } = useParams<{ id: string }>();
+    const { data: organization } = useGetOrganization(id);
     const [isEditing, setIsEditing] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
 
@@ -45,6 +50,13 @@ export const BookingFormCard: FC<{ bookingForm: BookingFormType }> = ({ bookingF
         setIsDeleting(true);
     }, []);
 
+    const handleCopyBookingFormUrl = useCallback(() => {
+        navigator.clipboard.writeText(
+            `${BOOKING_FORM_URL}/${organization?.slug}/${bookingForm.slug}`,
+        );
+        toast.success('Booking form URL copied to clipboard');
+    }, [organization?.slug, bookingForm.slug]);
+
     return (
         <>
             <div className={styles.bookingFormCard}>
@@ -66,8 +78,16 @@ export const BookingFormCard: FC<{ bookingForm: BookingFormType }> = ({ bookingF
                         <span className={styles.bookingFormCardTotalBookings}>
                             Total bookings in this month: {bookingForm.totalBookings}
                         </span>
-                    </div>
-                    <div className={styles.bookingFormCardGroup}>
+                        <button
+                            className={styles.bookingFormLink}
+                            onClick={handleCopyBookingFormUrl}
+                        >
+                            <span>Booking form URL (click to copy):</span>
+                            <br />
+                            <span className={styles.bookingFormCardLinkUrl}>
+                                {BOOKING_FORM_URL}/{organization?.slug}/{bookingForm.slug}
+                            </span>
+                        </button>
                         <Checkbox
                             label="Is active booking form"
                             checked={bookingForm.isActive}
