@@ -16,6 +16,7 @@ import { useIsBookingFormExists } from '@api/bookingForms/isBookingFormExists';
 
 const updateBookingFormSchema = z.object({
     name: z.string().min(1).max(255),
+    slug: z.string().min(1).max(60),
     description: z.string().optional().nullable(),
 }) satisfies z.ZodType<Omit<UpdateBookingFormRequest, 'bookingFormId' | 'isActive'>>;
 
@@ -34,21 +35,62 @@ export const EditBookingFormDialog: FC<EditBookingFormDialogProps> = memo(
         const { register, handleSubmit, control } = useForm<UpdateBookingFormFormData>({
             defaultValues: {
                 name: bookingForm.name,
+                slug: bookingForm.slug,
                 description: bookingForm.description,
             },
             resolver: zodResolver(updateBookingFormSchema),
         });
 
+        const name = useWatch({ control, name: 'name' });
+        const slug = useWatch({ control, name: 'slug' });
+
+        const { exists: nameExists } = useIsBookingFormExists({
+            organizationId: bookingForm.organizationId,
+            name: name.trim(),
+        });
+        const { exists: slugExists } = useIsBookingFormExists({
+            organizationId: bookingForm.organizationId,
+            slug: slug.trim(),
+        });
+
+        const nameIsValid =
+            name.trim() === bookingForm.name.trim()
+                ? undefined
+                : nameExists === undefined
+                  ? undefined
+                  : !nameExists;
+        const slugIsValid =
+            slug.trim() === bookingForm.slug.trim()
+                ? undefined
+                : slugExists === undefined
+                  ? undefined
+                  : !slugExists;
+
         const onSubmit = useCallback(
             async (data: UpdateBookingFormFormData) => {
+                const trimmedName = data.name.trim();
+                const trimmedSlug = data.slug.trim();
+
+                if (trimmedName !== bookingForm.name.trim() && nameExists === true) {
+                    toast.error('Booking form with this name already exists');
+                    return;
+                }
+
+                if (trimmedSlug !== bookingForm.slug.trim() && slugExists === true) {
+                    toast.error('Booking form with this slug already exists');
+                    return;
+                }
+
                 if (
-                    data.name.trim() !== bookingForm.name.trim() ||
+                    trimmedName !== bookingForm.name.trim() ||
+                    trimmedSlug !== bookingForm.slug.trim() ||
                     data.description?.trim() !== bookingForm.description?.trim()
                 ) {
                     await toast.promise(
                         updateBookingForm({
                             bookingFormId: bookingForm.id,
-                            name: data.name.trim(),
+                            name: trimmedName,
+                            slug: trimmedSlug,
                             description: data.description?.trim() ?? null,
                         }),
                         {
@@ -65,7 +107,10 @@ export const EditBookingFormDialog: FC<EditBookingFormDialogProps> = memo(
                 updateBookingForm,
                 bookingForm.id,
                 bookingForm.name,
+                bookingForm.slug,
                 bookingForm.description,
+                nameExists,
+                slugExists,
                 onOpenChange,
             ],
         );
@@ -73,10 +118,6 @@ export const EditBookingFormDialog: FC<EditBookingFormDialogProps> = memo(
         const onInvalid = useCallback((errors: FieldErrors<UpdateBookingFormFormData>) => {
             toast.error(getFirstFieldError(errors) ?? 'Invalid form data');
         }, []);
-
-        const name = useWatch({ control, name: 'name' });
-        let { exists } = useIsBookingFormExists(name.trim(), bookingForm.organizationId);
-        exists = name.trim() === bookingForm.name.trim() ? false : exists;
 
         return (
             <Dialog open={open} onOpenChange={onOpenChange}>
@@ -86,16 +127,42 @@ export const EditBookingFormDialog: FC<EditBookingFormDialogProps> = memo(
                         className={styles.editBookingFormForm}
                     >
                         <div className={styles.inputsGroup}>
-                            <ValidatableInput
-                                {...register('name')}
-                                placeholder="Enter the name of the booking form"
-                                isValid={!exists}
-                            />
-                            <Input
-                                {...register('description')}
-                                type="textarea"
-                                placeholder="Enter the description of the booking form"
-                            />
+                            <div className={styles.field}>
+                                <label className={styles.fieldLabel} htmlFor="edit-booking-form-name">
+                                    Name
+                                </label>
+                                <ValidatableInput
+                                    id="edit-booking-form-name"
+                                    {...register('name')}
+                                    placeholder="Enter the name of the booking form"
+                                    isValid={nameIsValid}
+                                />
+                            </div>
+                            <div className={styles.field}>
+                                <label className={styles.fieldLabel} htmlFor="edit-booking-form-slug">
+                                    Slug
+                                </label>
+                                <ValidatableInput
+                                    id="edit-booking-form-slug"
+                                    {...register('slug')}
+                                    placeholder="Enter a unique slug for the booking form"
+                                    isValid={slugIsValid}
+                                />
+                            </div>
+                            <div className={styles.field}>
+                                <label
+                                    className={styles.fieldLabel}
+                                    htmlFor="edit-booking-form-description"
+                                >
+                                    Description
+                                </label>
+                                <Input
+                                    id="edit-booking-form-description"
+                                    {...register('description')}
+                                    type="textarea"
+                                    placeholder="Enter the description of the booking form"
+                                />
+                            </div>
                         </div>
                         <div className={styles.buttonsGroup}>
                             <Button variant="red-clean" onClick={() => onOpenChange(false)}>

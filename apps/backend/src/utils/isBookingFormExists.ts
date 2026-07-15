@@ -1,13 +1,24 @@
 import { db } from '@/db.js';
 
-export const isBookingFormExists = async (name: string, organizationId: string) => {
+type IsBookingFormExistsParams = {
+    organizationId: string;
+    name?: string;
+    slug?: string;
+};
+
+export const isBookingFormExists = async ({
+    organizationId,
+    name,
+    slug,
+}: IsBookingFormExistsParams) => {
     const bookingForm = await db.query.bookingForms.findFirst({
         where: (bookingForms, { eq, and }) =>
             and(
-                eq(bookingForms.name, name),
                 eq(bookingForms.organizationId, organizationId),
+                name !== undefined ? eq(bookingForms.name, name) : eq(bookingForms.slug, slug!),
             ),
         columns: { id: true },
     });
+
     return !!bookingForm;
 };

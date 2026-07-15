@@ -82,6 +82,18 @@
         gap: 1rem;
     }
 
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .fieldLabel {
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+    }
+
     .buttonsGroup {
         width: 100%;
         display: flex;

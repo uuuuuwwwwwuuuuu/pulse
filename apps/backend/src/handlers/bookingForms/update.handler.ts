@@ -15,6 +15,7 @@ const updateBookingFormSchema = z
         name: z.string().min(1).max(255).optional(),
         description: z.string().optional().nullable(),
         isActive: z.boolean().optional(),
+        slug: z.string().min(1).max(60).optional(),
     })
     .refine(
         (data) =>
@@ -32,7 +33,7 @@ export const updateBookingFormHandler = factory(
     zValidator('json', updateBookingFormSchema),
     async (c) => {
         try {
-            const { bookingFormId, name, description, isActive } = c.req.valid('json');
+            const { bookingFormId, name, description, isActive, slug } = c.req.valid('json');
 
             const existingBookingForm = await db.query.bookingForms.findFirst({
                 where: (bookingForms, { eq }) => eq(bookingForms.id, bookingFormId),
@@ -43,19 +44,30 @@ export const updateBookingFormHandler = factory(
             }
 
             if (name !== undefined && name !== existingBookingForm.name) {
-                const duplicateBookingForm = await isBookingFormExists(
+                const duplicateByName = await isBookingFormExists({
                     name,
-                    existingBookingForm.organizationId,
-                );
+                    organizationId: existingBookingForm.organizationId,
+                });
 
-                if (duplicateBookingForm) {
+                if (duplicateByName) {
                     return c.json(prepareError('Booking form with this name already exists'), 400);
+                }
+            }
+
+            if (slug !== undefined && slug !== existingBookingForm.slug) {
+                const duplicateBySlug = await isBookingFormExists({
+                    slug,
+                    organizationId: existingBookingForm.organizationId,
+                });
+
+                if (duplicateBySlug) {
+                    return c.json(prepareError('Booking form with this slug already exists'), 400);
                 }
             }
 
             const [updatedBookingForm] = await db
                 .update(bookingForms)
-                .set({ name, description, isActive })
+                .set({ name, description, isActive, slug })
                 .where(eq(bookingForms.id, bookingFormId))
                 .returning();
 

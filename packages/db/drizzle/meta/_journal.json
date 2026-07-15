@@ -15,6 +15,13 @@
       "when": 1783609555543,
       "tag": "0001_zippy_mauler",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1784098301774,
+      "tag": "0002_sticky_mimic",
+      "breakpoints": true
     }
   ]
 }

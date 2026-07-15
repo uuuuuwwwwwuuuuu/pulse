@@ -40,6 +40,7 @@ export const bookingForms = pgTable('booking_forms', {
     id: uuid('id')
         .primaryKey()
         .$default(() => uuidv7()),
+    slug: text('slug').notNull(),
     organizationId: uuid('organization_id')
         .references(() => organizations.id, {
             onDelete: 'cascade',

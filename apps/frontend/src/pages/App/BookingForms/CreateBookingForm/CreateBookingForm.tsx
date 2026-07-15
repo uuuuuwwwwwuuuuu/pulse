@@ -16,6 +16,7 @@ import { getFirstFieldError } from '@utils/formErrors';
 
 const createBookingFormSchema = z.object({
     name: z.string().min(1).max(255),
+    slug: z.string().min(1).max(60),
     organizationId: z.uuid(),
     description: z.string().max(255).optional().nullable(),
 }) satisfies z.ZodType<CreateBookingFormRequest>;
@@ -35,18 +36,33 @@ export const CreateBookingForm: FC = () => {
         resolver: zodResolver(createBookingFormSchema),
         defaultValues: {
             name: '',
+            slug: '',
             description: '',
             organizationId: id ?? '',
         },
     });
 
     const name = useWatch({ control, name: 'name', defaultValue: '' });
-    const { exists: nameExists } = useIsBookingFormExists(name.trim(), id ?? '');
+    const slug = useWatch({ control, name: 'slug', defaultValue: '' });
+    const { exists: nameExists } = useIsBookingFormExists({
+        organizationId: id ?? '',
+        name: name.trim(),
+    });
+    const { exists: slugExists } = useIsBookingFormExists({
+        organizationId: id ?? '',
+        slug: slug.trim(),
+    });
     const nameIsValid = nameExists === undefined ? undefined : !nameExists;
+    const slugIsValid = slugExists === undefined ? undefined : !slugExists;
 
     const onSubmit = async (data: FormData) => {
         if (nameExists === true) {
             toast.error('Booking form with this name already exists');
+            return;
+        }
+
+        if (slugExists === true) {
+            toast.error('Booking form with this slug already exists');
             return;
         }
 
@@ -71,7 +87,9 @@ export const CreateBookingForm: FC = () => {
             <div className={styles.createBookingFormContent}>
                 <h2>Create a new booking form</h2>
 
-                <p>Pay your attention, you can't set the same name for multiple booking forms</p>
+                <p>
+                    Pay your attention, name and slug must be unique within your organization
+                </p>
             </div>
 
             <form
@@ -86,6 +104,18 @@ export const CreateBookingForm: FC = () => {
                             {...field}
                             placeholder="Enter the name of the booking form"
                             isValid={nameIsValid}
+                        />
+                    )}
+                />
+
+                <Controller
+                    name="slug"
+                    control={control}
+                    render={({ field }) => (
+                        <ValidatableInput
+                            {...field}
+                            placeholder="Enter a unique slug for the booking form"
+                            isValid={slugIsValid}
                         />
                     )}
                 />
