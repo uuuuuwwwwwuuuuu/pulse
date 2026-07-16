@@ -101,6 +101,11 @@ export const DeleteBookingFormDialog: FC<DeleteBookingFormDialogProps> = memo(
                             {...register('name')}
                             placeholder="Enter the name of the booking form"
                             isValid={isNameMatching}
+                            errorMessage={
+                                isNameMatching === false
+                                    ? 'Booking form name does not match'
+                                    : undefined
+                            }
                         />
                     </div>
                     <div className={styles.buttonsGroup}>

@@ -136,6 +136,11 @@ export const EditBookingFormDialog: FC<EditBookingFormDialogProps> = memo(
                                     {...register('name')}
                                     placeholder="Enter the name of the booking form"
                                     isValid={nameIsValid}
+                                    errorMessage={
+                                        nameExists === true
+                                            ? 'Booking form with this name already exists'
+                                            : undefined
+                                    }
                                 />
                             </div>
                             <div className={styles.field}>
@@ -147,6 +152,11 @@ export const EditBookingFormDialog: FC<EditBookingFormDialogProps> = memo(
                                     {...register('slug')}
                                     placeholder="Enter a unique slug for the booking form"
                                     isValid={slugIsValid}
+                                    errorMessage={
+                                        slugExists === true
+                                            ? 'Booking form with this slug already exists'
+                                            : undefined
+                                    }
                                 />
                             </div>
                             <div className={styles.field}>

@@ -1,9 +1,24 @@
 import { useEffect, useState, type JSX } from 'react';
+import {
+    autoUpdate,
+    flip,
+    FloatingPortal,
+    offset,
+    shift,
+    useDismiss,
+    useFloating,
+    useFocus,
+    useHover,
+    useInteractions,
+    useRole,
+} from '@floating-ui/react';
 import { BaseInput, type InputProps } from '@bookio/ui';
+import WarningIcon from '@assets/icons/warning.svg?react';
 import styles from './ValidatableInput.module.scss';
 
 type ValidatableInputBaseProps = {
     isValid?: boolean | null;
+    errorMessage?: string;
 };
 
 type TextareaValidatableInputProps = ValidatableInputBaseProps &
@@ -38,33 +53,94 @@ function useShake(isValid: boolean | null | undefined) {
 
 function getValidationClasses(
     isValid: boolean | null | undefined,
-    isShaking: boolean,
     className?: string,
+    hasErrorIcon?: boolean,
 ) {
     const validationClass =
         isValid === true ? styles.valid : isValid === false ? styles.invalid : undefined;
 
-    return [validationClass, isShaking && styles.shake, className].filter(Boolean).join(' ');
+    return [validationClass, hasErrorIcon && styles.inputWithError, className]
+        .filter(Boolean)
+        .join(' ');
+}
+
+function ErrorHint({ message }: { message?: string }) {
+    const [open, setOpen] = useState(false);
+
+    const { refs, floatingStyles, context } = useFloating({
+        open,
+        onOpenChange: setOpen,
+        placement: 'top',
+        middleware: [offset(8), flip(), shift({ padding: 8 })],
+        whileElementsMounted: autoUpdate,
+    });
+
+    const hover = useHover(context, { move: false });
+    const focus = useFocus(context);
+    const dismiss = useDismiss(context);
+    const role = useRole(context, { role: 'tooltip' });
+    const { getReferenceProps, getFloatingProps } = useInteractions([
+        hover,
+        focus,
+        dismiss,
+        role,
+    ]);
+
+    return (
+        <>
+            <span
+                ref={refs.setReference}
+                className={styles.warningTrigger}
+                tabIndex={message ? 0 : undefined}
+                aria-label={message ?? 'Validation error'}
+                {...(message ? getReferenceProps() : {})}
+            >
+                <WarningIcon className={styles.warningIcon} aria-hidden />
+            </span>
+            {open && message && (
+                <FloatingPortal>
+                    <div
+                        ref={refs.setFloating}
+                        style={floatingStyles}
+                        className={styles.tooltip}
+                        {...getFloatingProps()}
+                    >
+                        {message}
+                    </div>
+                </FloatingPortal>
+            )}
+        </>
+    );
 }
 
 function ValidatableTextareaInput(props: TextareaValidatableInputProps) {
-    const { isValid, className, ...inputProps } = props;
+    const { isValid, errorMessage, className, ...inputProps } = props;
     const isShaking = useShake(isValid);
-    const classes = getValidationClasses(isValid, isShaking, className);
+    const showError = isValid === false;
+    const classes = getValidationClasses(isValid, className, showError);
+    const rootClasses = [styles.root, isShaking && styles.shake].filter(Boolean).join(' ');
 
-    return <BaseInput {...inputProps} className={classes || undefined} />;
+    return (
+        <div className={rootClasses}>
+            <BaseInput {...inputProps} className={classes || undefined} />
+            {showError && <ErrorHint message={errorMessage} />}
+        </div>
+    );
 }
 
 function ValidatableNativeInput(props: NativeValidatableInputProps) {
-    const { isValid, className, ...inputProps } = props;
-
+    const { isValid, errorMessage, className, ...inputProps } = props;
     const isShaking = useShake(isValid);
-    const classes = getValidationClasses(isValid, isShaking, className);
+    const showError = isValid === false;
+    const classes = getValidationClasses(isValid, className, showError);
+    const rootClasses = [styles.root, isShaking && styles.shake].filter(Boolean).join(' ');
 
-    if (isValid === undefined)
-        return <BaseInput {...inputProps} className={className || undefined} />;
-
-    return <BaseInput {...inputProps} className={classes || undefined} />;
+    return (
+        <div className={rootClasses}>
+            <BaseInput {...inputProps} className={classes || undefined} />
+            {showError && <ErrorHint message={errorMessage} />}
+        </div>
+    );
 }
 
 function isTextareaValidatableInput(

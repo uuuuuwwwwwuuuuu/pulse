@@ -6,9 +6,11 @@ import {
     type CreateBookingFormStep,
 } from '@store/useCreateBookingFormStore';
 import { Step1NameDescription } from './Steps/Step1NameDescription';
+import { Step2UrlSlug } from './Steps/Step2UrlSlug';
 
 const STEPS: Record<CreateBookingFormStep, FC> = {
     1: Step1NameDescription,
+    2: Step2UrlSlug,
 };
 
 export const CreateBookingForm: FC = () => {

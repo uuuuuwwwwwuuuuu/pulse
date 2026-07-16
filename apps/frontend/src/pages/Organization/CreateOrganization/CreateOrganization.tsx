@@ -95,6 +95,11 @@ export const CreateOrganization: FC = () => {
                                 {...field}
                                 placeholder="Unique organization slug"
                                 isValid={slugIsValid}
+                                errorMessage={
+                                    slugExists === true
+                                        ? 'Organization slug is already taken'
+                                        : undefined
+                                }
                                 disabled={isDisabled}
                             />
                         )}

@@ -55,6 +55,11 @@ export const Step1NameDescription: FC = () => {
                 onChange={handleNameChange}
                 placeholder="Name*"
                 isValid={nameIsValid}
+                errorMessage={
+                    nameExists === true
+                        ? 'Booking form with this name already exists'
+                        : undefined
+                }
             />
             <Input
                 value={description}
