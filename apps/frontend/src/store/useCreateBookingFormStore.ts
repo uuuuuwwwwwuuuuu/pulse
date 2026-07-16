@@ -18,6 +18,8 @@ interface CreateBookingFormStore {
     step: CreateBookingFormStep;
     data: CreateBookingFormDraft;
 
+    goToNextStep: () => void;
+    goToPreviousStep: () => void;
     setStep: (step: CreateBookingFormStep) => void;
     setField: <K extends keyof CreateBookingFormDraft>(
         key: K,
@@ -33,6 +35,8 @@ export const useCreateBookingFormStore = create<CreateBookingFormStore>((set) =>
     step: INITIAL_STEP,
     data: INITIAL_DRAFT,
 
+    goToNextStep: () => set((state) => ({ step: state.step + 1 })),
+    goToPreviousStep: () => set((state) => ({ step: state.step - 1 })),
     setStep: (step) => set({ step }),
     setField: (key, value) => set((state) => ({ data: { ...state.data, [key]: value } })),
     setOrganizationId: (organizationId) =>

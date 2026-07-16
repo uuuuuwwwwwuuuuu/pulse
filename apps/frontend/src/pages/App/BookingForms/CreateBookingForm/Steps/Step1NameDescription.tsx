@@ -1,20 +1,23 @@
-import type { ChangeEvent, FC } from 'react';
+import { useCallback, type ChangeEvent, type FC } from 'react';
 import { useShallow } from 'zustand/shallow';
 import { Button, Input } from '@bookio/ui';
 import { ValidatableInput } from '@components/ValidatableInput/ValidatableInput';
 import { useIsBookingFormExists } from '@api/bookingForms/isBookingFormExists';
 import { useCreateBookingFormStore } from '@store/useCreateBookingFormStore';
 import { BookingFormConfiguratorLayout } from '../BookingFormConfiguratorLayout/BookingFormConfiguratorLayout';
+import toast from 'react-hot-toast';
 
 export const Step1NameDescription: FC = () => {
-    const { name, description, organizationId } = useCreateBookingFormStore(
+    const { data, name, description, organizationId, setField, goToNextStep } = useCreateBookingFormStore(
         useShallow((s) => ({
+            data: s.data,
             name: s.data.name,
             description: s.data.description,
             organizationId: s.data.organizationId,
+            setField: s.setField,
+            goToNextStep: s.goToNextStep,
         })),
     );
-    const setField = useCreateBookingFormStore((s) => s.setField);
 
     const { exists: nameExists } = useIsBookingFormExists({
         organizationId,
@@ -30,13 +33,19 @@ export const Step1NameDescription: FC = () => {
         setField('description', event.target.value);
     };
 
+    const handleClickNext = useCallback(() => {
+        if (!data.name) return toast.error('Name is required');
+
+        goToNextStep();
+    }, [data.name, goToNextStep]);
+
     return (
         <BookingFormConfiguratorLayout
             stepNumber={1}
             title="Enter name and description of booking form"
             description="The name must be unique within your organization. The description should explain the purpose of this booking form."
             footer={
-                <Button type="button" variant="primary-filled">
+                <Button type="button" variant="primary-filled" onClick={handleClickNext}>
                     Go to next
                 </Button>
             }

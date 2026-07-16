@@ -16,18 +16,21 @@ export const BookingFormConfiguratorLayout: FC<BookingFormConfiguratorLayoutProp
     children,
     footer,
 }) => {
+    const stepLabel = String(stepNumber).padStart(2, '0');
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.configurator}>
-                <div className={styles.header}>
-                    <span className={styles.stepNumber}>{stepNumber}</span>
+                <aside className={styles.rail}>
+                    <span className={styles.stepBadge}>Step {stepLabel}</span>
                     <h2 className={styles.title}>{title}</h2>
                     <p className={styles.description}>{description}</p>
+                </aside>
+
+                <div className={styles.stage}>
+                    <div className={styles.fields}>{children}</div>
+                    {footer ? <div className={styles.footer}>{footer}</div> : null}
                 </div>
-
-                <div className={styles.fields}>{children}</div>
-
-                {footer ? <div className={styles.footer}>{footer}</div> : null}
             </div>
         </div>
     );
