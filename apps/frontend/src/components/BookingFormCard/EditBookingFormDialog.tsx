@@ -127,52 +127,34 @@ export const EditBookingFormDialog: FC<EditBookingFormDialogProps> = memo(
                         className={styles.editBookingFormForm}
                     >
                         <div className={styles.inputsGroup}>
-                            <div className={styles.field}>
-                                <label className={styles.fieldLabel} htmlFor="edit-booking-form-name">
-                                    Name
-                                </label>
-                                <ValidatableInput
-                                    id="edit-booking-form-name"
-                                    {...register('name')}
-                                    placeholder="Enter the name of the booking form"
-                                    isValid={nameIsValid}
-                                    errorMessage={
-                                        nameExists === true
-                                            ? 'Booking form with this name already exists'
-                                            : undefined
-                                    }
-                                />
-                            </div>
-                            <div className={styles.field}>
-                                <label className={styles.fieldLabel} htmlFor="edit-booking-form-slug">
-                                    Slug
-                                </label>
-                                <ValidatableInput
-                                    id="edit-booking-form-slug"
-                                    {...register('slug')}
-                                    placeholder="Enter a unique slug for the booking form"
-                                    isValid={slugIsValid}
-                                    errorMessage={
-                                        slugExists === true
-                                            ? 'Booking form with this slug already exists'
-                                            : undefined
-                                    }
-                                />
-                            </div>
-                            <div className={styles.field}>
-                                <label
-                                    className={styles.fieldLabel}
-                                    htmlFor="edit-booking-form-description"
-                                >
-                                    Description
-                                </label>
-                                <Input
-                                    id="edit-booking-form-description"
-                                    {...register('description')}
-                                    type="textarea"
-                                    placeholder="Enter the description of the booking form"
-                                />
-                            </div>
+                            <ValidatableInput
+                                label="Name"
+                                {...register('name')}
+                                placeholder="Enter the name of the booking form"
+                                isValid={nameIsValid}
+                                errorMessage={
+                                    nameExists === true
+                                        ? 'Booking form with this name already exists'
+                                        : undefined
+                                }
+                            />
+                            <ValidatableInput
+                                label="Slug"
+                                {...register('slug')}
+                                placeholder="Enter a unique slug for the booking form"
+                                isValid={slugIsValid}
+                                errorMessage={
+                                    slugExists === true
+                                        ? 'Booking form with this slug already exists'
+                                        : undefined
+                                }
+                            />
+                            <Input
+                                label="Description"
+                                {...register('description')}
+                                type="textarea"
+                                placeholder="Enter the description of the booking form"
+                            />
                         </div>
                         <div className={styles.buttonsGroup}>
                             <Button variant="red-clean" onClick={() => onOpenChange(false)}>

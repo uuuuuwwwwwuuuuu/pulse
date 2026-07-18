@@ -137,26 +137,22 @@ export const Step3Styles: FC = () => {
             }
         >
             {COLOR_FIELDS.map(({ key, label, placeholder }) => (
-                <div key={key} className={styles.field}>
-                    <label className={styles.fieldLabel} htmlFor={`step3-styles-${key}`}>
-                        {label}
-                    </label>
-                    <div className={styles.colorField}>
-                        <Input
-                            id={`step3-styles-${key}`}
-                            className={styles.colorFieldInput}
-                            value={values[key]}
-                            onChange={handleChange(key)}
-                            placeholder={placeholder}
-                        />
-                        <ColorPicker
-                            className={styles.colorPicker}
-                            currentColor={values[key]}
-                            setCurrentColor={(color) => setField(key, color)}
-                            showValue={false}
-                            aria-label={label}
-                        />
-                    </div>
+                <div key={key} className={styles.colorField}>
+                    <Input
+                        label={label}
+                        id={`step3-styles-${key}`}
+                        className={styles.colorFieldInput}
+                        value={values[key]}
+                        onChange={handleChange(key)}
+                        placeholder={placeholder}
+                    />
+                    <ColorPicker
+                        className={styles.colorPicker}
+                        currentColor={values[key]}
+                        setCurrentColor={(color) => setField(key, color)}
+                        showValue={false}
+                        aria-label={label}
+                    />
                 </div>
             ))}
         </BookingFormConfiguratorLayout>

@@ -1,4 +1,4 @@
-import { useEffect, useState, type JSX } from 'react';
+import { useEffect, useId, useState, type JSX } from 'react';
 import {
     autoUpdate,
     flip,
@@ -12,7 +12,7 @@ import {
     useInteractions,
     useRole,
 } from '@floating-ui/react';
-import { BaseInput, type InputProps } from '@bookio/ui';
+import { BaseInput, InputField, type InputProps } from '@bookio/ui';
 import WarningIcon from '@assets/icons/warning.svg?react';
 import styles from './ValidatableInput.module.scss';
 
@@ -114,32 +114,40 @@ function ErrorHint({ message }: { message?: string }) {
 }
 
 function ValidatableTextareaInput(props: TextareaValidatableInputProps) {
-    const { isValid, errorMessage, className, ...inputProps } = props;
+    const { isValid, errorMessage, className, label, id, ...inputProps } = props;
+    const generatedId = useId();
+    const inputId = id ?? (label !== undefined ? generatedId : undefined);
     const isShaking = useShake(isValid);
     const showError = isValid === false;
     const classes = getValidationClasses(isValid, className, showError);
     const rootClasses = [styles.root, isShaking && styles.shake].filter(Boolean).join(' ');
 
     return (
-        <div className={rootClasses}>
-            <BaseInput {...inputProps} className={classes || undefined} />
-            {showError && <ErrorHint message={errorMessage} />}
-        </div>
+        <InputField label={label} htmlFor={inputId}>
+            <div className={rootClasses}>
+                <BaseInput {...inputProps} id={inputId} className={classes || undefined} />
+                {showError && <ErrorHint message={errorMessage} />}
+            </div>
+        </InputField>
     );
 }
 
 function ValidatableNativeInput(props: NativeValidatableInputProps) {
-    const { isValid, errorMessage, className, ...inputProps } = props;
+    const { isValid, errorMessage, className, label, id, ...inputProps } = props;
+    const generatedId = useId();
+    const inputId = id ?? (label !== undefined ? generatedId : undefined);
     const isShaking = useShake(isValid);
     const showError = isValid === false;
     const classes = getValidationClasses(isValid, className, showError);
     const rootClasses = [styles.root, isShaking && styles.shake].filter(Boolean).join(' ');
 
     return (
-        <div className={rootClasses}>
-            <BaseInput {...inputProps} className={classes || undefined} />
-            {showError && <ErrorHint message={errorMessage} />}
-        </div>
+        <InputField label={label} htmlFor={inputId}>
+            <div className={rootClasses}>
+                <BaseInput {...inputProps} id={inputId} className={classes || undefined} />
+                {showError && <ErrorHint message={errorMessage} />}
+            </div>
+        </InputField>
     );
 }
 

@@ -96,8 +96,14 @@ export const Step4Metadata: FC = () => {
                 </div>
             }
         >
-            <Input value={metaTitle} onChange={handleMetaTitleChange} placeholder="Title*" />
             <Input
+                label="Title"
+                value={metaTitle}
+                onChange={handleMetaTitleChange}
+                placeholder="Title*"
+            />
+            <Input
+                label="Description"
                 value={metaDescription}
                 onChange={handleMetaDescriptionChange}
                 placeholder="Description*"
@@ -106,12 +112,14 @@ export const Step4Metadata: FC = () => {
             {additionalMeta.map((item, index) => (
                 <div key={index} className={styles.metaRow}>
                     <Input
+                        label="Meta property name"
                         className={styles.metaRowInput}
                         value={item.key}
                         onChange={handleAdditionalMetaChange(index, 'key')}
                         placeholder="Meta property name*"
                     />
                     <Input
+                        label="Meta property value"
                         className={styles.metaRowInput}
                         value={item.value}
                         onChange={handleAdditionalMetaChange(index, 'value')}

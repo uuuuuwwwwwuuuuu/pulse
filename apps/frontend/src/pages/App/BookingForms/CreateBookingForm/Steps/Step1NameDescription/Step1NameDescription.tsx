@@ -6,8 +6,11 @@ import { useIsBookingFormExists } from '@api/bookingForms/isBookingFormExists';
 import { useCreateBookingFormStore } from '@store/useCreateBookingFormStore';
 import { BookingFormConfiguratorLayout } from '../../BookingFormConfiguratorLayout/BookingFormConfiguratorLayout';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import styles from './Step1NameDescription.module.scss';
 
 export const Step1NameDescription: FC = () => {
+    const navigate = useNavigate();
     const { data, name, description, organizationId, setField, goToNextStep } =
         useCreateBookingFormStore(
             useShallow((s) => ({
@@ -40,15 +43,23 @@ export const Step1NameDescription: FC = () => {
         goToNextStep();
     }, [data.name, goToNextStep]);
 
+    const handleClose = useCallback(() => {
+        navigate(-1);
+    }, [navigate]);
     return (
         <BookingFormConfiguratorLayout
             stepNumber={1}
             title="Enter name and description of booking form"
             description="The name must be unique within your organization. The description should explain the purpose of this booking form."
             footer={
-                <Button type="button" variant="primary-filled" onClick={handleClickNext}>
-                    Go to next
-                </Button>
+                <div className={styles.footerActions}>
+                    <Button type="button" variant="primary-filled" onClick={handleClickNext}>
+                        Go to next
+                    </Button>
+                    <Button type="button" variant="simple-clean" onClick={handleClose}>
+                        Close
+                    </Button>
+                </div>
             }
         >
             <ValidatableInput

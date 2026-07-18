@@ -39,6 +39,7 @@ const INITIAL_DRAFT: CreateBookingFormDraft = {
 interface CreateBookingFormStore {
     step: CreateBookingFormStep;
     data: CreateBookingFormDraft;
+    createdBookingFormId: string | null;
 
     goToNextStep: () => void;
     goToPreviousStep: () => void;
@@ -48,6 +49,7 @@ interface CreateBookingFormStore {
         value: CreateBookingFormDraft[K],
     ) => void;
     setOrganizationId: (organizationId: string) => void;
+    setCreatedBookingFormId: (createdBookingFormId: string) => void;
     reset: () => void;
 }
 
@@ -58,6 +60,7 @@ export const useCreateBookingFormStore = create<CreateBookingFormStore>()(
         (set) => ({
             step: INITIAL_STEP,
             data: INITIAL_DRAFT,
+            createdBookingFormId: null,
 
             goToNextStep: () => set((state) => ({ step: state.step + 1 }), false, 'goToNextStep'),
             goToPreviousStep: () =>
@@ -71,7 +74,14 @@ export const useCreateBookingFormStore = create<CreateBookingFormStore>()(
                     false,
                     'setOrganizationId',
                 ),
-            reset: () => set({ step: INITIAL_STEP, data: INITIAL_DRAFT }, false, 'reset'),
+            setCreatedBookingFormId: (createdBookingFormId) =>
+                set({ createdBookingFormId }, false, 'setCreatedBookingFormId'),
+            reset: () =>
+                set(
+                    { step: INITIAL_STEP, data: INITIAL_DRAFT, createdBookingFormId: null },
+                    false,
+                    'reset',
+                ),
         }),
         { name: 'CreateBookingFormStore' },
     ),

@@ -5,32 +5,24 @@
     gap: 0.8rem;
 }
 
-.field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 100%;
-}
-
-.fieldLabel {
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: var(--color-text-secondary);
-}
-
 .colorField {
     display: flex;
-    align-items: stretch;
+    align-items: flex-end;
     gap: 0.8rem;
     width: 100%;
+
+    > *:first-child {
+        flex: 1;
+        min-width: 0;
+    }
 }
 
 .colorFieldInput {
-    flex: 1;
+    width: 100%;
     min-width: 0;
 }
 
 .colorPicker {
-    flex: 0 0 auto;
-    align-self: stretch;
+    height: 4.8rem;
+    flex: 0 0 4.8rem;
 }
