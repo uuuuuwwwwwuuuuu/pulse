@@ -620,45 +620,26 @@
           "x": 0,
           "y": 0,
           "name": "Brand Panel",
+          "clip": true,
           "width": 390,
           "height": 280,
-          "fill": {
-            "type": "gradient",
-            "gradientType": "linear",
-            "enabled": true,
-            "rotation": 225,
-            "size": {
-              "height": 1
-            },
-            "colors": [
-              {
-                "color": "#8510F2",
-                "position": 0
-              },
-              {
-                "color": "#4A0A8A",
-                "position": 0.55
-              },
-              {
-                "color": "#1A0528",
-                "position": 1
-              }
-            ]
-          },
-          "layout": "vertical",
-          "gap": 12,
-          "padding": [
-            48,
-            24,
-            40,
-            24
-          ],
+          "fill": "$bgMain",
+          "layout": "none",
           "children": [
             {
               "type": "frame",
               "id": "hXC3r",
+              "layoutPosition": "absolute",
+              "x": 0,
+              "y": 0,
               "name": "Status Bar",
-              "width": "fill_container",
+              "width": 390,
+              "padding": [
+                14,
+                24,
+                0,
+                24
+              ],
               "justifyContent": "space_between",
               "alignItems": "center",
               "children": [
@@ -716,8 +697,11 @@
             {
               "type": "text",
               "id": "pYZI5",
+              "layoutPosition": "absolute",
+              "x": 24,
+              "y": 62,
               "name": "Org Badge",
-              "fill": "#FFFFFFB3",
+              "fill": "#FFFFFF99",
               "content": "BOOKIO",
               "fontFamily": "$fontFamily",
               "fontSize": 11,
@@ -727,10 +711,13 @@
             {
               "type": "text",
               "id": "WxOpY",
+              "layoutPosition": "absolute",
+              "x": 24,
+              "y": 90,
               "name": "Title",
               "fill": "#FFFFFF",
               "textGrowth": "fixed-width",
-              "width": "fill_container",
+              "width": 342,
               "content": "Sales consultation",
               "fontFamily": "$fontFamily",
               "fontSize": 30,
@@ -739,14 +726,96 @@
             {
               "type": "text",
               "id": "CEmre",
+              "layoutPosition": "absolute",
+              "x": 24,
+              "y": 168,
               "name": "Desc",
               "fill": "#FFFFFFCC",
               "textGrowth": "fixed-width",
-              "width": "fill_container",
+              "width": 342,
               "content": "Book a call anytime. No account — just send your details.",
               "lineHeight": 1.45,
               "fontFamily": "$fontFamily",
               "fontSize": 14
+            },
+            {
+              "type": "frame",
+              "id": "aR1B9",
+              "layoutPosition": "absolute",
+              "x": 0,
+              "y": 0,
+              "name": "Glow Layer",
+              "width": 390,
+              "height": 280,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "ZgzhP",
+                  "x": 160,
+                  "y": -80,
+                  "name": "Orb Top",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "radial",
+                    "enabled": true,
+                    "rotation": 0,
+                    "size": {
+                      "width": 1,
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#8510F244",
+                        "position": 0
+                      },
+                      {
+                        "color": "#8510F200",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 280,
+                  "height": 220,
+                  "effect": {
+                    "type": "blur",
+                    "radius": 70
+                  }
+                },
+                {
+                  "type": "ellipse",
+                  "id": "N1S4v",
+                  "x": -80,
+                  "y": 80,
+                  "name": "Orb Left",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "radial",
+                    "enabled": true,
+                    "rotation": 0,
+                    "size": {
+                      "width": 1,
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#4A0A8A33",
+                        "position": 0
+                      },
+                      {
+                        "color": "#4A0A8A00",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 220,
+                  "height": 200,
+                  "effect": {
+                    "type": "blur",
+                    "radius": 60
+                  }
+                }
+              ]
             }
           ]
         },
@@ -1532,6 +1601,2068 @@
                   "fontFamily": "$fontFamily",
                   "fontSize": 11,
                   "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "Z7aUO",
+      "x": 20,
+      "y": 1780,
+      "name": "Section Label — Desktop",
+      "fill": "$textSecondary",
+      "content": "Desktop / PC — Soft Glow flow",
+      "fontFamily": "$fontFamily",
+      "fontSize": 18,
+      "fontWeight": "700"
+    },
+    {
+      "type": "frame",
+      "id": "EVf7G",
+      "x": 20,
+      "y": 1885,
+      "name": "Desktop — Intro Soft Glow",
+      "clip": true,
+      "width": 1440,
+      "height": 900,
+      "fill": "$bgMain",
+      "layout": "vertical",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "xhBm8",
+          "layoutPosition": "absolute",
+          "x": 0,
+          "y": 0,
+          "name": "Glow Layer",
+          "width": 1440,
+          "height": 900,
+          "layout": "none",
+          "children": [
+            {
+              "type": "ellipse",
+              "id": "nylzO",
+              "x": 1020,
+              "y": -120,
+              "name": "Orb Top Right",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "radial",
+                "enabled": true,
+                "rotation": 0,
+                "size": {
+                  "width": 1,
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#8510F266",
+                    "position": 0
+                  },
+                  {
+                    "color": "#8510F200",
+                    "position": 1
+                  }
+                ]
+              },
+              "width": 500,
+              "height": 500,
+              "effect": {
+                "type": "blur",
+                "radius": 100
+              }
+            },
+            {
+              "type": "ellipse",
+              "id": "HvqjU",
+              "x": -100,
+              "y": 260,
+              "name": "Orb Center Left",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "radial",
+                "enabled": true,
+                "rotation": 0,
+                "size": {
+                  "width": 1,
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#4A0A8A55",
+                    "position": 0
+                  },
+                  {
+                    "color": "#4A0A8A00",
+                    "position": 1
+                  }
+                ]
+              },
+              "width": 420,
+              "height": 420,
+              "effect": {
+                "type": "blur",
+                "radius": 100
+              }
+            },
+            {
+              "type": "ellipse",
+              "id": "Q1cwua",
+              "x": 480,
+              "y": 580,
+              "name": "Orb Bottom",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "radial",
+                "enabled": true,
+                "rotation": 0,
+                "size": {
+                  "width": 1,
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#8510F244",
+                    "position": 0
+                  },
+                  {
+                    "color": "#8510F200",
+                    "position": 1
+                  }
+                ]
+              },
+              "width": 480,
+              "height": 400,
+              "effect": {
+                "type": "blur",
+                "radius": 110
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "rZ0ar",
+          "name": "Hero Center",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "padding": [
+            0,
+            80
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "X16oV",
+              "name": "Hero Stack",
+              "width": 560,
+              "layout": "vertical",
+              "gap": 24,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "k5QH3D",
+                  "name": "Title",
+                  "fill": "#FFFFFF",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Sales consultation",
+                  "textAlign": "center",
+                  "fontFamily": "$fontFamily",
+                  "fontSize": 52,
+                  "fontWeight": "800"
+                },
+                {
+                  "type": "text",
+                  "id": "t9Al8",
+                  "name": "Desc",
+                  "fill": "#FFFFFFCC",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Book a call anytime. No account — just send your details.",
+                  "lineHeight": 1.45,
+                  "textAlign": "center",
+                  "fontFamily": "$fontFamily",
+                  "fontSize": 18,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "Uo4V0",
+                  "name": "Open Sheet CTA",
+                  "width": 280,
+                  "height": 56,
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 16,
+                  "gap": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "jdzEJ",
+                      "name": "CTA Label",
+                      "fill": "#4A0A8A",
+                      "content": "Book now",
+                      "fontFamily": "$fontFamily",
+                      "fontSize": 17,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "CLvU3",
+                      "name": "CTA Icon",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "chevron-up",
+                      "library": "lucide",
+                      "fill": "#4A0A8A"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "AMAWz",
+          "name": "Bookio Credit",
+          "width": "fill_container",
+          "padding": [
+            0,
+            80,
+            40,
+            80
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Oy2Zp",
+              "name": "Credit Row",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "fHVds",
+                  "name": "Mini Mark",
+                  "width": 14,
+                  "height": 14,
+                  "fill": "#FFFFFF28",
+                  "cornerRadius": 3,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "kZfuF",
+                      "name": "Mark Letter",
+                      "fill": "#FFFFFF66",
+                      "content": "B",
+                      "fontFamily": "$fontFamily",
+                      "fontSize": 9,
+                      "fontWeight": "800"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "R02gRz",
+                  "name": "Credit Text",
+                  "fill": "#FFFFFF66",
+                  "content": "Powered by Bookio",
+                  "fontFamily": "$fontFamily",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "eBew4",
+      "x": 1500,
+      "y": 1885,
+      "name": "Desktop — Form Split",
+      "clip": true,
+      "width": 1440,
+      "height": 900,
+      "fill": "$bgMain",
+      "children": [
+        {
+          "type": "frame",
+          "id": "oYV9T",
+          "layoutPosition": "absolute",
+          "x": 0,
+          "y": 0,
+          "name": "Shared Glow Layer",
+          "width": 1440,
+          "height": 900,
+          "layout": "none",
+          "children": [
+            {
+              "type": "ellipse",
+              "id": "UVCKj",
+              "x": 640,
+              "y": 100,
+              "name": "Orb Behind Form",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "radial",
+                "enabled": true,
+                "rotation": 0,
+                "size": {
+                  "width": 1,
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#8510F03A",
+                    "position": 0
+                  },
+                  {
+                    "color": "#8510F000",
+                    "position": 1
+                  }
+                ]
+              },
+              "width": 700,
+              "height": 640,
+              "effect": {
+                "type": "blur",
+                "radius": 140
+              }
+            },
+            {
+              "type": "ellipse",
+              "id": "dAHpa",
+              "x": 980,
+              "y": 540,
+              "name": "Orb Bottom Right",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "radial",
+                "enabled": true,
+                "rotation": 0,
+                "size": {
+                  "width": 1,
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#4A0A8A32",
+                    "position": 0
+                  },
+                  {
+                    "color": "#4A0A8A00",
+                    "position": 1
+                  }
+                ]
+              },
+              "width": 500,
+              "height": 420,
+              "effect": {
+                "type": "blur",
+                "radius": 110
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "sUIiO",
+          "name": "Brand Panel",
+          "clip": true,
+          "width": 440,
+          "height": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 28,
+          "padding": [
+            52,
+            48
+          ],
+          "justifyContent": "space_between",
+          "children": [
+            {
+              "type": "frame",
+              "id": "fP0Z0",
+              "name": "Rail Top",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "J253BP",
+                  "name": "Brand Block",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "OYYHQ",
+                      "name": "Org Badge",
+                      "fill": "#FFFFFF99",
+                      "content": "BOOKIO",
+                      "fontFamily": "$fontFamily",
+                      "fontSize": 11,
+                      "fontWeight": "800",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "Q5UBTp",
+                      "name": "Title",
+                      "fill": "$textMain",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Sales consultation",
+                      "lineHeight": 1.15,
+                      "fontFamily": "$fontFamily",
+                      "fontSize": 32,
+                      "fontWeight": "800"
+                    },
+                    {
+                      "type": "text",
+                      "id": "G39Sq",
+                      "name": "Desc",
+                      "fill": "$textSecondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Book a call anytime — no account needed.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "$fontFamily",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "xKQKS",
+                  "name": "What Happens Next",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "hmI8e",
+                      "name": "Steps Heading",
+                      "fill": "$textSecondary",
+                      "content": "What happens next",
+                      "fontFamily": "$fontFamily",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "eYLq3",
+                      "name": "Steps List",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "kwE7r",
+                          "name": "Step 1",
+                          "width": "fill_container",
+                          "gap": 12,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "o6fTLs",
+                              "name": "Marker Col 1",
+                              "width": 12,
+                              "layout": "vertical",
+                              "padding": [
+                                5,
+                                0,
+                                0,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "ellipse",
+                                  "id": "EBsIf",
+                                  "name": "Dot 1",
+                                  "fill": "$border",
+                                  "width": 5,
+                                  "height": 5
+                                },
+                                {
+                                  "type": "rectangle",
+                                  "id": "zmvfy",
+                                  "name": "Spine 1",
+                                  "fill": "#544D4D66",
+                                  "width": 1,
+                                  "height": 44
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "KaxW9",
+                              "name": "Step Text 1",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 3,
+                              "padding": [
+                                0,
+                                0,
+                                10,
+                                0
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "rGXXw",
+                                  "name": "Step Title 1",
+                                  "fill": "#FFFFFFB3",
+                                  "content": "Send details",
+                                  "fontFamily": "$fontFamily",
+                                  "fontSize": 14,
+                                  "fontWeight": "500"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "E4OmeS",
+                                  "name": "Step Desc 1",
+                                  "fill": "#D9D2D28C",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Share a few basics so the business can prepare.",
+                                  "lineHeight": 1.4,
+                                  "fontFamily": "$fontFamily",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "CYwI3",
+                          "name": "Step 2",
+                          "width": "fill_container",
+                          "gap": 12,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "AfgvM",
+                              "name": "Marker Col 2",
+                              "width": 12,
+                              "layout": "vertical",
+                              "padding": [
+                                5,
+                                0,
+                                0,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "ellipse",
+                                  "id": "N4kqSH",
+                                  "name": "Dot 2",
+                                  "fill": "$border",
+                                  "width": 5,
+                                  "height": 5
+                                },
+                                {
+                                  "type": "rectangle",
+                                  "id": "wCwk0",
+                                  "name": "Spine 2",
+                                  "fill": "#544D4D66",
+                                  "width": 1,
+                                  "height": 44
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "nyH3E",
+                              "name": "Step Text 2",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 3,
+                              "padding": [
+                                0,
+                                0,
+                                10,
+                                0
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "eHgi4",
+                                  "name": "Step Title 2",
+                                  "fill": "#FFFFFFB3",
+                                  "content": "Business reviews",
+                                  "fontFamily": "$fontFamily",
+                                  "fontSize": 14,
+                                  "fontWeight": "500"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "ZBhT1",
+                                  "name": "Step Desc 2",
+                                  "fill": "#D9D2D28C",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "They check availability and match you to a slot.",
+                                  "lineHeight": 1.4,
+                                  "fontFamily": "$fontFamily",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "u6d4t",
+                          "name": "Step 3",
+                          "width": "fill_container",
+                          "gap": 12,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "IuHao",
+                              "name": "Marker Col 3",
+                              "width": 12,
+                              "layout": "vertical",
+                              "padding": [
+                                5,
+                                0,
+                                0,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "ellipse",
+                                  "id": "rHPgR",
+                                  "name": "Dot 3",
+                                  "fill": "$border",
+                                  "width": 5,
+                                  "height": 5
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "WdJUf",
+                              "name": "Step Text 3",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 3,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "E6Kbp",
+                                  "name": "Step Title 3",
+                                  "fill": "#FFFFFFB3",
+                                  "content": "Confirm",
+                                  "fontFamily": "$fontFamily",
+                                  "fontSize": 14,
+                                  "fontWeight": "500"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "WZrdi",
+                                  "name": "Step Desc 3",
+                                  "fill": "#D9D2D28C",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "You get a confirmation once everything is set.",
+                                  "lineHeight": 1.4,
+                                  "fontFamily": "$fontFamily",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "UwqVm",
+                  "name": "Meta Cards",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "yczOv",
+                      "name": "Meta Card / No Account",
+                      "width": "fill_container",
+                      "fill": "$bgElevated",
+                      "cornerRadius": 14,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 14,
+                      "padding": 18,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "tTVYQ",
+                          "name": "Card Icon",
+                          "width": 20,
+                          "height": 20,
+                          "icon": "user-round",
+                          "library": "lucide",
+                          "fill": "$primary"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "AIsHv",
+                          "name": "Card Text",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "lGvZX",
+                              "name": "Card Title",
+                              "fill": "$textMain",
+                              "content": "No account",
+                              "fontFamily": "$fontFamily",
+                              "fontSize": 15,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "fhNr0",
+                              "name": "Card Desc",
+                              "fill": "$textSecondary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Just send your details",
+                              "fontFamily": "$fontFamily",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Y6Ch11",
+                      "name": "Meta Card / Time",
+                      "width": "fill_container",
+                      "fill": "$bgElevated",
+                      "cornerRadius": 14,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 14,
+                      "padding": 18,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "xESoH",
+                          "name": "Card Icon",
+                          "width": 20,
+                          "height": 20,
+                          "icon": "timer",
+                          "library": "lucide",
+                          "fill": "$primary"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "vlJjb",
+                          "name": "Card Text",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Yzi0z",
+                              "name": "Card Title",
+                              "fill": "$textMain",
+                              "content": "~2 minutes",
+                              "fontFamily": "$fontFamily",
+                              "fontSize": 15,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "lwOeL",
+                              "name": "Card Desc",
+                              "fill": "$textSecondary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Quick booking request",
+                              "fontFamily": "$fontFamily",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "DeYZj",
+                      "name": "Meta Card / Reply",
+                      "width": "fill_container",
+                      "fill": "$bgElevated",
+                      "cornerRadius": 14,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 14,
+                      "padding": 18,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "eZkHE",
+                          "name": "Card Icon",
+                          "width": 20,
+                          "height": 20,
+                          "icon": "message-circle",
+                          "library": "lucide",
+                          "fill": "$primary"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "OMhi9",
+                          "name": "Card Text",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "EuJlu",
+                              "name": "Card Title",
+                              "fill": "$textMain",
+                              "content": "Fast reply",
+                              "fontFamily": "$fontFamily",
+                              "fontSize": 15,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "X6HIw",
+                              "name": "Card Desc",
+                              "fill": "$textSecondary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Usually within 1 business day",
+                              "fontFamily": "$fontFamily",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "Kb4an",
+              "name": "Powered Credit",
+              "fill": "#FFFFFF66",
+              "content": "Powered by Bookio",
+              "fontFamily": "$fontFamily",
+              "fontSize": 13,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "mdVXn",
+          "name": "Form Area",
+          "clip": true,
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "padding": [
+            48,
+            56
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "pTZz4",
+              "layoutPosition": "absolute",
+              "x": 0,
+              "y": 0,
+              "name": "Form Area Glow",
+              "width": 960,
+              "height": 900,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "PSzMx",
+                  "x": 160,
+                  "y": 120,
+                  "name": "Orb Card Aura",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "radial",
+                    "enabled": true,
+                    "rotation": 0,
+                    "size": {
+                      "width": 1,
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#8510F036",
+                        "position": 0
+                      },
+                      {
+                        "color": "#8510F000",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 580,
+                  "height": 560,
+                  "effect": {
+                    "type": "blur",
+                    "radius": 120
+                  }
+                },
+                {
+                  "type": "ellipse",
+                  "id": "dZMqT",
+                  "x": 20,
+                  "y": 520,
+                  "name": "Orb Card Soft",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "radial",
+                    "enabled": true,
+                    "rotation": 0,
+                    "size": {
+                      "width": 1,
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#4A0A8A2C",
+                        "position": 0
+                      },
+                      {
+                        "color": "#4A0A8A00",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 400,
+                  "height": 360,
+                  "effect": {
+                    "type": "blur",
+                    "radius": 100
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "s5iHD",
+              "name": "Form Card",
+              "width": 600,
+              "fill": "$bgUi",
+              "cornerRadius": 24,
+              "stroke": "$border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "fKn5F",
+                  "name": "Sheet Title",
+                  "fill": "$textMain",
+                  "content": "Your details",
+                  "fontFamily": "$fontFamily",
+                  "fontSize": 22,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "DnvGO",
+                  "name": "Sheet Hint",
+                  "fill": "$textSecondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "We only ask what the business needs to book you in.",
+                  "fontFamily": "$fontFamily",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "P49Ff",
+                  "name": "Fields",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "llcLM",
+                      "name": "Group / Contact details",
+                      "width": "fill_container",
+                      "fill": "$bgElevated",
+                      "cornerRadius": 14,
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "FZsvu",
+                          "name": "Group Header",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "rectangle",
+                              "cornerRadius": 2,
+                              "id": "pwGnQ",
+                              "name": "Group Accent",
+                              "fill": "$primary",
+                              "width": 3,
+                              "height": 28
+                            },
+                            {
+                              "type": "frame",
+                              "id": "uKB78",
+                              "name": "Group Titles",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 2,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "xGPpg",
+                                  "name": "Group Title",
+                                  "fill": "$textMain",
+                                  "content": "Contact details",
+                                  "fontFamily": "$fontFamily",
+                                  "fontSize": 14,
+                                  "fontWeight": "700"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "TTQ61",
+                                  "name": "Group Hint",
+                                  "fill": "$textSecondary",
+                                  "content": "How we can reach you",
+                                  "fontFamily": "$fontFamily",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "x6IrAd",
+                          "type": "ref",
+                          "ref": "MHIvw",
+                          "name": "Full Name Field",
+                          "width": "fill_container",
+                          "descendants": {
+                            "YfX1I": {
+                              "content": "Full name *",
+                              "fontSize": 13
+                            },
+                            "nz3Ma": {
+                              "cornerRadius": 14,
+                              "fill": "$bgMain"
+                            },
+                            "VLBBK": {
+                              "content": "Jane Doe",
+                              "fill": "$textMain",
+                              "fontSize": 15,
+                              "fontWeight": "500"
+                            }
+                          }
+                        },
+                        {
+                          "type": "frame",
+                          "id": "pWwEx",
+                          "name": "Email Phone Row",
+                          "width": "fill_container",
+                          "gap": 12,
+                          "children": [
+                            {
+                              "id": "l1NQGc",
+                              "type": "ref",
+                              "ref": "MHIvw",
+                              "name": "Email Field",
+                              "width": "fill_container",
+                              "descendants": {
+                                "YfX1I": {
+                                  "content": "Email *",
+                                  "fontSize": 13
+                                },
+                                "nz3Ma": {
+                                  "cornerRadius": 14,
+                                  "fill": "$bgMain"
+                                },
+                                "VLBBK": {
+                                  "content": "jane@company.com",
+                                  "fill": "$textMain",
+                                  "fontSize": 15,
+                                  "fontWeight": "500"
+                                }
+                              }
+                            },
+                            {
+                              "id": "fsSM2",
+                              "type": "ref",
+                              "ref": "MHIvw",
+                              "name": "Phone Field",
+                              "width": "fill_container",
+                              "descendants": {
+                                "YfX1I": {
+                                  "content": "Phone",
+                                  "fontSize": 13
+                                },
+                                "nz3Ma": {
+                                  "cornerRadius": 14,
+                                  "fill": "$bgMain"
+                                },
+                                "VLBBK": {
+                                  "content": "+1 555 0123",
+                                  "fill": "$textMain",
+                                  "fontSize": 15,
+                                  "fontWeight": "500"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "kiSZA",
+                      "name": "Group / Preferences",
+                      "width": "fill_container",
+                      "fill": "$bgElevated",
+                      "cornerRadius": 14,
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "i4mXk",
+                          "name": "Group Header",
+                          "width": "fill_container",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "rectangle",
+                              "cornerRadius": 2,
+                              "id": "MtRPN",
+                              "name": "Group Accent",
+                              "fill": "$primary",
+                              "width": 3,
+                              "height": 28
+                            },
+                            {
+                              "type": "frame",
+                              "id": "NiEXG",
+                              "name": "Group Titles",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 2,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "PHgZb",
+                                  "name": "Group Title",
+                                  "fill": "$textMain",
+                                  "content": "Preferences",
+                                  "fontFamily": "$fontFamily",
+                                  "fontSize": 14,
+                                  "fontWeight": "700"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "MsgRy",
+                                  "name": "Group Hint",
+                                  "fill": "$textSecondary",
+                                  "content": "Optional — helps us schedule faster",
+                                  "fontFamily": "$fontFamily",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "txFip",
+                          "name": "Date Time Row",
+                          "width": "fill_container",
+                          "gap": 12,
+                          "children": [
+                            {
+                              "id": "CfLHH",
+                              "type": "ref",
+                              "ref": "MHIvw",
+                              "name": "Date Field",
+                              "width": "fill_container",
+                              "descendants": {
+                                "YfX1I": {
+                                  "content": "Preferred date",
+                                  "fontSize": 13
+                                },
+                                "nz3Ma": {
+                                  "cornerRadius": 14,
+                                  "fill": "$bgMain"
+                                },
+                                "VLBBK": {
+                                  "content": "Jul 24, 2026",
+                                  "fill": "$textMain",
+                                  "fontSize": 15,
+                                  "fontWeight": "500"
+                                }
+                              }
+                            },
+                            {
+                              "id": "EF7Kg",
+                              "type": "ref",
+                              "ref": "MHIvw",
+                              "name": "Time Field",
+                              "width": "fill_container",
+                              "descendants": {
+                                "YfX1I": {
+                                  "content": "Preferred time",
+                                  "fontSize": 13
+                                },
+                                "nz3Ma": {
+                                  "cornerRadius": 14,
+                                  "fill": "$bgMain"
+                                },
+                                "VLBBK": {
+                                  "content": "14:00",
+                                  "fill": "$textMain",
+                                  "fontSize": 15,
+                                  "fontWeight": "500"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "T7id6P",
+                          "name": "Select Field",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "DhRIE",
+                              "name": "Select Label",
+                              "fill": "$textSecondary",
+                              "content": "How did you hear about us",
+                              "fontFamily": "$fontFamily",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "ygVXW",
+                              "name": "Select Input",
+                              "width": "fill_container",
+                              "height": 48,
+                              "fill": "$bgMain",
+                              "cornerRadius": 14,
+                              "stroke": "$border",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                16
+                              ],
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "r2qiP",
+                                  "name": "Select Value",
+                                  "fill": "$textMain",
+                                  "content": "Instagram",
+                                  "fontFamily": "$fontFamily",
+                                  "fontSize": 15,
+                                  "fontWeight": "500"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "xiNuD",
+                                  "name": "Select Chevron",
+                                  "width": 18,
+                                  "height": 18,
+                                  "icon": "chevron-down",
+                                  "library": "lucide",
+                                  "fill": "$textSecondary"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "YOGI3",
+                      "type": "ref",
+                      "ref": "U6nSQn",
+                      "name": "Notes Field",
+                      "width": "fill_container",
+                      "descendants": {
+                        "NJevu": {
+                          "content": "Notes",
+                          "fontSize": 13
+                        },
+                        "nqj2w": {
+                          "cornerRadius": 14,
+                          "fill": "$bgElevated",
+                          "height": 72
+                        },
+                        "Jh4Lm": {
+                          "content": "Looking for a product demo next week",
+                          "fill": "$textMain",
+                          "fontSize": 15,
+                          "fontWeight": "500"
+                        }
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "qkg8g",
+                      "name": "Consent Field",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "F9OpQK",
+                          "name": "Checkbox",
+                          "width": 20,
+                          "height": 20,
+                          "fill": "$primary",
+                          "cornerRadius": 4,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "CytHT",
+                              "name": "Check",
+                              "width": 12,
+                              "height": 12,
+                              "icon": "check",
+                              "library": "lucide",
+                              "fill": "$textMain"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "lqDT7",
+                          "name": "Consent Label",
+                          "fill": "$textSecondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "I agree to be contacted about this booking *",
+                          "lineHeight": 1.4,
+                          "fontFamily": "$fontFamily",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "sNgjb",
+                  "name": "CTA",
+                  "width": "fill_container",
+                  "height": 52,
+                  "fill": "$primary",
+                  "cornerRadius": 16,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "u2GCO",
+                      "name": "CTA Label",
+                      "fill": "$textMain",
+                      "content": "Submit booking",
+                      "fontFamily": "$fontFamily",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "AUnIM",
+      "x": 2980,
+      "y": 1885,
+      "name": "Desktop — Success",
+      "clip": true,
+      "width": 1440,
+      "height": 900,
+      "fill": "$bgMain",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "Djr8u",
+          "layoutPosition": "absolute",
+          "x": 0,
+          "y": 0,
+          "name": "Glow Layer",
+          "width": 1440,
+          "height": 900,
+          "layout": "none",
+          "children": [
+            {
+              "type": "ellipse",
+              "id": "icbdB",
+              "x": 980,
+              "y": -120,
+              "name": "Orb Top Right",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "radial",
+                "enabled": true,
+                "rotation": 0,
+                "size": {
+                  "width": 1,
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#8510F266",
+                    "position": 0
+                  },
+                  {
+                    "color": "#8510F200",
+                    "position": 1
+                  }
+                ]
+              },
+              "width": 480,
+              "height": 480,
+              "effect": {
+                "type": "blur",
+                "radius": 100
+              }
+            },
+            {
+              "type": "ellipse",
+              "id": "b1xLGb",
+              "x": -140,
+              "y": 240,
+              "name": "Orb Center Left",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "radial",
+                "enabled": true,
+                "rotation": 0,
+                "size": {
+                  "width": 1,
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#4A0A8A55",
+                    "position": 0
+                  },
+                  {
+                    "color": "#4A0A8A00",
+                    "position": 1
+                  }
+                ]
+              },
+              "width": 420,
+              "height": 420,
+              "effect": {
+                "type": "blur",
+                "radius": 90
+              }
+            },
+            {
+              "type": "ellipse",
+              "id": "Ep3Gi",
+              "x": 460,
+              "y": 620,
+              "name": "Orb Bottom",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "radial",
+                "enabled": true,
+                "rotation": 0,
+                "size": {
+                  "width": 1,
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#8510F244",
+                    "position": 0
+                  },
+                  {
+                    "color": "#8510F200",
+                    "position": 1
+                  }
+                ]
+              },
+              "width": 520,
+              "height": 360,
+              "effect": {
+                "type": "blur",
+                "radius": 110
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "j4LaH",
+          "name": "Main Content",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": 40,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "ZU7fs",
+              "name": "Success Card",
+              "width": 500,
+              "fill": "$bgUi",
+              "cornerRadius": 24,
+              "stroke": "$border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 24,
+              "padding": 40,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "i9UyU",
+                  "name": "Success Icon Wrap",
+                  "width": 80,
+                  "height": 80,
+                  "fill": "#1ECC0E22",
+                  "cornerRadius": 40,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Chxdm",
+                      "name": "Check Icon",
+                      "width": 36,
+                      "height": 36,
+                      "icon": "check",
+                      "library": "lucide",
+                      "fill": "$systemGreen"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cdi5N",
+                  "name": "Success Header",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ZlLnw",
+                      "name": "Success Title",
+                      "fill": "$textMain",
+                      "content": "Booking sent",
+                      "textAlign": "center",
+                      "fontFamily": "$fontFamily",
+                      "fontSize": 38,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "j0dtvg",
+                      "name": "Success Description",
+                      "fill": "$textSecondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Thanks, Jane. The business received your request and will confirm shortly.",
+                      "lineHeight": 1.45,
+                      "textAlign": "center",
+                      "fontFamily": "$fontFamily",
+                      "fontSize": 16,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u1LVH",
+                  "name": "Summary Card",
+                  "width": "fill_container",
+                  "fill": "$bgElevated",
+                  "cornerRadius": 16,
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "s4HjyP",
+                      "name": "Summary Row Form",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "XMvv6",
+                          "name": "Form Label",
+                          "fill": "$textSecondary",
+                          "content": "Form",
+                          "fontFamily": "$fontFamily",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "n1QPMv",
+                          "name": "Form Value",
+                          "fill": "$textMain",
+                          "content": "Sales consultation",
+                          "fontFamily": "$fontFamily",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Ky8Ar",
+                      "name": "Summary Row Status",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "r2gdQ2",
+                          "name": "Status Label",
+                          "fill": "$textSecondary",
+                          "content": "Status",
+                          "fontFamily": "$fontFamily",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "MQUsI",
+                          "name": "Pending Badge",
+                          "fill": "#8510F222",
+                          "cornerRadius": 999,
+                          "gap": 6,
+                          "padding": [
+                            4,
+                            10
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "ellipse",
+                              "id": "zZSq3",
+                              "name": "Pending Dot",
+                              "fill": "$primary",
+                              "width": 6,
+                              "height": 6
+                            },
+                            {
+                              "type": "text",
+                              "id": "Wmxld",
+                              "name": "Pending Label",
+                              "fill": "$primary",
+                              "content": "Pending",
+                              "fontFamily": "$fontFamily",
+                              "fontSize": 13,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "m07Aj",
+                  "type": "ref",
+                  "ref": "zevir",
+                  "name": "Done Button",
+                  "width": "fill_container",
+                  "descendants": {
+                    "E8tnD": {
+                      "content": "Done"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "Z1fQ6",
+              "name": "Powered by Bookio",
+              "opacity": 0.7,
+              "fill": "$textSecondary",
+              "content": "Powered by Bookio",
+              "textAlign": "center",
+              "fontFamily": "$fontFamily",
+              "fontSize": 13,
+              "fontWeight": "500"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "yCN5U",
+      "x": 4460,
+      "y": 1885,
+      "name": "Desktop — Inactive",
+      "clip": true,
+      "width": 1440,
+      "height": 900,
+      "fill": "$bgMain",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "J4KZf",
+          "layoutPosition": "absolute",
+          "x": 0,
+          "y": 0,
+          "name": "Glow Layer",
+          "width": "fill_container(0)",
+          "height": "fill_container(0)",
+          "layout": "none",
+          "children": [
+            {
+              "type": "ellipse",
+              "id": "Wv2ks",
+              "x": 1040,
+              "y": -140,
+              "name": "Orb Top Right",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "radial",
+                "enabled": true,
+                "rotation": 0,
+                "size": {
+                  "width": 1,
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#6B5E6B44",
+                    "position": 0
+                  },
+                  {
+                    "color": "#6B5E6B00",
+                    "position": 1
+                  }
+                ]
+              },
+              "width": 480,
+              "height": 480,
+              "effect": {
+                "type": "blur",
+                "radius": 110
+              }
+            },
+            {
+              "type": "ellipse",
+              "id": "r4Cxdj",
+              "x": -120,
+              "y": 280,
+              "name": "Orb Center Left",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "radial",
+                "enabled": true,
+                "rotation": 0,
+                "size": {
+                  "width": 1,
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#4A0A8A33",
+                    "position": 0
+                  },
+                  {
+                    "color": "#4A0A8A00",
+                    "position": 1
+                  }
+                ]
+              },
+              "width": 400,
+              "height": 400,
+              "effect": {
+                "type": "blur",
+                "radius": 100
+              }
+            },
+            {
+              "type": "ellipse",
+              "id": "UB5hB",
+              "x": 500,
+              "y": 600,
+              "name": "Orb Bottom",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "radial",
+                "enabled": true,
+                "rotation": 0,
+                "size": {
+                  "width": 1,
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#544D4D40",
+                    "position": 0
+                  },
+                  {
+                    "color": "#544D4D00",
+                    "position": 1
+                  }
+                ]
+              },
+              "width": 440,
+              "height": 360,
+              "effect": {
+                "type": "blur",
+                "radius": 120
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "AKUQH",
+          "name": "Main Content",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": 40,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "jIsNv",
+              "name": "Inactive Card",
+              "width": 500,
+              "fill": "$bgUi",
+              "cornerRadius": 24,
+              "stroke": "$border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 24,
+              "padding": 40,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "AhpsF",
+                  "name": "Inactive Icon Wrap",
+                  "width": 80,
+                  "height": 80,
+                  "fill": "#544D4D33",
+                  "cornerRadius": 40,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "YLFdv",
+                      "name": "Pause Icon",
+                      "width": 36,
+                      "height": 36,
+                      "icon": "circle-pause",
+                      "library": "lucide",
+                      "fill": "$textSecondary"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "FM53v",
+                  "name": "Inactive Title",
+                  "fill": "$textMain",
+                  "content": "Form unavailable",
+                  "textAlign": "center",
+                  "fontFamily": "$fontFamily",
+                  "fontSize": 38,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "i8f53X",
+                  "name": "Inactive Description",
+                  "fill": "$textSecondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "This booking form is temporarily turned off by the business. Please check back later or contact them directly.",
+                  "lineHeight": 1.45,
+                  "textAlign": "center",
+                  "fontFamily": "$fontFamily",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "PWQIC",
+                  "name": "Form Info Card",
+                  "width": "fill_container",
+                  "fill": "$bgElevated",
+                  "cornerRadius": 12,
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "MR5KL",
+                      "name": "Form Name",
+                      "fill": "$textMain",
+                      "content": "Sales consultation",
+                      "fontFamily": "$fontFamily",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "SeK9w",
+                      "name": "Badge Row",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "DUEUF",
+                          "name": "Inactive Badge",
+                          "fill": "#CC2B0E22",
+                          "cornerRadius": 999,
+                          "gap": 6,
+                          "padding": [
+                            4,
+                            10
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "ellipse",
+                              "id": "ctHwS",
+                              "name": "Inactive Dot",
+                              "fill": "$systemRed",
+                              "width": 6,
+                              "height": 6
+                            },
+                            {
+                              "type": "text",
+                              "id": "ZOOr3",
+                              "name": "Inactive Label",
+                              "fill": "$systemRed",
+                              "content": "Inactive",
+                              "fontFamily": "$fontFamily",
+                              "fontSize": 12,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
