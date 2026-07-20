@@ -120,3 +120,53 @@ export const getActiveBookingFormsByOrganizationSlugHandler = factory(
         }
     },
 );
+
+const getBookingFormBySlugsSchema = z.object({
+    organizationSlug: z.string().min(1),
+    bookingFormSlug: z.string().min(1),
+});
+
+export const getBookingFormBySlugsHandler = factory(
+    zValidator('query', getBookingFormBySlugsSchema),
+    async (c) => {
+        try {
+            const { organizationSlug, bookingFormSlug } = c.req.valid('query');
+
+            const organization = await db.query.organizations.findFirst({
+                where: (organizations, { eq }) => eq(organizations.slug, organizationSlug),
+                columns: { id: true },
+            });
+
+            if (!organization) {
+                return c.json(prepareError('Organization not found'), 404);
+            }
+
+            const form = await db.query.bookingForms.findFirst({
+                where: (bookingForms, { eq, and }) =>
+                    and(
+                        eq(bookingForms.organizationId, organization.id),
+                        eq(bookingForms.slug, bookingFormSlug),
+                    ),
+                with: {
+                    fields: {
+                        where: (field, { isNull }) => isNull(field.parentId),
+                        with: {
+                            childFields: true,
+                        },
+                        orderBy: (field, { asc }) => [asc(field.order)],
+                    },
+                    metaData: true,
+                    styles: true,
+                },
+            });
+
+            if (!form) {
+                return c.json(prepareError('Booking form not found'), 404);
+            }
+
+            return c.json(prepareSuccess(form));
+        } catch (error) {
+            return c.json(prepareError('Failed to get booking form by slugs'), 500);
+        }
+    },
+);
