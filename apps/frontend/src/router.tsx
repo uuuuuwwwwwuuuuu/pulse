@@ -49,20 +49,26 @@ export const router = createBrowserRouter([
                                 ),
                             },
                             {
-                                path: 'create',
                                 lazy: lazyRoute(
-                                    () =>
-                                        import('@pages/Organization/CreateOrganization/CreateOrganization'),
-                                    'CreateOrganization',
+                                    () => import('@pages/Organization/OrganizationAccess'),
+                                    'OrganizationAccessLayout',
                                 ),
-                            },
-                            {
-                                path: 'connect',
-                                lazy: lazyRoute(
-                                    () =>
-                                        import('@pages/Organization/ConnectOrganization/ConnectOrganization'),
-                                    'ConnectOrganization',
-                                ),
+                                children: [
+                                    {
+                                        path: 'create',
+                                        lazy: lazyRoute(
+                                            () => import('@pages/Organization/OrganizationAccess'),
+                                            'CreateOrganization',
+                                        ),
+                                    },
+                                    {
+                                        path: 'connect',
+                                        lazy: lazyRoute(
+                                            () => import('@pages/Organization/OrganizationAccess'),
+                                            'ConnectOrganization',
+                                        ),
+                                    },
+                                ],
                             },
                         ],
                     },

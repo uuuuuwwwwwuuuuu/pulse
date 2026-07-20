@@ -10,9 +10,11 @@ export const OrganizationLayout: FC = () => {
     return (
         <div className={styles.organizationLayout}>
             <OrganizationHeader />
-            <Suspense fallback={<PageLoader />}>
-                <Outlet />
-            </Suspense>
+            <div className={styles.content}>
+                <Suspense fallback={<PageLoader />}>
+                    <Outlet />
+                </Suspense>
+            </div>
             <OrganizationSearch />
         </div>
     );

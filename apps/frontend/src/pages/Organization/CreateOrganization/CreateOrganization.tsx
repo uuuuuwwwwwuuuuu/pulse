@@ -1,5 +1,6 @@
-import { type FC, useCallback } from 'react';
+import { type FC, useCallback, useEffect } from 'react';
 import styles from './CreateOrganization.module.scss';
+import panelStyles from '@components/PanelFormLayout/PanelFormLayout.module.scss';
 import { Button, Input, HiddenField } from '@bookio/ui';
 import { ValidatableInput } from '@components/ValidatableInput/ValidatableInput';
 import {
@@ -14,6 +15,7 @@ import { useIsOrganizationExists } from '@api/organizations/isOrganizationExists
 import { Controller, useForm, useWatch, type FieldErrors } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { getFirstFieldError } from '@utils/formErrors';
+import { useOrganizationAccess } from '../OrganizationAccess/OrganizationAccessContext';
 
 const formSchema = z.object({
     name: z.string().min(3).max(255),
@@ -37,6 +39,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export const CreateOrganization: FC = () => {
+    const { switchMode, setMeta } = useOrganizationAccess();
     const { data: session } = useSession();
     const { data: organization, mutateAsync, isPending, isSuccess } = useCreateOrganization();
 
@@ -53,6 +56,10 @@ export const CreateOrganization: FC = () => {
     const slug = useWatch({ control, name: 'slug', defaultValue: '' });
     const { exists: slugExists } = useIsOrganizationExists(slug);
     const slugIsValid = slugExists === undefined ? undefined : !slugExists;
+
+    useEffect(() => {
+        return () => setMeta(null);
+    }, [setMeta]);
 
     const onSubmit = async (data: FormData) => {
         if (slugExists === true) {
@@ -78,10 +85,13 @@ export const CreateOrganization: FC = () => {
     const isDisabled = isPending || isSubmitting;
 
     return (
-        <div className={styles.createOrganization}>
-            <form className={styles.form} onSubmit={handleSubmit(onSubmit, onInvalid)}>
-                <h2 className={styles.title}>Lets create your organization</h2>
-                <div className={styles.formGroup}>
+        <>
+            <div className={panelStyles.fields}>
+                <form
+                    id="create-organization-form"
+                    className={styles.form}
+                    onSubmit={handleSubmit(onSubmit, onInvalid)}
+                >
                     <Input
                         placeholder="Organization name"
                         disabled={isDisabled}
@@ -111,47 +121,61 @@ export const CreateOrganization: FC = () => {
                         disabled={isDisabled}
                         {...register('password')}
                     />
+                </form>
+            </div>
+            <div className={panelStyles.footer}>
+                <div className={styles.footerActions}>
+                    <Button
+                        variant="primary-filled"
+                        type="submit"
+                        form="create-organization-form"
+                        disabled={isDisabled}
+                    >
+                        Create Organization
+                    </Button>
+                    <Button
+                        type="button"
+                        variant="simple-clean"
+                        onClick={() => switchMode('connect')}
+                    >
+                        Connect instead
+                    </Button>
                 </div>
-                <Button
-                    className={styles.button}
-                    variant="primary-filled"
-                    type="submit"
-                    disabled={isDisabled}
-                >
-                    Create Organization
-                </Button>
-            </form>
-        </div>
+            </div>
+        </>
     );
 };
 
 const SuccessfulOrganizationCreation: FC<{ data: CreateOrganizationResponse['data'] }> = ({
     data,
 }) => {
+    const { setMeta } = useOrganizationAccess();
+
+    useEffect(() => {
+        setMeta({
+            badge: 'Done',
+            title: `${data.organization.name} is ready`,
+            description:
+                'Your organization has been created. Copy the secret key below and keep it in a safe place.',
+        });
+    }, [data.organization.name, setMeta]);
+
     const handleCopy = useCallback(() => {
         toast.success('Secret key copied to clipboard');
     }, []);
 
     return (
-        <div className={styles.createOrganization}>
-            <div className={styles.content}>
-                <h2 className={styles.title}>
-                    Organization {data.organization.name} created successfully
-                </h2>
-                <p className={styles.description}>
-                    Your organization has been created successfully. Bellow, in the hidden field,
-                    you can find the organization secret key. Copy and keep it in a safe place.
-                </p>
+        <>
+            <div className={panelStyles.fields}>
                 <HiddenField value={data.organization.secretKey} onCopy={handleCopy} />
-                <Button
-                    type="link"
-                    to="/organizations/list"
-                    className={styles.button}
-                    variant="primary-filled"
-                >
-                    Go to organizations
-                </Button>
             </div>
-        </div>
+            <div className={panelStyles.footer}>
+                <div className={styles.footerActions}>
+                    <Button type="link" to="/organizations/list" variant="primary-filled">
+                        Go to organizations
+                    </Button>
+                </div>
+            </div>
+        </>
     );
 };

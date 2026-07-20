@@ -1,5 +1,6 @@
 import { type FC } from 'react';
 import styles from './ConnectOrganization.module.scss';
+import panelStyles from '@components/PanelFormLayout/PanelFormLayout.module.scss';
 import { Button, Input } from '@bookio/ui';
 import {
     useConnectToOrganization,
@@ -11,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, type FieldErrors } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { getFirstFieldError } from '@utils/formErrors';
+import { useOrganizationAccess } from '../OrganizationAccess/OrganizationAccessContext';
 
 const formSchema = z.object({
     slug: z.string().min(1).max(255),
@@ -20,6 +22,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export const ConnectOrganization: FC = () => {
+    const { switchMode } = useOrganizationAccess();
     const navigate = useNavigate();
     const { mutateAsync, isSuccess, isPending } = useConnectToOrganization();
 
@@ -51,10 +54,13 @@ export const ConnectOrganization: FC = () => {
     const isDisabled = isPending || isSubmitting;
 
     return (
-        <div className={styles.connectOrganization}>
-            <form className={styles.form} onSubmit={handleSubmit(onSubmit, onInvalid)}>
-                <h2 className={styles.title}>Lets connect to organization</h2>
-                <div className={styles.formGroup}>
+        <>
+            <div className={panelStyles.fields}>
+                <form
+                    id="connect-organization-form"
+                    className={styles.form}
+                    onSubmit={handleSubmit(onSubmit, onInvalid)}
+                >
                     <Input
                         placeholder="Organization slug"
                         disabled={isDisabled}
@@ -66,16 +72,27 @@ export const ConnectOrganization: FC = () => {
                         disabled={isDisabled}
                         {...register('password')}
                     />
+                </form>
+            </div>
+            <div className={panelStyles.footer}>
+                <div className={styles.footerActions}>
+                    <Button
+                        variant="primary-filled"
+                        type="submit"
+                        form="connect-organization-form"
+                        disabled={isDisabled}
+                    >
+                        Connect to Organization
+                    </Button>
+                    <Button
+                        type="button"
+                        variant="simple-clean"
+                        onClick={() => switchMode('create')}
+                    >
+                        Create instead
+                    </Button>
                 </div>
-                <Button
-                    className={styles.button}
-                    variant="primary-filled"
-                    type="submit"
-                    disabled={isDisabled}
-                >
-                    Connect to Organization
-                </Button>
-            </form>
-        </div>
+            </div>
+        </>
     );
 };
