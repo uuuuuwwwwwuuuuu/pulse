@@ -9,50 +9,51 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as OrganizationSlugBookingFormSlugRouteImport } from './routes/$organizationSlug.$bookingFormSlug'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const OrganizationSlugBookingFormSlugRoute =
+  OrganizationSlugBookingFormSlugRouteImport.update({
+    id: '/$organizationSlug/$bookingFormSlug',
+    path: '/$organizationSlug/$bookingFormSlug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/$organizationSlug/$bookingFormSlug': typeof OrganizationSlugBookingFormSlugRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/$organizationSlug/$bookingFormSlug': typeof OrganizationSlugBookingFormSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/$organizationSlug/$bookingFormSlug': typeof OrganizationSlugBookingFormSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/$organizationSlug/$bookingFormSlug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/$organizationSlug/$bookingFormSlug'
+  id: '__root__' | '/$organizationSlug/$bookingFormSlug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  OrganizationSlugBookingFormSlugRoute: typeof OrganizationSlugBookingFormSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/$organizationSlug/$bookingFormSlug': {
+      id: '/$organizationSlug/$bookingFormSlug'
+      path: '/$organizationSlug/$bookingFormSlug'
+      fullPath: '/$organizationSlug/$bookingFormSlug'
+      preLoaderRoute: typeof OrganizationSlugBookingFormSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  OrganizationSlugBookingFormSlugRoute: OrganizationSlugBookingFormSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

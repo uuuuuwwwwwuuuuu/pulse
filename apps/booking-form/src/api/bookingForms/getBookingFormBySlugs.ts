@@ -11,7 +11,7 @@ export type GetBookingFormBySlugsResponse = InferResponseType<
 >;
 export type BookingFormBySlugsType = GetBookingFormBySlugsResponse['data'];
 
-const fetchBookingFormBySlugs = async (
+export const fetchBookingFormBySlugs = async (
     organizationSlug: string,
     bookingFormSlug: string,
 ): Promise<BookingFormBySlugsType> => {
@@ -27,12 +27,12 @@ const fetchBookingFormBySlugs = async (
 };
 
 export const useGetBookingFormBySlugs = (
-    organizationSlug: string | undefined,
-    bookingFormSlug: string | undefined,
+    organizationSlug: string,
+    bookingFormSlug: string,
 ): UseQueryResult<BookingFormBySlugsType> => {
     return useQuery<BookingFormBySlugsType>({
         queryKey: ['booking-form', organizationSlug, bookingFormSlug],
-        queryFn: () => fetchBookingFormBySlugs(organizationSlug!, bookingFormSlug!),
+        queryFn: () => fetchBookingFormBySlugs(organizationSlug, bookingFormSlug),
         enabled: !!organizationSlug && !!bookingFormSlug,
     });
 };
