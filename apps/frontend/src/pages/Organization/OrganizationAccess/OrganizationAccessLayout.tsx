@@ -1,6 +1,8 @@
 import { useCallback, useMemo, useState, type FC } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { PanelFormLayout } from '@components/PanelFormLayout/PanelFormLayout';
+import { CreateOrganization } from '../CreateOrganization/CreateOrganization';
+import { ConnectOrganization } from '../ConnectOrganization/ConnectOrganization';
 import {
     MODE_META,
     OrganizationAccessProvider,
@@ -45,7 +47,7 @@ export const OrganizationAccessLayout: FC = () => {
                 description={meta.description}
                 contentKey={contentKey}
             >
-                <Outlet />
+                {mode === 'create' ? <CreateOrganization /> : <ConnectOrganization />}
             </PanelFormLayout>
         </OrganizationAccessProvider>
     );

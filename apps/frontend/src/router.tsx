@@ -40,36 +40,9 @@ export const router = createBrowserRouter([
                                 index: true,
                                 element: <Navigate to="list" replace />,
                             },
-                            {
-                                path: 'list',
-                                lazy: lazyRoute(
-                                    () =>
-                                        import('@pages/Organization/OrganizationList/OrganizationList'),
-                                    'OrganizationList',
-                                ),
-                            },
-                            {
-                                lazy: lazyRoute(
-                                    () => import('@pages/Organization/OrganizationAccess'),
-                                    'OrganizationAccessLayout',
-                                ),
-                                children: [
-                                    {
-                                        path: 'create',
-                                        lazy: lazyRoute(
-                                            () => import('@pages/Organization/OrganizationAccess'),
-                                            'CreateOrganization',
-                                        ),
-                                    },
-                                    {
-                                        path: 'connect',
-                                        lazy: lazyRoute(
-                                            () => import('@pages/Organization/OrganizationAccess'),
-                                            'ConnectOrganization',
-                                        ),
-                                    },
-                                ],
-                            },
+                            { path: 'list' },
+                            { path: 'create' },
+                            { path: 'connect' },
                         ],
                     },
                     {

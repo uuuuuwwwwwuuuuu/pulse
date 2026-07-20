@@ -78,11 +78,9 @@ export const PanelFormLayout: FC<PanelFormLayoutProps> = ({
             footer,
         };
 
-        setPhase('exit');
+        setPhase((current) => (current === 'exit' ? current : 'exit'));
 
-        if (exitTimerRef.current != null) {
-            window.clearTimeout(exitTimerRef.current);
-        }
+        if (exitTimerRef.current != null) return;
 
         exitTimerRef.current = window.setTimeout(() => {
             if (pendingRef.current) {
