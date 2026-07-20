@@ -8,7 +8,7 @@ import { BETTER_AUTH_SECRET, BETTER_AUTH_URL, ENVIRONMENT, TRUSTED_ORIGINS } fro
 export const auth = betterAuth({
     secret: BETTER_AUTH_SECRET!,
     baseURL: BETTER_AUTH_URL!,
-    trustedOrigins: TRUSTED_ORIGINS?.split(',').map((origin) => origin.trim()),
+    trustedOrigins: TRUSTED_ORIGINS,
     database: drizzleAdapter(db, {
         provider: 'pg',
         usePlural: true,
@@ -21,7 +21,7 @@ export const auth = betterAuth({
     }),
     emailAndPassword: {
         enabled: true,
-    },
+    }, 
     advanced: {
         database: {
             generateId: false,
