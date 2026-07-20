@@ -1,0 +1,1821 @@
+{
+  "version": "2.14",
+  "children": [
+    {
+      "type": "frame",
+      "id": "ekEga",
+      "x": 5040,
+      "y": 0,
+      "name": "Feature-focused Variant (Bookio)",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$bookio-bg",
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "fHTia",
+          "name": "Main Card",
+          "clip": true,
+          "width": 1000,
+          "height": 700,
+          "fill": "$bookio-card",
+          "cornerRadius": 24,
+          "stroke": "$bookio-border",
+          "strokeWidth": 1,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000080",
+            "offset": {
+              "x": 0,
+              "y": 20
+            },
+            "blur": 60
+          },
+          "children": [
+            {
+              "type": "frame",
+              "id": "sDISO",
+              "name": "Features Side",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "linear",
+                "enabled": true,
+                "rotation": 45,
+                "size": {
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#8510f220",
+                    "position": 0
+                  },
+                  {
+                    "color": "#00000000",
+                    "position": 1
+                  }
+                ]
+              },
+              "layout": "vertical",
+              "gap": 40,
+              "padding": 60,
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "s125G",
+                  "name": "Main Title",
+                  "fill": "$bookio-text",
+                  "content": "Join Bookio",
+                  "fontFamily": "$bookio-font",
+                  "fontSize": 32,
+                  "fontWeight": "800"
+                },
+                {
+                  "type": "frame",
+                  "id": "y4HTCF",
+                  "name": "Feature: Easy Booking",
+                  "gap": 20,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "p93s1",
+                      "name": "Icon Container",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "#8510f215",
+                      "cornerRadius": 12,
+                      "layout": "vertical",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "ekxtr",
+                          "name": "Icon",
+                          "width": 24,
+                          "height": 24,
+                          "icon": "calendar-check",
+                          "library": "lucide",
+                          "fill": "$bookio-primary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Q0EUp",
+                      "name": "Text Content",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "LroOO",
+                          "name": "Title",
+                          "fill": "$bookio-text",
+                          "content": "Easy Booking",
+                          "fontFamily": "$bookio-font",
+                          "fontSize": 18,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "H6Uvc",
+                          "name": "Description",
+                          "fill": "$bookio-text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": 300,
+                          "content": "Schedule your appointments or book books in seconds with our intuitive interface.",
+                          "fontFamily": "$bookio-font",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "z1dOF9",
+                  "name": "Feature: Global Access",
+                  "gap": 20,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "VEkm7",
+                      "name": "Icon Container",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "#8510f215",
+                      "cornerRadius": 12,
+                      "layout": "vertical",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "p9Zoq",
+                          "name": "Icon",
+                          "width": 24,
+                          "height": 24,
+                          "icon": "globe",
+                          "library": "lucide",
+                          "fill": "$bookio-primary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "BIQ9E",
+                      "name": "Text Content",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "mLSJi",
+                          "name": "Title",
+                          "fill": "$bookio-text",
+                          "content": "Global Access",
+                          "fontFamily": "$bookio-font",
+                          "fontSize": 18,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "A7GlsP",
+                          "name": "Description",
+                          "fill": "$bookio-text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": 300,
+                          "content": "Access your personal library and bookings from anywhere in the world, on any device.",
+                          "fontFamily": "$bookio-font",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "dxLRk",
+                  "name": "Feature: Personal Library",
+                  "gap": 20,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "wQgLV",
+                      "name": "Icon Container",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "#8510f215",
+                      "cornerRadius": 12,
+                      "layout": "vertical",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "IyPRa",
+                          "name": "Icon",
+                          "width": 24,
+                          "height": 24,
+                          "icon": "library",
+                          "library": "lucide",
+                          "fill": "$bookio-primary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "KTMGG",
+                      "name": "Text Content",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u3Q44",
+                          "name": "Title",
+                          "fill": "$bookio-text",
+                          "content": "Personal Library",
+                          "fontFamily": "$bookio-font",
+                          "fontSize": 18,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ZOX2i",
+                          "name": "Description",
+                          "fill": "$bookio-text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": 300,
+                          "content": "Keep track of all your favorite titles and upcoming events in one central hub.",
+                          "fontFamily": "$bookio-font",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vmhkt",
+              "name": "Form Side",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 32,
+              "padding": 60,
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "iXLgM",
+                  "name": "Form Title",
+                  "fill": "$bookio-text",
+                  "content": "Create Account",
+                  "fontFamily": "$bookio-font",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "sA8g5",
+                  "name": "Input Group: Full Name",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "essNG",
+                      "name": "Label",
+                      "fill": "$bookio-text-secondary",
+                      "content": "Full Name",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "V01jkP",
+                      "name": "Input Field",
+                      "width": "fill_container",
+                      "height": 48,
+                      "fill": "#ffffff08",
+                      "cornerRadius": 8,
+                      "stroke": "$bookio-border",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "padding": [
+                        0,
+                        16
+                      ],
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "NV4EF",
+                          "name": "Placeholder",
+                          "fill": "#ffffff40",
+                          "content": "John Doe",
+                          "fontFamily": "$bookio-font",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "bHP84",
+                  "name": "Input Group: Email Address",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "J0oRs",
+                      "name": "Label",
+                      "fill": "$bookio-text-secondary",
+                      "content": "Email Address",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "MfTsL",
+                      "name": "Input Field",
+                      "width": "fill_container",
+                      "height": 48,
+                      "fill": "#ffffff08",
+                      "cornerRadius": 8,
+                      "stroke": "$bookio-border",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "padding": [
+                        0,
+                        16
+                      ],
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "w6fRQ6",
+                          "name": "Placeholder",
+                          "fill": "#ffffff40",
+                          "content": "john@example.com",
+                          "fontFamily": "$bookio-font",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "eqeCX",
+                  "name": "Input Group: Password",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "HlRiN",
+                      "name": "Label",
+                      "fill": "$bookio-text-secondary",
+                      "content": "Password",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "YHiaf",
+                      "name": "Input Field",
+                      "width": "fill_container",
+                      "height": 48,
+                      "fill": "#ffffff08",
+                      "cornerRadius": 8,
+                      "stroke": "$bookio-border",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "padding": [
+                        0,
+                        16
+                      ],
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Qre4i",
+                          "name": "Placeholder",
+                          "fill": "#ffffff40",
+                          "content": "••••••••••••",
+                          "fontFamily": "$bookio-font",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "pgtVz",
+                  "name": "Sign Up Button",
+                  "width": "fill_container",
+                  "height": 52,
+                  "fill": "$bookio-primary",
+                  "cornerRadius": 12,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "N3YLB",
+                      "name": "Button Label",
+                      "fill": "#ffffff",
+                      "content": "Get Started",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "gm3Gq",
+                  "name": "Footer",
+                  "width": "fill_container",
+                  "gap": 4,
+                  "justifyContent": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "x64Fn6",
+                      "name": "Text",
+                      "fill": "$bookio-text-secondary",
+                      "content": "Already have an account?",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ceTFr",
+                      "name": "Link",
+                      "fill": "$bookio-primary",
+                      "content": "Log in",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "KGuAS",
+      "x": 6560,
+      "y": 0,
+      "name": "Glassmorphism Creative (Bookio)",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "#101010",
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "VQmUW",
+          "x": 400,
+          "y": 200,
+          "name": "Glow 1",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "radial",
+            "enabled": true,
+            "rotation": 0,
+            "size": {
+              "width": 1,
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#8510f240",
+                "position": 0
+              },
+              {
+                "color": "#8510f200",
+                "position": 1
+              }
+            ]
+          },
+          "width": 600,
+          "height": 600,
+          "effect": {
+            "type": "blur",
+            "radius": 100
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "lAJuA",
+          "x": 800,
+          "y": 500,
+          "name": "Glow 2",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "radial",
+            "enabled": true,
+            "rotation": 0,
+            "size": {
+              "width": 1,
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#8510f220",
+                "position": 0
+              },
+              {
+                "color": "#8510f200",
+                "position": 1
+              }
+            ]
+          },
+          "width": 500,
+          "height": 500,
+          "effect": {
+            "type": "blur",
+            "radius": 120
+          }
+        },
+        {
+          "type": "frame",
+          "id": "G2g8IP",
+          "x": 480,
+          "y": 162,
+          "name": "Glass Card",
+          "width": 480,
+          "fill": "#1A1A1A99",
+          "cornerRadius": 32,
+          "stroke": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 45,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#FFFFFF40",
+                "position": 0
+              },
+              {
+                "color": "#FFFFFF10",
+                "position": 0.5
+              },
+              {
+                "color": "#8510f240",
+                "position": 1
+              }
+            ]
+          },
+          "strokeWidth": 1.5,
+          "effect": [
+            {
+              "type": "background_blur",
+              "radius": 60
+            },
+            {
+              "type": "shadow",
+              "shadowType": "outer",
+              "color": "#00000080",
+              "offset": {
+                "x": 0,
+                "y": 20
+              },
+              "blur": 60
+            }
+          ],
+          "layout": "vertical",
+          "gap": 32,
+          "padding": 48,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "K6YDh",
+              "name": "Logo",
+              "fill": "#8510f2",
+              "content": "Bookio",
+              "fontFamily": "Nunito",
+              "fontSize": 28,
+              "fontWeight": "800",
+              "letterSpacing": -1
+            },
+            {
+              "type": "frame",
+              "id": "s0keU",
+              "name": "Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "pLemL",
+                  "name": "Title",
+                  "fill": "#FFFFFF",
+                  "content": "Create Account",
+                  "fontFamily": "Nunito",
+                  "fontSize": 32,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "zE7qL",
+                  "name": "Subtitle",
+                  "fill": "#FFFFFF80",
+                  "content": "Start your reading journey today",
+                  "fontFamily": "Nunito",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "toY7H",
+              "name": "Form",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "bbdnQ",
+                  "name": "Input Container Full Name",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "wo6OH",
+                      "name": "Label",
+                      "fill": "#FFFFFF60",
+                      "content": "Full Name",
+                      "fontFamily": "Nunito",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "fSw0o",
+                      "name": "Field",
+                      "width": "fill_container",
+                      "height": 56,
+                      "fill": "#FFFFFF08",
+                      "cornerRadius": 16,
+                      "stroke": "#FFFFFF10",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "padding": [
+                        0,
+                        20
+                      ],
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "uXECd",
+                          "name": "Placeholder",
+                          "fill": "#FFFFFF30",
+                          "content": "John Doe",
+                          "fontFamily": "Nunito",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "KmIrR",
+                  "name": "Input Container Email Address",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "AQ5nY",
+                      "name": "Label",
+                      "fill": "#FFFFFF60",
+                      "content": "Email Address",
+                      "fontFamily": "Nunito",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "tvhxa",
+                      "name": "Field",
+                      "width": "fill_container",
+                      "height": 56,
+                      "fill": "#FFFFFF08",
+                      "cornerRadius": 16,
+                      "stroke": "#FFFFFF10",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "padding": [
+                        0,
+                        20
+                      ],
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "O3QOB",
+                          "name": "Placeholder",
+                          "fill": "#FFFFFF30",
+                          "content": "hello@example.com",
+                          "fontFamily": "Nunito",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "r0QXV",
+                  "name": "Input Container Password",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "XufOB",
+                      "name": "Label",
+                      "fill": "#FFFFFF60",
+                      "content": "Password",
+                      "fontFamily": "Nunito",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "JHCov",
+                      "name": "Field",
+                      "width": "fill_container",
+                      "height": 56,
+                      "fill": "#FFFFFF08",
+                      "cornerRadius": 16,
+                      "stroke": "#FFFFFF10",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "padding": [
+                        0,
+                        20
+                      ],
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Xm6Gr",
+                          "name": "Placeholder",
+                          "fill": "#FFFFFF30",
+                          "content": "••••••••••••",
+                          "fontFamily": "Nunito",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Vis5D",
+              "name": "Register Button",
+              "width": "fill_container",
+              "height": 60,
+              "fill": {
+                "type": "gradient",
+                "gradientType": "linear",
+                "enabled": true,
+                "rotation": 90,
+                "size": {
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#8510f2",
+                    "position": 0
+                  },
+                  {
+                    "color": "#a246ff",
+                    "position": 1
+                  }
+                ]
+              },
+              "cornerRadius": 16,
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#8510f240",
+                "offset": {
+                  "x": 0,
+                  "y": 10
+                },
+                "blur": 20
+              },
+              "layout": "vertical",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "miMDq",
+                  "name": "Label",
+                  "fill": "#FFFFFF",
+                  "content": "Register Now",
+                  "fontFamily": "Nunito",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "B5QMBC",
+              "name": "Footer",
+              "width": "fill_container",
+              "gap": 4,
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "M7zdEM",
+                  "name": "Text",
+                  "fill": "#FFFFFF60",
+                  "content": "Already have an account?",
+                  "fontFamily": "Nunito",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "SvMMW",
+                  "name": "Link",
+                  "fill": "#8510f2",
+                  "content": "Log in",
+                  "fontFamily": "Nunito",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "LySkc",
+      "x": 8100,
+      "y": 0,
+      "name": "Wizard Variant (Bookio)",
+      "width": 1440,
+      "height": 900,
+      "fill": "$bookio-bg",
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "pt0Wr",
+          "name": "Wizard Card",
+          "width": 600,
+          "fill": "$bookio-card",
+          "cornerRadius": 24,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000080",
+            "offset": {
+              "x": 0,
+              "y": 10
+            },
+            "blur": 40
+          },
+          "layout": "vertical",
+          "gap": 32,
+          "padding": 48,
+          "children": [
+            {
+              "type": "frame",
+              "id": "LOJgc",
+              "name": "Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "aAN6e",
+                  "name": "Title",
+                  "fill": "$bookio-text",
+                  "content": "Create your Bookio account",
+                  "fontFamily": "$bookio-font",
+                  "fontSize": 32,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "KASwl",
+                  "name": "Subtitle",
+                  "fill": "$bookio-text-secondary",
+                  "content": "Join our community of book lovers",
+                  "fontFamily": "$bookio-font",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ab2U8",
+              "name": "Progress Indicator",
+              "width": "fill_container",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ytZR0",
+                  "name": "Step 1",
+                  "width": 32,
+                  "height": 32,
+                  "fill": "$bookio-primary",
+                  "cornerRadius": 16,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "g3XP8",
+                      "name": "Number",
+                      "fill": "$bookio-text",
+                      "content": "1",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 14,
+                      "fontWeight": "bold"
+                    }
+                  ]
+                },
+                {
+                  "type": "rectangle",
+                  "id": "u4cARI",
+                  "name": "Divider",
+                  "fill": "$bookio-primary",
+                  "width": "fill_container",
+                  "height": 2
+                },
+                {
+                  "type": "frame",
+                  "id": "Vozc8",
+                  "name": "Step 2",
+                  "width": 32,
+                  "height": 32,
+                  "fill": "$bookio-primary",
+                  "cornerRadius": 16,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "gntmQ",
+                      "name": "Number",
+                      "fill": "$bookio-text",
+                      "content": "2",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 14,
+                      "fontWeight": "bold"
+                    }
+                  ]
+                },
+                {
+                  "type": "rectangle",
+                  "id": "x0HIJI",
+                  "name": "Divider",
+                  "fill": "$bookio-border",
+                  "width": "fill_container",
+                  "height": 2
+                },
+                {
+                  "type": "frame",
+                  "id": "nBrIb",
+                  "name": "Step 3",
+                  "width": 32,
+                  "height": 32,
+                  "fill": "$bookio-bg",
+                  "cornerRadius": 16,
+                  "stroke": "$bookio-border",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "WJ7Ru",
+                      "name": "Number",
+                      "fill": "$bookio-text",
+                      "content": "3",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 14,
+                      "fontWeight": "bold"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "v1v69",
+              "name": "Step Content",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "C7zkNJ",
+                  "name": "Step Label",
+                  "fill": "$bookio-text",
+                  "content": "Step 2: Your Preferences",
+                  "fontFamily": "$bookio-font",
+                  "fontSize": 18,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "MS98c",
+                  "name": "Category Grid",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "N1UtQ",
+                      "name": "Row",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "eihCZ",
+                          "name": "Chip Fiction",
+                          "width": "fill_container",
+                          "fill": "#8510f220",
+                          "cornerRadius": 12,
+                          "stroke": "$bookio-primary",
+                          "strokeWidth": 1,
+                          "padding": [
+                            12,
+                            16
+                          ],
+                          "justifyContent": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "KTpGM",
+                              "name": "Label",
+                              "fill": "$bookio-primary",
+                              "content": "Fiction",
+                              "fontFamily": "$bookio-font",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "g1pst",
+                          "name": "Chip Sci-Fi",
+                          "width": "fill_container",
+                          "fill": "$bookio-bg",
+                          "cornerRadius": 12,
+                          "stroke": "$bookio-border",
+                          "strokeWidth": 1,
+                          "padding": [
+                            12,
+                            16
+                          ],
+                          "justifyContent": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "O7uCo",
+                              "name": "Label",
+                              "fill": "$bookio-text-secondary",
+                              "content": "Sci-Fi",
+                              "fontFamily": "$bookio-font",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "pxM5e",
+                      "name": "Row",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "vqn4u",
+                          "name": "Chip History",
+                          "width": "fill_container",
+                          "fill": "#8510f220",
+                          "cornerRadius": 12,
+                          "stroke": "$bookio-primary",
+                          "strokeWidth": 1,
+                          "padding": [
+                            12,
+                            16
+                          ],
+                          "justifyContent": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "r0nbVV",
+                              "name": "Label",
+                              "fill": "$bookio-primary",
+                              "content": "History",
+                              "fontFamily": "$bookio-font",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Wkr71",
+                          "name": "Chip Biography",
+                          "width": "fill_container",
+                          "fill": "$bookio-bg",
+                          "cornerRadius": 12,
+                          "stroke": "$bookio-border",
+                          "strokeWidth": 1,
+                          "padding": [
+                            12,
+                            16
+                          ],
+                          "justifyContent": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "MOBHW",
+                              "name": "Label",
+                              "fill": "$bookio-text-secondary",
+                              "content": "Biography",
+                              "fontFamily": "$bookio-font",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "wvS1z",
+                      "name": "Row",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "c2NiUT",
+                          "name": "Chip Mystery",
+                          "width": "fill_container",
+                          "fill": "$bookio-bg",
+                          "cornerRadius": 12,
+                          "stroke": "$bookio-border",
+                          "strokeWidth": 1,
+                          "padding": [
+                            12,
+                            16
+                          ],
+                          "justifyContent": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "xiohp",
+                              "name": "Label",
+                              "fill": "$bookio-text-secondary",
+                              "content": "Mystery",
+                              "fontFamily": "$bookio-font",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "C7edTY",
+                          "name": "Chip Poetry",
+                          "width": "fill_container",
+                          "fill": "$bookio-bg",
+                          "cornerRadius": 12,
+                          "stroke": "$bookio-border",
+                          "strokeWidth": 1,
+                          "padding": [
+                            12,
+                            16
+                          ],
+                          "justifyContent": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ri4t4",
+                              "name": "Label",
+                              "fill": "$bookio-text-secondary",
+                              "content": "Poetry",
+                              "fontFamily": "$bookio-font",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "F76qnu",
+              "name": "Footer",
+              "width": "fill_container",
+              "gap": 16,
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Xiz4X",
+                  "name": "Back Button",
+                  "cornerRadius": 12,
+                  "stroke": "$bookio-border",
+                  "strokeWidth": 1,
+                  "padding": [
+                    14,
+                    28
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "duPVd",
+                      "name": "Label",
+                      "fill": "$bookio-text-secondary",
+                      "content": "Back",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 16,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "IF136",
+                  "name": "Next Button",
+                  "width": "fill_container",
+                  "fill": "$bookio-primary",
+                  "cornerRadius": 12,
+                  "padding": [
+                    14,
+                    28
+                  ],
+                  "justifyContent": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "CBh0Q",
+                      "name": "Label",
+                      "fill": "$bookio-text",
+                      "content": "Continue",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 16,
+                      "fontWeight": "bold"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "sMfLH",
+      "x": 9640,
+      "y": 0,
+      "name": "Wizard Variant (Step 1) (Bookio)",
+      "width": 1440,
+      "height": 900,
+      "fill": "$bookio-bg",
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "SYbmy",
+          "name": "Wizard Card",
+          "width": 600,
+          "fill": "$bookio-card",
+          "cornerRadius": 24,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000080",
+            "offset": {
+              "x": 0,
+              "y": 10
+            },
+            "blur": 40
+          },
+          "layout": "vertical",
+          "gap": 32,
+          "padding": 48,
+          "children": [
+            {
+              "type": "frame",
+              "id": "HAd4X",
+              "name": "Header",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "wKO2p",
+                  "name": "Title",
+                  "fill": "$bookio-text",
+                  "content": "Create your Bookio account",
+                  "fontFamily": "$bookio-font",
+                  "fontSize": 32,
+                  "fontWeight": "bold"
+                },
+                {
+                  "type": "text",
+                  "id": "LB73x",
+                  "name": "Subtitle",
+                  "fill": "$bookio-text-secondary",
+                  "content": "Step 1: Basic Information",
+                  "fontFamily": "$bookio-font",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "GmWtn",
+              "name": "Progress Indicator",
+              "width": "fill_container",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "mdm1z",
+                  "name": "Step 1",
+                  "width": 32,
+                  "height": 32,
+                  "fill": "$bookio-primary",
+                  "cornerRadius": 16,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "thVyX",
+                      "name": "Number",
+                      "fill": "$bookio-text",
+                      "content": "1",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 14,
+                      "fontWeight": "bold"
+                    }
+                  ]
+                },
+                {
+                  "type": "rectangle",
+                  "id": "FAJbh",
+                  "name": "Divider",
+                  "fill": "$bookio-border",
+                  "width": "fill_container",
+                  "height": 2
+                },
+                {
+                  "type": "frame",
+                  "id": "u3fIf",
+                  "name": "Step 2",
+                  "width": 32,
+                  "height": 32,
+                  "fill": "$bookio-bg",
+                  "cornerRadius": 16,
+                  "stroke": "$bookio-border",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Z19Skx",
+                      "name": "Number",
+                      "fill": "$bookio-text",
+                      "content": "2",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 14,
+                      "fontWeight": "bold"
+                    }
+                  ]
+                },
+                {
+                  "type": "rectangle",
+                  "id": "sZ8f0",
+                  "name": "Divider",
+                  "fill": "$bookio-border",
+                  "width": "fill_container",
+                  "height": 2
+                },
+                {
+                  "type": "frame",
+                  "id": "cBwCS",
+                  "name": "Step 3",
+                  "width": 32,
+                  "height": 32,
+                  "fill": "$bookio-bg",
+                  "cornerRadius": 16,
+                  "stroke": "$bookio-border",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "SGZ0n",
+                      "name": "Number",
+                      "fill": "$bookio-text",
+                      "content": "3",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 14,
+                      "fontWeight": "bold"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "QdXvE",
+              "name": "Form",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "DR3w0",
+                  "name": "Field Full Name",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "TD4vl",
+                      "name": "Label",
+                      "fill": "$bookio-text",
+                      "content": "Full Name",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "SGi63",
+                      "name": "Input",
+                      "width": "fill_container",
+                      "fill": "$bookio-bg",
+                      "cornerRadius": 12,
+                      "stroke": "$bookio-border",
+                      "strokeWidth": 1,
+                      "padding": [
+                        14,
+                        16
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "sCAAo",
+                          "name": "Placeholder",
+                          "fill": "#ffffff60",
+                          "content": "Enter your name",
+                          "fontFamily": "$bookio-font",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "hvlq1",
+                  "name": "Field Email Address",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "XMGWw",
+                      "name": "Label",
+                      "fill": "$bookio-text",
+                      "content": "Email Address",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Y594v",
+                      "name": "Input",
+                      "width": "fill_container",
+                      "fill": "$bookio-bg",
+                      "cornerRadius": 12,
+                      "stroke": "$bookio-border",
+                      "strokeWidth": 1,
+                      "padding": [
+                        14,
+                        16
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "U01hz4",
+                          "name": "Placeholder",
+                          "fill": "#ffffff60",
+                          "content": "you@example.com",
+                          "fontFamily": "$bookio-font",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "w8Gu86",
+                  "name": "Field Password",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "jrKgT",
+                      "name": "Label",
+                      "fill": "$bookio-text",
+                      "content": "Password",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "bRwer",
+                      "name": "Input",
+                      "width": "fill_container",
+                      "fill": "$bookio-bg",
+                      "cornerRadius": 12,
+                      "stroke": "$bookio-border",
+                      "strokeWidth": 1,
+                      "padding": [
+                        14,
+                        16
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "YKrwo",
+                          "name": "Placeholder",
+                          "fill": "#ffffff60",
+                          "content": "••••••••",
+                          "fontFamily": "$bookio-font",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "D4mwOD",
+              "name": "Footer",
+              "width": "fill_container",
+              "justifyContent": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "P3I9V",
+                  "name": "Next Button",
+                  "width": "fill_container",
+                  "fill": "$bookio-primary",
+                  "cornerRadius": 12,
+                  "padding": [
+                    14,
+                    28
+                  ],
+                  "justifyContent": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "e1x88F",
+                      "name": "Label",
+                      "fill": "$bookio-text",
+                      "content": "Next Step",
+                      "fontFamily": "$bookio-font",
+                      "fontSize": 16,
+                      "fontWeight": "bold"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "bg-main": {
+      "type": "color",
+      "value": "#0F172A"
+    },
+    "text-primary": {
+      "type": "color",
+      "value": "#111827"
+    },
+    "text-secondary": {
+      "type": "color",
+      "value": "#4B5563"
+    },
+    "accent-purple": {
+      "type": "color",
+      "value": "#A855F7"
+    },
+    "accent-cyan": {
+      "type": "color",
+      "value": "#06B6D4"
+    },
+    "card-bg": {
+      "type": "color",
+      "value": "#1E293B80"
+    },
+    "input-bg": {
+      "type": "color",
+      "value": "#0F172A80"
+    },
+    "input-border": {
+      "type": "color",
+      "value": "#D1D5DB"
+    },
+    "bg-white": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "primary": {
+      "type": "color",
+      "value": "#1A1A1A"
+    },
+    "primary-hover": {
+      "type": "color",
+      "value": "#2563EB"
+    },
+    "font-main": {
+      "type": "string",
+      "value": "Inter"
+    },
+    "bg-warm": {
+      "type": "color",
+      "value": "#F9F8F6"
+    },
+    "white": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "text-main": {
+      "type": "color",
+      "value": "#1A1A1A"
+    },
+    "text-muted": {
+      "type": "color",
+      "value": "#6B7280"
+    },
+    "border": {
+      "type": "color",
+      "value": "#E5E7EB"
+    },
+    "primary-text": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "bookio-primary": {
+      "type": "color",
+      "value": "#8510f2"
+    },
+    "bookio-bg": {
+      "type": "color",
+      "value": "#101010"
+    },
+    "bookio-card": {
+      "type": "color",
+      "value": "#191918"
+    },
+    "bookio-text": {
+      "type": "color",
+      "value": "#ffffff"
+    },
+    "bookio-text-secondary": {
+      "type": "color",
+      "value": "#d9d2d2"
+    },
+    "bookio-border": {
+      "type": "color",
+      "value": "#544d4d"
+    },
+    "bookio-font": {
+      "type": "string",
+      "value": "Nunito"
+    }
+  },
+  "fileToken": "0942dd13-1d7c-42bb-b186-dc7c669f9b72"
+}
