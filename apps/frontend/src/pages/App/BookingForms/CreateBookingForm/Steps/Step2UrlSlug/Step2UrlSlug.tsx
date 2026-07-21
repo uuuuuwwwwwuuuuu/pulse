@@ -1,11 +1,11 @@
 import { useCallback, type ChangeEvent, type FC } from 'react';
 import { useShallow } from 'zustand/shallow';
 import { Button } from '@bookio/ui';
+import { BookingFormUrlPreview } from '@components/BookingFormUrlPreview/BookingFormUrlPreview';
 import { ValidatableInput } from '@components/ValidatableInput/ValidatableInput';
 import { useIsBookingFormExists } from '@api/bookingForms/isBookingFormExists';
 import { useGetOrganization } from '@api/organizations/getOrganizationData';
 import { useCreateBookingFormStore } from '@store/useCreateBookingFormStore';
-import { BOOKING_FORM_URL } from '@utils/constants';
 import { BookingFormConfiguratorLayout } from '../../BookingFormConfiguratorLayout/BookingFormConfiguratorLayout';
 import { step2Schema } from '../../schemas/createBookingFormDraft.schema';
 import toast from 'react-hot-toast';
@@ -100,13 +100,10 @@ export const Step2UrlSlug: FC = () => {
                 isValid={slugIsValid}
                 errorMessage={slugErrorMessage}
             />
-            <div className={styles.urlPreview}>
-                <span className={styles.urlPreviewLabel}>Public form URL</span>
-                <span className={styles.urlPreviewValue}>
-                    {BOOKING_FORM_URL}/{organizationSlug}/
-                    <span className={styles.urlPreviewSlug}>{previewSlug}</span>
-                </span>
-            </div>
+            <BookingFormUrlPreview
+                organizationSlug={organizationSlug}
+                formSlug={previewSlug}
+            />
         </BookingFormConfiguratorLayout>
     );
 };
