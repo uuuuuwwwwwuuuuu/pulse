@@ -77,7 +77,7 @@ export const router = createBrowserRouter([
                                     {
                                         index: true,
                                         lazy: lazyRoute(
-                                            () => import('@pages/App/BookingForms/BookingForms'),
+                                            () => import('@pages/App/BookingForms/BookingFormsList/BookingFormsList'),
                                             'BookingForms',
                                         ),
                                     },

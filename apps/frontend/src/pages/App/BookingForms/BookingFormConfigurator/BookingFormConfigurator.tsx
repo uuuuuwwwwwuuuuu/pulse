@@ -5,20 +5,24 @@ import {
     useBookingFormConfigurator,
 } from './BookingFormConfiguratorContext';
 import { ConfiguratorLayout } from './ConfiguratorLayout/ConfiguratorLayout';
+import { getConfiguratorTab } from './configuratorTabs';
 import styles from './BookingFormConfigurator.module.scss';
-import { SettingsTab } from './ConfiguratorTabs/SettingsTab';
-
-const configuratorTabs = {
-    settings: <SettingsTab />,
-};
 
 const BookingFormConfiguratorContent: FC = () => {
     const { activeTab } = useBookingFormConfigurator();
+    const tab = getConfiguratorTab(activeTab);
+    const Panel = tab?.Panel;
+    const Footer = tab?.Footer;
 
     return (
         <div className={styles.bookingFormConfigurator}>
             <ConfiguratorLayout>
-                {configuratorTabs[activeTab as keyof typeof configuratorTabs]}
+                <ConfiguratorLayout.Content>
+                    {Panel ? <Panel /> : null}
+                </ConfiguratorLayout.Content>
+                <ConfiguratorLayout.Footer>
+                    {Footer ? <Footer /> : null}
+                </ConfiguratorLayout.Footer>
             </ConfiguratorLayout>
             <div className={styles.configuratorPreview}></div>
         </div>

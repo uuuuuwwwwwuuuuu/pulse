@@ -1,5 +1,5 @@
 import { useCallback, type FC } from 'react';
-import styles from './BookingForms.module.scss';
+import styles from './BookingFormsList.module.scss';
 import { useGetBookingForms } from '@api/bookingForms/getBookingForms';
 import { useParams } from 'react-router-dom';
 import { Button, Input } from '@bookio/ui';

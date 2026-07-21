@@ -1,8 +1,13 @@
 import { createContext, useContext, useState, type FC, type ReactNode } from 'react';
 
+import {
+    DEFAULT_CONFIGURATOR_TAB,
+    type ConfiguratorTabValue,
+} from './configuratorTabs';
+
 type BookingFormConfiguratorContextValue = {
-    activeTab: string;
-    setActiveTab: (tab: string) => void;
+    activeTab: ConfiguratorTabValue;
+    setActiveTab: (tab: ConfiguratorTabValue) => void;
     isCollapsed: boolean;
     setIsCollapsed: (collapsed: boolean) => void;
 };
@@ -12,7 +17,7 @@ const BookingFormConfiguratorContext = createContext<BookingFormConfiguratorCont
 );
 
 export const BookingFormConfiguratorProvider: FC<{ children: ReactNode }> = ({ children }) => {
-    const [activeTab, setActiveTab] = useState('settings');
+    const [activeTab, setActiveTab] = useState<ConfiguratorTabValue>(DEFAULT_CONFIGURATOR_TAB);
     const [isCollapsed, setIsCollapsed] = useState(false);
     
     return (

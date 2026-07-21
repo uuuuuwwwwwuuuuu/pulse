@@ -2,15 +2,15 @@ import { useCallback, type FC } from 'react';
 import { useGetBookingForm } from '@api/bookingForms/getBookingForm';
 import type { BookingFormType } from '@api/bookingForms/getBookingForms';
 import { useParams } from 'react-router-dom';
-import { Button, Checkbox, Input } from '@bookio/ui';
+import { Checkbox, Input } from '@bookio/ui';
 import { ValidatableInput } from '@components/ValidatableInput/ValidatableInput';
 import { useIsBookingFormExists } from '@api/bookingForms/isBookingFormExists';
 
-import styles from './SettingsTab.module.scss';
+import styles from './SettingsTabPanel.module.scss';
 import { BookingFormUrlPreview } from '@components/BookingFormUrlPreview/BookingFormUrlPreview';
 import { useGetOrganization, type OrganizationData } from '@api/organizations/getOrganizationData';
 
-import { useForm, useWatch, Controller, type FieldErrors } from 'react-hook-form';
+import { useForm, useWatch, type FieldErrors } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import toast from 'react-hot-toast';
@@ -108,38 +108,12 @@ const SettingsTabForm: FC<SettingsTabFormProps> = ({ bookingForm, organization }
                 },
             );
         },
-        [
-            updateBookingForm,
-            bookingForm.id,
-            originalName,
-            originalSlug,
-            nameExists,
-            slugExists,
-        ],
+        [updateBookingForm, bookingForm.id, originalName, originalSlug, nameExists, slugExists],
     );
 
     const onInvalid = useCallback((errors: FieldErrors<SettingsTabFormData>) => {
         toast.error(getFirstFieldError(errors) ?? 'Invalid form data');
     }, []);
-
-    const handleIsActiveChange = useCallback(
-        async (nextValue: boolean, onChange: (value: boolean) => void) => {
-            onChange(nextValue);
-
-            await toast.promise(
-                updateBookingForm({
-                    bookingFormId: bookingForm.id,
-                    isActive: nextValue,
-                }),
-                {
-                    loading: 'Updating booking form...',
-                    success: 'Booking form updated successfully',
-                    error: 'Failed to update booking form',
-                },
-            );
-        },
-        [updateBookingForm, bookingForm.id],
-    );
 
     return (
         <form className={styles.settingsTab} onSubmit={handleSubmit(onSubmit, onInvalid)}>
@@ -171,25 +145,7 @@ const SettingsTabForm: FC<SettingsTabFormProps> = ({ bookingForm, organization }
                 formSlug={trimmedSlug || originalSlug}
                 organizationSlug={organization.slug}
             />
-            <Controller
-                control={control}
-                name="isActive"
-                render={({ field: { value, onChange, onBlur, name, ref } }) => (
-                    <Checkbox
-                        label="Is active"
-                        name={name}
-                        ref={ref}
-                        checked={value}
-                        onBlur={onBlur}
-                        onChange={(event) => {
-                            void handleIsActiveChange(event.target.checked, onChange);
-                        }}
-                    />
-                )}
-            />
-            <Button type="submit" variant="green-clean" className={styles.saveButton}>
-                Save
-            </Button>
+            <Checkbox label="Is active" {...register('isActive')} />
         </form>
     );
 };
