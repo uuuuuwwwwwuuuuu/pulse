@@ -21,6 +21,7 @@ export type GetEntireBookingFormByIdResponse = InferResponseType<
     200
 >;
 export type EntireBookingFormType = GetEntireBookingFormByIdResponse['data'];
+export type EntireBookingFormField = NonNullable<EntireBookingFormType>['fields'][number];
 
 const fetchEntireBookingFormById = async (
     bookingFormId: string,

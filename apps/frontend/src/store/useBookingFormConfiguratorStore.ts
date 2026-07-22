@@ -8,13 +8,13 @@ import {
     DEFAULT_CONFIGURATOR_TAB,
     type ConfiguratorTabValue,
 } from '@pages/App/BookingForms/BookingFormConfigurator/configuratorTabs';
-import type { UpdateBookingFormFieldRequest } from '@api/bookingForms/bookingFormFields/updateBookingFormField';
+import type { EntireBookingFormField } from '@api/bookingForms/getEntireBookingFormById';
 
 interface BookingFormConfiguratorForm {
     bookingForm: UpdateBookingFormRequest | null;
     bookingFormStyles: UpdateBookingFormStylesRequest | null;
     bookingFormMeta: UpdateBookingFormMetaRequest | null;
-    bookingFormFields: UpdateBookingFormFieldRequest[] | null;
+    bookingFormFields: EntireBookingFormField[] | null;
 }
 
 interface BookingFormConfiguratorState extends BookingFormConfiguratorForm {
@@ -25,7 +25,7 @@ interface BookingFormConfiguratorState extends BookingFormConfiguratorForm {
     setBookingForm: (bookingForm: UpdateBookingFormRequest) => void;
     setBookingFormStyles: (bookingFormStyles: UpdateBookingFormStylesRequest) => void;
     setBookingFormMeta: (bookingFormMeta: UpdateBookingFormMetaRequest) => void;
-    setBookingFormFields: (bookingFormFields: UpdateBookingFormFieldRequest[]) => void;
+    setBookingFormFields: (bookingFormFields: EntireBookingFormField[]) => void;
 }
 
 export const useBookingFormConfiguratorStore = create<BookingFormConfiguratorState>()(
