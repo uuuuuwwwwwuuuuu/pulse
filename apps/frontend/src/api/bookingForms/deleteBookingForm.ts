@@ -3,6 +3,7 @@ import { queryClient } from '@lib/query-client';
 import { useMutation } from '@tanstack/react-query';
 import { validateError } from '@utils/validateError';
 import type { InferRequestType, InferResponseType } from 'hono/client';
+import { invalidateEntireBookingForm } from './getEntireBookingFormById';
 
 const deleteBookingFormClient = hono['booking-forms']['delete'];
 
@@ -33,6 +34,7 @@ export const useDeleteBookingForm = (bookingFormId: string | undefined) => {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['booking-forms'] });
             queryClient.invalidateQueries({ queryKey: ['booking-form', bookingFormId] });
+            invalidateEntireBookingForm(bookingFormId);
         },
     });
 };

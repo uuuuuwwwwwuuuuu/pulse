@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { validateError } from '@utils/validateError';
 import { trimObj } from '@utils/trimObj';
 import type { InferRequestType, InferResponseType } from 'hono/client';
+import { invalidateEntireBookingForm } from '../getEntireBookingFormById';
 
 export type CreateBookingFormFieldRequest = InferRequestType<
     typeof hono.fields.create.$post
@@ -28,9 +29,9 @@ const createBookingFormFieldRequest = async (requestData: CreateBookingFormField
 export const useCreateBookingFormField = () => {
     return useMutation({
         mutationFn: createBookingFormFieldRequest,
-        onSuccess: () => {
+        onSuccess: (_, variables) => {
             queryClient.invalidateQueries({ queryKey: ['booking-form-fields'] });
-            queryClient.invalidateQueries({ queryKey: ['booking-form-with-fields'] });
+            invalidateEntireBookingForm(variables.bookingFormId);
         },
     });
 };

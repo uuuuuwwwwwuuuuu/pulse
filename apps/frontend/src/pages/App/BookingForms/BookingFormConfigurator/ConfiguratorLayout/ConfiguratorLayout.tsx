@@ -1,4 +1,4 @@
-import { memo, type FC, type ReactNode } from 'react';
+import { memo, type FC, type ReactNode, useMemo, useCallback } from 'react';
 
 import PanelLeftCloseIcon from '@assets/icons/panel-left-close.svg?react';
 import { Button } from '@bookio/ui';
@@ -8,6 +8,13 @@ import { useBookingFormConfiguratorStore } from '@store/useBookingFormConfigurat
 import { configuratorTabs } from '../configuratorTabs';
 import styles from './ConfiguratorLayout.module.scss';
 import { ConfiguratorTabs } from './ConfiguratorTabs';
+import { useParams } from 'react-router-dom';
+import { useGetEntireBookingFormById } from '@api/bookingForms/getEntireBookingFormById';
+import isEqual from 'fast-deep-equal';
+import { useUpdateBookingForm } from '@api/bookingForms/updateBookingForm';
+import toast from 'react-hot-toast';
+import { useCreateBookingFormField } from '@api/bookingForms/bookingFormFields/createBookingFormField';
+import { useUpdateBookingFormField } from '@api/bookingForms/bookingFormFields/updateBookingFormField';
 
 export const ConfiguratorLayout = memo(function ConfiguratorLayout({
     children,
@@ -55,12 +62,71 @@ const ConfiguratorHeader: FC = memo(() => {
 });
 
 const ConfiguratorFooter: FC = memo(() => {
+    const { bookingFormId } = useParams();
+    const { data: baseLine } = useGetEntireBookingFormById(bookingFormId);
+    const { bookingForm, bookingFormFields } = useBookingFormConfiguratorStore(
+        useShallow(({ bookingForm, bookingFormStyles, bookingFormFields }) => ({
+            bookingForm,
+            bookingFormStyles,
+            bookingFormFields,
+        })),
+    );
+
+    const { mutateAsync: updateBookingForm } = useUpdateBookingForm(bookingFormId);
+    const { mutateAsync: updateBookingFormField } = useUpdateBookingFormField(bookingFormId);
+
+    const { mutateAsync: createBookingFormField } = useCreateBookingFormField();
+
+    const isDirtyBookingForm = useMemo(() => {
+        if (!baseLine || !bookingForm) return false;
+
+        return !isEqual(baseLine, bookingForm);
+    }, [baseLine, bookingForm]);
+
+    const isDirtyBookingFormFields = useMemo(() => {
+        if (!baseLine || !bookingFormFields) return false;
+
+        return !isEqual(baseLine.fields, bookingFormFields);
+    }, [baseLine, bookingFormFields]);
+
+    const requests = useMemo(() => {
+        const requestsArray: Promise<unknown>[] = [];
+
+        if (isDirtyBookingForm && bookingForm) requestsArray.push(updateBookingForm( bookingForm));
+        if (isDirtyBookingFormFields && bookingFormFields) {
+            requestsArray.push(
+                ...bookingFormFields.map((bookingFormField) => {
+                    const existingField = baseLine?.fields.find(
+                        (field) => field.id === bookingFormField.id,
+                    );
+                    if (existingField) {
+                        return updateBookingFormField(bookingFormField);
+                    }
+                    if (!bookingFormId) {
+                        return Promise.reject(new Error('Booking form ID is required'));
+                    }
+                    return createBookingFormField({ bookingFormId, ...bookingFormField});
+                }),
+            );
+        }
+
+        return requestsArray;
+    }, [isDirtyBookingForm, bookingForm, updateBookingForm]);
+
+    const handleSave = useCallback(() => {
+        toast.promise(Promise.all(requests), {
+            loading: 'Saving booking form...',
+            success: 'Booking form saved successfully',
+            error: 'Failed to save booking form',
+        });
+    }, [requests]);
+
     return (
         <div className={styles.footer}>
             <Button type="button" variant="simple-clean">
                 Back
             </Button>
-            <Button variant="green-filled" className={styles.saveButton}>
+            <Button variant="green-filled" className={styles.saveButton} onClick={handleSave}>
                 Save booking form
             </Button>
         </div>

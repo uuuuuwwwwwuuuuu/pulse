@@ -3,6 +3,7 @@ import { queryClient } from '@lib/query-client';
 import { useMutation } from '@tanstack/react-query';
 import { validateError } from '@utils/validateError';
 import type { InferRequestType, InferResponseType } from 'hono/client';
+import { invalidateEntireBookingForm } from '../getEntireBookingFormById';
 
 export type DeleteBookingFormFieldRequest = InferRequestType<
     typeof hono.fields.delete.$delete
@@ -24,12 +25,12 @@ const deleteBookingFormFieldRequest = async (requestData: DeleteBookingFormField
     return body.data;
 };
 
-export const useDeleteBookingFormField = () => {
+export const useDeleteBookingFormField = (bookingFormId: string | undefined) => {
     return useMutation({
         mutationFn: deleteBookingFormFieldRequest,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['booking-form-fields'] });
-            queryClient.invalidateQueries({ queryKey: ['booking-form-with-fields'] });
+            invalidateEntireBookingForm(bookingFormId);
         },
     });
 };

@@ -5,6 +5,7 @@ import { validateError } from '@utils/validateError';
 import { trimObj } from '@utils/trimObj';
 import type { InferRequestType, InferResponseType } from 'hono/client';
 import type { BookingFormsType } from './getBookingForms';
+import { invalidateEntireBookingForm } from './getEntireBookingFormById';
 
 const updateBookingFormClient = hono['booking-forms']['update'];
 
@@ -30,6 +31,7 @@ export const useUpdateBookingForm = (bookingFormId: string | undefined) => {
         mutationFn: updateBookingFormRequest,
         onSuccess: (updatedBookingForm) => {
             queryClient.setQueryData(['booking-form', bookingFormId], updatedBookingForm);
+            invalidateEntireBookingForm(bookingFormId);
 
             queryClient.setQueriesData<BookingFormsType>(
                 { queryKey: ['booking-forms'] },

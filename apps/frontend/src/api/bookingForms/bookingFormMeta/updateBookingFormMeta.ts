@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { validateError } from '@utils/validateError';
 import { trimObj } from '@utils/trimObj';
 import type { InferRequestType, InferResponseType } from 'hono/client';
+import { invalidateEntireBookingForm } from '../getEntireBookingFormById';
 
 const updateBookingFormMetaClient = hono['booking-form-meta']['update'];
 
@@ -32,6 +33,7 @@ export const useUpdateBookingFormMeta = (bookingFormId: string | undefined) => {
         mutationFn: updateBookingFormMetaRequest,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['booking-form-meta', bookingFormId] });
+            invalidateEntireBookingForm(bookingFormId);
         },
     });
 };

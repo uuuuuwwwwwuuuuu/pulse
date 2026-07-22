@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@lib/query-client';
 import { validateError } from '@utils/validateError';
 import { trimObj } from '@utils/trimObj';
+import { invalidateEntireBookingForm } from '../getEntireBookingFormById';
 
 export type UpdateBookingFormFieldRequest = InferRequestType<
     typeof hono.fields.update.$put
@@ -24,12 +25,12 @@ const updateBookingFormFieldRequest = async (requestData: UpdateBookingFormField
     return body.data;
 };
 
-export const useUpdateBookingFormField = () => {
+export const useUpdateBookingFormField = (bookingFormId: string | undefined) => {
     return useMutation({
         mutationFn: updateBookingFormFieldRequest,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['booking-form-fields'] });
-            queryClient.invalidateQueries({ queryKey: ['booking-form-with-fields'] });
+            invalidateEntireBookingForm(bookingFormId);
         },
     });
 };
