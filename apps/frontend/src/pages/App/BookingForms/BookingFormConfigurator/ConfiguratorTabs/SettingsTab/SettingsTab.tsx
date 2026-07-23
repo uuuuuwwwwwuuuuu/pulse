@@ -114,13 +114,20 @@ const SettingsTabForm: FC<SettingsTabFormProps> = ({ bookingForm, organization }
     );
 };
 
-export const SettingsTab: FC = () => {
+export const SettingsTab = () => {
     const { bookingFormId, id } = useParams();
     const navigate = useNavigate();
 
-    const { data: organization, isLoading: isOrganizationLoading } = useGetOrganization(id);
-    const { data: bookingForm, isLoading: isBookingFormLoading } =
-        useGetEntireBookingFormById(bookingFormId);
+    const {
+        data: organization,
+        isLoading: isOrganizationLoading,
+        isError: isOrganizationError,
+    } = useGetOrganization(id);
+    const {
+        data: bookingForm,
+        isLoading: isBookingFormLoading,
+        isError: isBookingFormError,
+    } = useGetEntireBookingFormById(bookingFormId);
 
     if (!id) {
         return navigate('/organizations/list');
@@ -130,16 +137,16 @@ export const SettingsTab: FC = () => {
         return navigate(`/${id}/booking-forms`);
     }
 
-    if (isOrganizationLoading || isBookingFormLoading)
+    if (isOrganizationLoading || isBookingFormLoading || !organization || !bookingForm)
         return (
             <div className={styles.settingsTab}>
                 <Spinner />
             </div>
         );
 
-    if (!bookingForm || !organization) {
+    if (isOrganizationError || isBookingFormError) {
         return navigate(`/${id}/booking-forms`);
-    };
+    }
 
     return <SettingsTabForm bookingForm={bookingForm} organization={organization} />;
 };
