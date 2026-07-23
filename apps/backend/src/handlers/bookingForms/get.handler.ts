@@ -66,6 +66,10 @@ export const getEntireBookingFormByIdHandler = factory(
                 },
             });
 
+            if (!form) {
+                return c.json(prepareError('Booking form not found'), 404);
+            }
+
             return c.json(prepareSuccess(form));
         } catch (error) {
             return c.json(prepareError('Failed to get entire booking form by id'), 500);
