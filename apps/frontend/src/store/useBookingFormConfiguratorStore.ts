@@ -15,6 +15,7 @@ interface BookingFormConfiguratorForm {
     bookingFormStyles: UpdateBookingFormStylesRequest | null;
     bookingFormMeta: UpdateBookingFormMetaRequest | null;
     bookingFormFields: EntireBookingFormField[] | null;
+    createBookingFormField: Partial<EntireBookingFormField> | null;
 }
 
 interface BookingFormConfiguratorState extends BookingFormConfiguratorForm {
@@ -26,6 +27,7 @@ interface BookingFormConfiguratorState extends BookingFormConfiguratorForm {
     setBookingFormStyles: (bookingFormStyles: UpdateBookingFormStylesRequest) => void;
     setBookingFormMeta: (bookingFormMeta: UpdateBookingFormMetaRequest) => void;
     setBookingFormFields: (bookingFormFields: EntireBookingFormField[]) => void;
+    setCreateBookingFormField: (createBookingFormField: Partial<EntireBookingFormField> | null) => void;
 }
 
 export const useBookingFormConfiguratorStore = create<BookingFormConfiguratorState>()(
@@ -34,9 +36,10 @@ export const useBookingFormConfiguratorStore = create<BookingFormConfiguratorSta
             activeTab: DEFAULT_CONFIGURATOR_TAB,
             isCollapsed: false,
             bookingForm: null,
-            bookingFormMeta: null,
             bookingFormStyles: null,
+            bookingFormMeta: null,
             bookingFormFields: null,
+            createBookingFormField: null,
             setActiveTab: (activeTab) => set({ activeTab }, false, 'setActiveTab'),
             setIsCollapsed: (isCollapsed) => set({ isCollapsed }, false, 'setIsCollapsed'),
             setBookingForm: (bookingForm) => set({ bookingForm }, false, 'setBookingForm'),
@@ -46,6 +49,8 @@ export const useBookingFormConfiguratorStore = create<BookingFormConfiguratorSta
                 set({ bookingFormMeta }, false, 'setBookingFormMeta'),
             setBookingFormFields: (bookingFormFields) =>
                 set({ bookingFormFields }, false, 'setBookingFormFields'),
+            setCreateBookingFormField: (createBookingFormField) =>
+                set({ createBookingFormField }, false, 'setCreateBookingFormField'),
         }),
         { name: 'BookingFormConfiguratorStore' },
     ),
