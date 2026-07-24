@@ -74,7 +74,7 @@ export type FieldParamsByType<T extends FieldType> = T extends InputFieldType
 /** Union of all possible params shapes (used for Drizzle jsonb.$type) */
 export type FieldParams = FieldParamsByType<FieldType>;
 
-type BookingFormFieldRowBase = {
+export type BookingFormFieldRowBase = {
     id: string;
     bookingFormId: string;
     key: string;

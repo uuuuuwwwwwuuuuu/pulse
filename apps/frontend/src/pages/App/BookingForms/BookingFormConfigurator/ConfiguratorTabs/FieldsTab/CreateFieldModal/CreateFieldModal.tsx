@@ -27,8 +27,8 @@ export const CreateFieldModal: FC<CreateFieldModalProps> = memo(({ open, onOpenC
         defaultValues: {},
     });
 
-    const fieldType = useWatch({ control, name: 'type' });
-    const required = useWatch({ control, name: 'required' });
+
+    const formData = useWatch({ control});
 
     const handleCancel = useCallback(() => {
         onOpenChange(false);
@@ -42,10 +42,10 @@ export const CreateFieldModal: FC<CreateFieldModalProps> = memo(({ open, onOpenC
         }
 
         setCreateBookingFormField({
-            ...(fieldType ? { type: fieldType } : {}),
-            required: required ?? false,
+            ...(formData.type ? { type: formData.type } : {}),
+            required: formData.required ?? false,
         });
-    }, [open, fieldType, required, reset, setCreateBookingFormField]);
+    }, [open, formData, reset, setCreateBookingFormField]);
 
     return (
         <Dialog
