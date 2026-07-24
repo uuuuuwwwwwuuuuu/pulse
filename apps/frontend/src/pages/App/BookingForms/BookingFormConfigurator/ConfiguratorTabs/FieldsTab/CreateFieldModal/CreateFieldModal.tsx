@@ -27,8 +27,7 @@ export const CreateFieldModal: FC<CreateFieldModalProps> = memo(({ open, onOpenC
         defaultValues: {},
     });
 
-
-    const formData = useWatch({ control});
+    const formData = useWatch({ control });
 
     const handleCancel = useCallback(() => {
         onOpenChange(false);
@@ -75,7 +74,7 @@ export const CreateFieldModal: FC<CreateFieldModalProps> = memo(({ open, onOpenC
                                         key={typeOption}
                                         icon={<Icon color={color} />}
                                         onClick={() => setValue('type', typeOption)}
-                                        active={typeOption === fieldType}
+                                        active={typeOption === formData.type}
                                     >
                                         {typeOption.charAt(0).toUpperCase() + typeOption.slice(1)}
                                     </ChoiceChip>
@@ -86,7 +85,7 @@ export const CreateFieldModal: FC<CreateFieldModalProps> = memo(({ open, onOpenC
                 </div>
 
                 <RequiredRow
-                    checked={required ?? false}
+                    checked={formData.required ?? false}
                     onCheckedChange={(value) => setValue('required', value)}
                 />
             </form>
